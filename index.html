@@ -1,0 +1,361 @@
+
+
+<body>
+
+<script src="three.min.js"></script> 
+
+<script>
+
+
+
+var app = {}
+var api = {}
+var the = {}
+var ub  = {}
+
+
+ub.coords = {
+	
+	width : 20,
+	length : 20,
+	height : 100,
+	getSqPos : function ( px, py ) {
+		
+		var point = {
+			x : px * this.width,
+			z : py * this.length,
+			 y : this.height,
+		}
+		
+		return point;
+	},
+}
+
+app.scene = {
+
+	
+	renders : [],
+	cameras : [],
+	
+	
+	init : function ( ) {
+	
+	
+		this.scene = new THREE.Scene()
+		
+		the.scene = this.scene;
+		
+		
+		this.renderer = new THREE.WebGLRenderer({antialias:true} );
+		this.renderer.setSize( window.innerWidth, window.innerHeight/2 );
+
+		document.body.appendChild( this.renderer.domElement );
+		
+		
+		this.renderer2 = new THREE.WebGLRenderer({antialias:true} );
+		this.renderer2.setSize( window.innerWidth, window.innerHeight/2 );
+
+		document.body.appendChild( this.renderer2.domElement );
+		
+		
+		
+		this.scene.add( new THREE.AmbientLight( 0xeef0ff ) );
+
+		
+		
+	
+		var light = new THREE.DirectionalLight( 0xffddcc, 1 );
+		light.position.set( 1, 0.75, 0.5 );
+		this.scene.add( light );
+		var light = new THREE.DirectionalLight( 0xccccff, 1 );
+		light.position.set( -1, 0.75, -0.5 );
+		this.scene.add( light );
+	},
+	
+	addRender : function ( ) {
+	
+	},
+	
+	render : function ( ) {
+		this.renderer.render( this.scene, this.camera );
+		this.renderer2.render( this.scene, this.camera2 );
+	},
+	
+	addCamera : function ( ) {
+		
+		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+		this.camera.position.z = 1000;
+		this.camera.position.y = 200;
+		
+		
+		this.camera2 = new THREE.PerspectiveCamera( 185, window.innerWidth / window.innerHeight, 1, 10000 );
+		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, - 500, 10000 );
+
+		this.camera2.position.y = 200;
+		this.camera2.position.x = 500;
+		this.camera2.position.z = 100;
+
+	},
+	
+	add  : function ( obj ) {
+		this.scene.add( obj );
+	}
+}
+
+
+app.dummyObj = {
+
+	add : function ( ) {
+		this.render();
+		app.scene.add( this.obj );
+	},
+	render : function ( ) {
+		
+		
+		geometry = new THREE.BoxGeometry( 200, 200, 200 );
+		material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+
+		mesh = new THREE.Mesh( geometry, material );
+		
+		this.obj = mesh;
+	},
+	
+	rotateDelta : function( dx, dy ) {
+		//this.obj.rotation.x += dx;
+		//this.obj.rotation.y += dy;
+	}
+}
+
+
+app.ani = [];
+
+
+app.plane = {
+	add : function ( item ) {
+	
+		this.render( item );
+		
+		app.scene.add( item.obj );
+	},
+	
+	render : function ( item ) {
+	
+		var planeW = 50; // pixels
+		var planeH = 50; // pixels 
+		var numW = 50; // how many wide (50*50 = 2500 pixels wide)
+		var numH = 50; // how many tall (50*50 = 2500 pixels tall)
+		var plane = new THREE.Mesh(
+			new THREE.PlaneGeometry( planeW*numW, planeH*numH, planeW, planeH ),
+			new THREE.MeshBasicMaterial( {
+				color: "#fff",
+				wireframe: true
+			} )
+		);	
+		
+		plane.rotation.x = Math.PI / 2 ;
+		
+		var grid = new THREE.GridHelper(30000, 100);
+		
+		grid.position.y = 20;
+
+		
+		item.obj = grid;
+	}
+}
+	
+
+app.square = {
+
+	add : function ( item, i ) {
+		this.render(item, i );
+		app.scene.add( item.obj );
+		app.scene.add( item.obj3 );
+		
+		
+		item.nextOp = 0.01;
+		app.scene.add( item.obj2 );
+		
+		//app.scene.add( item.obj4 );
+	},
+	render : function (item) {
+		var geometry = new THREE.CylinderGeometry( 55, 25, 140, 32,8, 1,true  );
+		
+		
+		material2 = this.getMaterial(i);
+		
+		item.mat  =material2;
+		
+		var cylinder = new THREE.Mesh( geometry, material2 );
+
+		
+		
+		item.obj = cylinder;
+		
+		
+		
+		
+		
+		var geometry = new THREE.CylinderGeometry( 55, 25, 140, 32,8, 1,true  );
+		
+		
+		material2 = this.getMaterial(i);
+		
+		item.mat2  =material2;
+		
+		var cylinder = new THREE.Mesh( geometry, material2 );
+
+		
+		
+		item.obj2 = cylinder;
+		
+		
+		
+		var cube = new THREE.Mesh( new THREE.CubeGeometry( 20, 40, 20 ), new THREE.MeshNormalMaterial() );
+
+
+		item.obj3 = cube;
+
+		
+		var cube = new THREE.Mesh( new THREE.SphereGeometry( 12 ), new THREE.MeshNormalMaterial() );
+
+
+		item.obj4 = cube;
+
+		
+	},
+	
+	getMaterial : function ( i) {
+	
+	
+		var filename = "flair.png";
+		
+		var map = new THREE.TextureLoader().load( filename , function ( ) { console.log ("hey") } );
+		
+		
+		
+		var material = new THREE.MeshBasicMaterial({
+			
+			map : map,
+			transparent: true,
+			depthTest: true,
+			depthWrite: true,
+			wireframe: false,
+			
+			opacity :0.2
+		});
+
+		
+		
+		
+		console.log( "done" );
+		
+		material.map.wrapS = THREE.RepeatWrapping;
+		material.map.wrapT = THREE.RepeatWrapping;
+		material.map.repeat.set( 1,1 );
+		material.depthWrite = false;
+
+
+		material.side = THREE.DoubleSide;
+		material.color = new THREE.Color("hsl("+((i*30)%60  + 150 )+", 100%, 50%)");// "#bada55");//0xff0000);
+
+		console.log("hsl("+(i*30)%360+", 100%, 50%)");
+		return material;
+	},
+	
+	rotateDelta : function( item,dx, dy ) {
+		//this.obj.rotation.x += dx;
+		item.obj.rotation.y += dx * 2;
+		item.obj2.rotation.y -= dx/1.3;
+		
+		//item.mat.map.offset.x  += dx/2;
+		//item.mat2.map.offset.x += dx/6;
+		
+		
+		item.mat.opacity = item.mat.opacity + item.nextOp;
+		item.mat2.opacity = item.mat2.opacity + item.nextOp;
+		
+		if( item.mat.opacity < -0.2 || item.mat.opacity > 1 ) item.nextOp = - item.nextOp;
+		
+		
+		item.obj3.position.y = (item.obj3.position.y + item.nextOp );
+	},
+	
+	move : function ( item, x, y, z ) {
+	
+		item.obj.position.x = x;
+		item.obj.position.y = y  + 60;
+		item.obj.position.z = z;
+		
+		
+		item.obj2.position.x = x;
+		item.obj2.position.y = y + 60;
+		item.obj2.position.z = z;
+		
+		
+		item.obj3.position.x = x;
+		item.obj3.position.y = y + 30;
+		item.obj3.position.z = z;
+		
+		item.obj4.position.x = x;
+		item.obj4.position.y = y + 60;
+		item.obj4.position.z = z;
+		
+		
+		
+	}
+
+}
+	
+
+app.scene.init();
+app.scene.addCamera();
+
+app.dummyObj.add();
+
+
+var items = [];
+
+for ( var i = 0 ;i <130; i++ ) {
+	var item = {};
+	
+	app.square.add(item, i);
+
+	
+	app.square.move( item, 300 * (i / 10 ), 10, 300 * ( i % 10 ) )
+	
+	items.push( item );
+}
+
+var item = {};
+app.plane.add( item );
+
+
+
+function animate() {
+
+    requestAnimationFrame( animate );
+
+    app.dummyObj.rotateDelta( 0.01, 0.02 );
+    
+    for ( var i = 0; i < 130; i++ ) 
+    app.square.rotateDelta( items[ i ] , 0.01, 0.02 );
+
+    
+    
+    
+				var timer = Date.now() * 0.0001;
+
+				app.scene.camera2.position.x = Math.cos( timer ) * 4600;
+				app.scene.camera2.position.z = Math.sin( timer ) * 4600;
+				app.scene.camera2.lookAt( the.scene.position );
+
+				
+    //app.scene.camera2.rotation.y += 0.003;
+    app.scene.render( );
+    
+
+}
+
+animate();
+
+</script>
