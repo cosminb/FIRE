@@ -21,7 +21,7 @@ var the = {}
 var ub  = {}
 
 
-ub.coords = {
+ub.spaceCoords = {
 	
 	width : 20,
 	length : 20,
@@ -55,17 +55,8 @@ app.scene = {
 		
 		this.renderer = new THREE.WebGLRenderer({antialias:true} );
 		this.renderer.setSize( window.innerWidth/2, window.innerHeight );
-
-		
-				this.renderer.shadowMap.enabled = true;
-				this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-				this.renderer.gammaInput = true;
-				this.renderer.gammaOutput = true;
-
 				
-							
-		this.renderer.setPixelRatio( window.devicePixelRatio );
-
+						
 					
 		document.body.appendChild( this.renderer.domElement );
 		this.renderer.domElement.style.float = "left";
@@ -75,10 +66,10 @@ app.scene = {
 		this.renderer2.setSize( window.innerWidth/2 - 10, window.innerHeight );
 
 		
-			this.renderer2.shadowMap.enabled = true;
-				this.renderer2.shadowMap.type = THREE.PCFSoftShadowMap;
-				this.renderer2.gammaInput = true;
-				this.renderer2.gammaOutput = true;
+        this.renderer2.shadowMap.enabled = true;
+        this.renderer2.shadowMap.type = THREE.PCFSoftShadowMap;
+        this.renderer2.gammaInput = true;
+        this.renderer2.gammaOutput = true;
 
 				
 		document.body.appendChild( this.renderer2.domElement );
