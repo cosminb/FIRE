@@ -12,31 +12,18 @@ canvas { width : 50% !important; float : left }
 <script src="libs/three.min.js"></script> 
 
 <script>
-
-
-
 var app = {}
 var api = {}
 var the = {}
 var ub  = {}
 
+</script>
 
-ub.spaceCoords = {
-	
-	width : 20,
-	length : 20,
-	height : 100,
-	getSqPos : function ( px, py ) {
-		
-		var point = {
-			x : px * this.width,
-			z : py * this.length,
-			 y : this.height,
-		}
-		
-		return point;
-	},
-}
+<script src='api.js'> </script>
+<script>
+
+
+
 
 app.scene = {
 
