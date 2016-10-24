@@ -17,724 +17,28 @@ var api = {}
 var the = {}
 var ub  = {}
 
+app.dummy = {}
 </script>
 
 <script src='api.js'> </script>
+
+<script src='scene.js' ></script>
+
+<script src='textures.js'></script>
+
+<script src='dummy.line.js' ></script>
+
+<script src='player.js'> </script>
+
+<script src='floor.js'> </script>
+
+<script src='trap.js'></script>
+
+
 <script>
 
 
 
-
-app.scene = {
-
-	
-	renders : [],
-	cameras : [],
-	
-	
-	init : function ( ) {
-	
-	
-		this.scene = new THREE.Scene()
-		
-		the.scene = this.scene;
-		
-		
-		this.renderer = new THREE.WebGLRenderer({antialias:true} );
-		this.renderer.setSize( window.innerWidth/2, window.innerHeight );
-				
-						
-					
-		document.body.appendChild( this.renderer.domElement );
-		this.renderer.domElement.style.float = "left";
-		
-		
-		this.renderer2 = new THREE.WebGLRenderer({antialias:true} );
-		this.renderer2.setSize( window.innerWidth/2 - 10, window.innerHeight );
-
-		
-        this.renderer2.shadowMap.enabled = true;
-        this.renderer2.shadowMap.type = THREE.PCFSoftShadowMap;
-        this.renderer2.gammaInput = true;
-        this.renderer2.gammaOutput = true;
-
-				
-		document.body.appendChild( this.renderer2.domElement );
-		this.renderer2.domElement.style.float = "left";
-		
-		
-		this.scene.add( new THREE.AmbientLight( 0xeef0ff ) );
-
-		
-		
-	
-		var light = new THREE.DirectionalLight( 0xffddcc, 1 );
-		light.position.set( 1, 0.75, 0.5 );
-		this.scene.add( light );
-		var light = new THREE.DirectionalLight( 0xccccff, 1 );
-		light.position.set(200, 400, 500 );
-		this.scene.add( light );
-		
-
-
-	},
-	
-	addRender : function ( ) {
-	
-	},
-	
-	render : function ( ) {
-		this.renderer.render( this.scene, this.camera );
-		this.renderer2.render( this.scene, this.camera2 );
-	},
-	
-	addCamera : function ( ) {
-		
-		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / (2 * window.innerHeight), 0.1, 10000 );
-		this.camera.position.z = 1350;
-		this.camera.position.y = 230;
-		this.camera.position.x = 500;
-		
-		
-		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2 - 500, window.innerWidth / 2-500, window.innerHeight -500, window.innerHeight / - 1 -500, -100, 10000 );
-		this.camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / (2 * window.innerHeight), 0.1, 10000 );
-
-		this.camera2.position.y = 600;
-		this.camera2.position.x = 500;
-		this.camera2.position.z = 100;
-
-	},
-	
-	add  : function ( obj ) {
-		this.scene.add( obj );
-	}
-}
-
-
-
-app.line = {
-
-	add : function ( ) {
-		this.render();
-		app.scene.add( this.obj );
-	},
-	
-	
-	render : function ( opt ) {
-	
-	
-		x0 = 0;
-		y0 = 0;
-		
-		x1 = 100;
-		y1 = 440;
-		
-		x2 = 200;
-		y2 = 100;
-		
-		SUBDIVISIONS = 20;
-		geometry = new THREE.Geometry();
-		curve = new THREE.QuadraticBezierCurve3();
-		curve.v0 = new THREE.Vector3(x0, y0, 0);
-		curve.v1 = new THREE.Vector3(x1, y1, 0);
-		curve.v2 = new THREE.Vector3(x2, y2, 0);
-		for (j = 0; j < SUBDIVISIONS; j++) {
-		geometry.vertices.push( curve.getPoint(j / SUBDIVISIONS) )
-		}
-
-		material = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 20 } );
-		
-		
-		line = new THREE.Line(geometry, material);
-		this.obj = line;
-
-
-	},
-	
-	
-	getMaterial : function ( i, wf) {
-	
-	
-		var filename = "textures/flair.png";
-		
-		var map = new THREE.TextureLoader().load( filename  );
-		
-		
-		
-		var material = new THREE.MeshBasicMaterial({
-			
-			map : map,
-			transparent: true,
-			depthTest: true,
-			depthWrite: true,
-			wireframe: false,
-			
-			opacity :0.2
-		});
-
-		
-		
-		
-		material.map.wrapS = THREE.RepeatWrapping;
-		material.map.wrapT = THREE.RepeatWrapping;
-		material.map.repeat.set( 1,1 );
-		material.depthWrite = false;
-
-
-		material.side = THREE.DoubleSide;
-		material.color = new THREE.Color("hsl("+((i*30)%360 )+", 100%, 50%)");// "#bada55");//0xff0000);
-		return material;
-	},
-}
-
-
-
-	
-		var filename = "textures/10.jpg";
-		
-		var ten = new THREE.TextureLoader().load( filename  );
-		
-		
-		
-app.dummyObj = {
-
-	add : function ( item ) {
-		this.render(item );
-		app.scene.add( item.obj );
-		//app.scene.add( this.obj2 );
-		
-// 		var spotLight = new THREE.SpotLight( 0xffffff );
-// spotLight.position.set( 100, 1000, 100 );
-// 
-// spotLight.castShadow = true;
-// 
-// spotLight.shadow.mapSize.width = 1024;
-// spotLight.shadow.mapSize.height = 1024;
-// 
-// spotLight.shadow.camera.near = 500;
-// spotLight.shadow.camera.far = 4000;
-// spotLight.shadow.camera.fov = 30;
-// 
-// app.scene.add( spotLight );
-// 
-// 
-// 
-// item.spotLight = spotLight;
-		
-	},
-	
-	move : function ( item, x, y, z ) {
-	
-		item.obj.position.x = x;
-		item.obj.position.y = y;
-		item.obj.position.z = z;
-		
-	},
-	
-	cylinder : function ( item, opt ) {
-	
-		var material = this.getMaterial();
-		
-		var geometry = new THREE.CylinderBufferGeometry( 50, 50, opt.h, 29 );
-		
-		var obj = new THREE.Mesh( geometry, material );
-		
-		
-		this.setPlace( item, obj,opt );
-		
-		
-		item.material1 = material;
-		
-		item.group.add( obj );
-	},
-	
-	setPlace : function (item,  obj, opt ) {
-		if ( !opt.position ) return;
-		
-		var position = opt.position;
-		for ( var i in position ) {
-			obj.position[ i ] = position[ i ];
-		}
-	},
-	
-	
-	sphere     : function (item, opt ) {
-		var material = this.getMaterial( opt.c );
-		
-		var geometry = new THREE.SphereBufferGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
-		
-		var obj = new THREE.Mesh( geometry, material );
-		
-		
-		this.setPlace( item, obj, opt );
-		
-		item.group.add( obj );
-		
-		
-	},
-	
-	
-	getMaterial : function ( col) {
-	
-		
-		//var material = new THREE.MeshBasicMaterial( {color: "#007abc", wireframe : true} );
-		//return material;
-		var map = ten;
-		
-		
-		var material = new THREE.MeshBasicMaterial({
-			
-			map : map,
-//			bumpMap : map,
-//			roughnessMap : map, 
-			transparent: false,
-			depthTest: true,
-			depthWrite: true,
-			wireframe: false,
-			
-			
-		});
-
-		
-		
-		
-		material.map.wrapS = THREE.RepeatWrapping;
-		material.map.wrapT = THREE.RepeatWrapping;
-		material.map.repeat.set( 1,1 );
-
-
-		material.side = THREE.DoubleSide;
-		
-		var i = (this.i+= 20) //Math.random() * 360;
-		
-		if ( col ) 
-		material.color = new THREE.Color(col)
-		else
-		material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 70%)");// "#bada55");//0xff0000);
-		
-		
-		return material;
-		
-	},
-	
-	i : 20,
-	
-	render : function ( item ) {
-	
-		var group = new THREE.Group();
-		
-		item.group = group;
-		
-		
-		/*
-		var material = new THREE.MeshBasicMaterial( {color: "#007abc", wireframe : true} );
-
-		
-		var geometry = new THREE.CylinderBufferGeometry( 50, 50, 100, 32 );
-		
-		var cylinder = new THREE.Mesh( geometry, material );
-
-		var geometry2 = new THREE.SphereBufferGeometry( 50, 3, 3, 0, Math.PI * 2, 0,  4 * Math.PI / 6 );		
-		var pendulum = new THREE.Mesh(geometry2, material);
-		
-		*/
-		//group.add( pendulum );
-		//group.add( cylinder );
-		
-		
-		var items = {
-		
-			head : {
-			
-				type : "sphere",
-				
-				position : {
-				
-					y : 100,
-					
-				},
-				
-				
-				r : 50,
-				
-			},
-			
-			
-			hand : {
-				type : "sphere",
-				
-				position : {
-					y : 40,
-					x : -70,
-					z : 0
-				},
-				
-				r : 20
-			},
-			hand2 : {
-				type : "sphere",
-				
-				position : {
-					y : 40,
-					x : 170,
-					z : 0
-				},
-				
-				r : 20
-			},
-			
-						
-			eye1 : {
-				type : "sphere",
-				
-				position : {
-					y : 140,
-					x : -70,
-					z : 0
-				},
-				
-				r : 10,
-				
-c : "#ffffff"
-			},
-			eye2 : {
-				type : "sphere",
-				
-				position : {
-					y : 140,
-					x : 170,
-					z : 0
-				},
-				
-				r : 20,
-				
-c : "#ffffff"
-},
-			
-			body : {
-			
-				type : "cylinder",
-				
-				position : {
-				
-					y : 0,
-					
-				},
-				
-				h : 20
-			},
-			
-						body2 : {
-			
-				type : "cylinder",
-				
-				position : {
-				
-					y : 50,
-					
-				},
-				
-				h : 50
-			}
-		
-			
-		}
-		
-		
-		for ( var i in items ) {
-		
-			this[ items[ i ].type ](item, items[ i ] ) 
-		}
-		
-		
-		/*
-		this.cylinder( {
-			position : { 
-			
-				y : 20
-			}
-		});
-		
-		this.sphere ( {
-		
-			position : {
-			
-				y : 120
-			}
-		})
-		
-		*/
-		item.obj = group;
-		//this.obj2 = cylinder;
-
-		
-		
-// var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-// var sphere = new THREE.Mesh( geometry, material );
-// scene.add( sphere );
-
-
-
-		//this.obj = cylinder;
-
-		
-		
-		//geometry = new THREE.BoxGeometry( 200, 200, 200 );
-		
-		
-		
-		//material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
-
-		//mesh = new THREE.Mesh( geometry, material );
-		
-		//this.obj = mesh;
-	},
-	
-	
-	createTarget : function ( item ) {
-	
-		var target = {
-		
-			x  : Math.random() * 2000,
-			z  : Math.random() * 2000,
-			
-			y   : Math.random() * 600,
-			
-			
-		}
-		
-		target.dx = ( -item.obj.position.x + target.x ) / 300;
-		target.dz = ( -item.obj.position.z + target.z ) / 300;
-		target.dy = ( -item.obj.position.y + target.y ) / 300;
-		
-		target.steps = 0;
-		
-		
-		item.target = target;
-	},
-	rotateDelta : function( item, dx, dy ) {
-	
-	
-		item.obj.rotation.y += dy
-		
-		
-		if ( !item.target ) 
-			this.createTarget( item );
-			
-		if ( item.target.steps >= 300 ) 
-			this.createTarget( item );
-			
-		item.target.steps++;
-		
-		item.obj.position.x += item.target.dx;
-		
-		
-		item.obj.position.z += item.target.dz;
-		
-		item.obj.position.y += item.target.dy;
-		
-		
-		
-		/*
-		item.spotLight.position.x = item.obj.position.x + 3 * item.target.dx
-		item.spotLight.position.z = item.obj.position.z + 3 * item.target.dz
-		item.spotLight.position.y = item.obj.position.y + 3 * item.target.dy
-		*/
-		item.material1.map.offset.y += 0.0001;
-			
-		//item.obj.rotation.x = 0.5 - Math.random();
-		//this.obj.rotation.z += dz
-		///*
-		//this.obj2.position.y = 150;
-		//this.obj.position.y = 240;
-		
-		
-		//this.obj.position.z = 0;
-		//*/
-		//this.obj.rotation.x += dx;
-		//this.obj.rotation.y += dy;
-	}
-}
-
-
-app.ani = [];
-
-
-app.plane = {
-	add : function ( item ) {
-	
-		this.render( item );
-		
-		app.scene.add( item.obj );
-	},
-	
-	
-	
-	render : function ( item ) {
-	
-		var planeW = 550; // pixels
-		var planeH = 550; // pixels 
-		var numW = 50; // how many wide (50*50 = 2500 pixels wide)
-		var numH = 50; // how many tall (50*50 = 2500 pixels tall)
-		var plane = new THREE.Mesh(
-			new THREE.PlaneGeometry( planeW*numW, planeH*numH, planeW, planeH ),
-			new THREE.MeshPhongMaterial( {
-				color: "#fff",
-				wireframe: false
-			} )
-		);	
-		
-		plane.rotation.x = Math.PI / 2 ;
-		
-		var grid = new THREE.GridHelper(30000, 100);
-		
-		grid.position.y = 20;
-
-		
-		item.obj = grid;
-	}
-}
-	
-
-	
-		var filename = "textures/flair.png";
-		
-		var flair = new THREE.TextureLoader().load( filename  );
-		
-		
-app.square = {
-
-	add : function ( item, i ) {
-		this.render(item, i );
-		app.scene.add( item.obj );
-		app.scene.add( item.obj3 );
-		
-		
-		item.nextOp = 0.01;
-		app.scene.add( item.obj2 );
-		
-		//app.scene.add( item.obj4 );
-	},
-	render : function (item) {
-		var geometry = new THREE.CylinderGeometry( 75, 25, 100, 32,8, 1,true  );
-		
-		
-		material2 = this.getMaterial(i, 1);
-		
-		item.mat  =material2;
-		
-		var cylinder = new THREE.Mesh( geometry, material2 );
-
-		
-		
-		item.obj = cylinder;
-		
-		
-		
-		
-		
-		var geometry = new THREE.CylinderGeometry( 75, 25, 100, 32,8, 1,true  );
-		
-		
-		material2 = this.getMaterial(i);
-		
-		item.mat2  =material2;
-		
-		var cylinder = new THREE.Mesh( geometry, material2 );
-
-		
-		
-		item.obj2 = cylinder;
-		
-		
-		
-		var cube = new THREE.Mesh( new THREE.CubeGeometry( 20, 40, 20 ), new THREE.MeshNormalMaterial() );
-
-
-		item.obj3 = cube;
-
-		
-		var cube = new THREE.Mesh( new THREE.SphereGeometry( 12 ), new THREE.MeshNormalMaterial() );
-
-
-		item.obj4 = cube;
-
-		
-	},
-	
-	getMaterial : function ( i, wf) {
-	
-		map = flair;
-		
-		var material = new THREE.MeshBasicMaterial({
-			
-			map : map,
-			transparent: true,
-			depthTest: true,
-			depthWrite: true,
-			wireframe: false,
-			
-			opacity :0.2
-		});
-
-		
-		
-		
-		material.map.wrapS = THREE.RepeatWrapping;
-		material.map.wrapT = THREE.RepeatWrapping;
-		material.map.repeat.set( 1,1 );
-		material.depthWrite = false;
-
-
-		material.side = THREE.DoubleSide;
-		material.color = new THREE.Color("hsl("+((i*30)%360 )+", 100%, 50%)");// "#bada55");//0xff0000);
-		return material;
-	},
-	
-	rotateDelta : function( item,dx, dy ) {
-		//this.obj.rotation.x += dx;
-		item.obj.rotation.y += dx * 2;
-		item.obj2.rotation.y -= dx/3;
-		
-		//item.mat.map.offset.x  += dx/2;
-		//item.mat2.map.offset.x += dx/6;
-		
-		
-		item.mat.opacity = item.mat.opacity + item.nextOp ;
-		item.mat2.opacity = item.mat2.opacity + item.nextOp;
-		
-		if( item.mat.opacity < -0.2 || item.mat.opacity > 1 ) item.nextOp = - item.nextOp;
-		
-		
-		item.obj3.position.y = (item.obj3.position.y + item.nextOp );
-	},
-	
-	move : function ( item, x, y, z ) {
-	
-		item.obj.position.x = x;
-		item.obj.position.y = y  + 60;
-		item.obj.position.z = z;
-		
-		
-		item.obj2.position.x = x;
-		item.obj2.position.y = y + 60;
-		item.obj2.position.z = z;
-		
-		
-		item.obj3.position.x = x;
-		item.obj3.position.y = y + 30;
-		item.obj3.position.z = z;
-		
-		item.obj4.position.x = x;
-		item.obj4.position.y = y + 60;
-		item.obj4.position.z = z;
-		
-		
-		
-	}
-
-}
-	
 
 app.scene.init();
 app.scene.addCamera();
@@ -742,13 +46,12 @@ app.scene.addCamera();
 
 var x= [];
 
-
 for ( var i = 0 ; i < 35; i++ ) {
 
 	x[i] = {};
-	app.dummyObj.add(x[i]);
+	app.player.add(x[i]);
 	
-	app.dummyObj.move( x[i], 300 * (i / 3 ) + 50, 10, 300 * ( i % 3 ) + 50 ) ;
+	app.player.move( x[i], 300 * (i / 3 ) + 50, 10, 300 * ( i % 3 ) + 50 ) ;
 }
 
 
@@ -761,18 +64,20 @@ for ( var i = 0 ;i <100; i++ ) {
 	
 	var item = {};
 	
-	app.square.add(item, i);
+	app.trap.add(item, i);
 
 	
-	app.square.move( item, 300 * (i / 10 ), 10, 300 * ( i % 10 ) )
+	app.trap.move( item, 300 * (i / 10 ), 10, 300 * ( i % 10 ) )
 	
 	items.push( item );
 }
 
-var item = {};
-app.plane.add( item );
 
-app.line.add( );
+
+var item = {};
+
+app.floor.add( item );
+app.dummy.line.add( );
 
 
 
@@ -781,30 +86,27 @@ function animate() {
     requestAnimationFrame( animate );
 
     
-    for ( var i in x ) { // = 0 ; i < 10; i++ ) {
+    for ( var i in x ) { 
+        app.player.rotateDelta( x[i], 0.05, 0.02 );;
+    }
 
-	app.dummyObj.rotateDelta( x[i], 0.05, 0.02 );;
-}
-
-    for ( var i in items ) //= 0; i < 9; i++ ) 
-    app.square.rotateDelta( items[ i ] , 0.01, 0.02 );
-
+    for ( var i in items ) { 
+        app.trap.rotateDelta( items[ i ] , 0.01, 0.02 );
+    }
     
     
     
-				var timer = Date.now() * 0.0001;
+    
+    var timer = Date.now() * 0.0001;
 
-				app.scene.camera2.position.x = Math.cos( timer ) * 1700;
-				app.scene.camera2.position.z = Math.sin( timer ) * 1700;
-				app.scene.camera2.position.y = 750;
-				
-				app.scene.camera2.rotation.x = Math.PI/2;
-				
-				app.scene.camera2.lookAt( { x : 1500, y : 20, z : 1000 } );
+    app.scene.camera2.position.x = Math.cos( timer ) * 1700;
+    app.scene.camera2.position.z = Math.sin( timer ) * 1700;
+    app.scene.camera2.position.y = 750;
+    
+    app.scene.camera2.rotation.x = Math.PI/2;
+    
+    app.scene.camera2.lookAt( { x : 1500, y : 20, z : 1000 } );
 
-				
-				
-    //app.scene.camera2.rotation.y += 0.003;
     app.scene.render( );
     
 
