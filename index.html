@@ -9,7 +9,7 @@ body,window { padding : 0; margin : 0 }
 
 canvas { width : 50% !important; float : left }
 </style>
-<script src="three.min.js"></script> 
+<script src="libs/three.min.js"></script> 
 
 <script>
 
@@ -168,7 +168,7 @@ app.line = {
 	getMaterial : function ( i, wf) {
 	
 	
-		var filename = "flair.png";
+		var filename = "textures/flair.png";
 		
 		var map = new THREE.TextureLoader().load( filename  );
 		
@@ -203,7 +203,7 @@ app.line = {
 
 
 	
-		var filename = "10.jpg";
+		var filename = "textures/10.jpg";
 		
 		var ten = new THREE.TextureLoader().load( filename  );
 		
@@ -610,7 +610,7 @@ app.plane = {
 	
 
 	
-		var filename = "flair.png";
+		var filename = "textures/flair.png";
 		
 		var flair = new THREE.TextureLoader().load( filename  );
 		
