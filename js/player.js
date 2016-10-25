@@ -74,9 +74,6 @@ app.player = {
 			
 		});
 
-		
-		
-		
 		material.map.wrapS = THREE.RepeatWrapping;
 		material.map.wrapT = THREE.RepeatWrapping;
 		material.map.repeat.set( 1,1 );
@@ -158,7 +155,7 @@ app.player = {
 				
 				r : 10,
 				
-c : "#ffffff"
+                c : "#ffffff"
 			},
 			eye2 : {
 				type : "sphere",
@@ -171,8 +168,8 @@ c : "#ffffff"
 				
 				r : 20,
 				
-c : "#ffffff"
-},
+                c : "#ffffff"
+            },
 			
 			body : {
 			
@@ -219,13 +216,17 @@ c : "#ffffff"
 	
 		var target = {
 		
-			x  : Math.random() * 2000,
-			z  : Math.random() * 2000,
+			a  : Math.random() * 200,
+			b  : Math.random() * 200,
 			
 			y   : Math.random() * 600,
 			
 			
 		}
+        
+        var temp = pos3d( target.a, target.b );
+        target.x = temp.x;
+        target.z = temp.z;
 		
 		target.dx = ( -item.obj.position.x + target.x ) / 300;
 		target.dz = ( -item.obj.position.z + target.z ) / 300;

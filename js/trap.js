@@ -106,13 +106,43 @@ app.trap = {
 		item.obj3.position.y = (item.obj3.position.y + item.nextOp );
 	},
 	
-	move : function ( item, x, y, z ) {
+	move : function ( item, x, y, z) {
 	
+      //*
+      
+        var p = pos3d( x, z );
+        
+        item.obj.position.x = p.x;
+		item.obj.position.y = p.y  + 60;
+		item.obj.position.z = p.z;
+		
+        item.obj2.position.x = p.x;
+		item.obj2.position.y = p.y  + 60;
+		item.obj2.position.z = p.z;
+		
+        item.obj3.position.x = p.x;
+		item.obj3.position.y = p.y  + 60;
+		item.obj3.position.z = p.z;
+		
+        item.obj4.position.x = p.x;
+		item.obj4.position.y = p.y  + 60;
+		item.obj4.position.z = p.z;
+		
+        //*
+        item.obj.position = pos3d( x, z );
+        item.obj2.position = pos3d( x, z );
+        item.obj3.position = pos3d( x, z );
+        item.obj4.position = pos3d( x, z );
+        //*/
+        
+        console.log(x,z,  pos3d ( x, z) );
+      //*/      
+       /*
 		item.obj.position.x = x;
 		item.obj.position.y = y  + 60;
 		item.obj.position.z = z;
 		
-		
+
 		item.obj2.position.x = x;
 		item.obj2.position.y = y + 60;
 		item.obj2.position.z = z;
@@ -125,7 +155,7 @@ app.trap = {
 		item.obj4.position.x = x;
 		item.obj4.position.y = y + 60;
 		item.obj4.position.z = z;
-		
+		//*/
 		
 		
 	}
