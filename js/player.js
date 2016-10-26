@@ -88,7 +88,7 @@ app.player = {
 		if ( col ) 
             material.color = new THREE.Color(col)
 		else
-            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 20%)");// "#bada55");//0xff0000);
+            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 99%)");// "#bada55");//0xff0000);
 		
 		
 		return material;
