@@ -44,7 +44,7 @@ app.player = {
 	
 	
 	sphere     : function (item, opt ) {
-		var material = this.getMaterial( opt.c );
+		var material = this.getMaterial( opt.c , opt.t);
 		
 		var geometry = new THREE.SphereBufferGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
 		
@@ -59,8 +59,10 @@ app.player = {
 	},
 	
 	
-	getMaterial : function ( col) {
+	getMaterial : function ( col, texture) {
 		var map = ten;
+		
+		if ( texture  == "smiley" ) map = smiley;
 		
 		
 		var material = new THREE.MeshBasicMaterial({
@@ -86,7 +88,7 @@ app.player = {
 		if ( col ) 
             material.color = new THREE.Color(col)
 		else
-            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 70%)");// "#bada55");//0xff0000);
+            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 30%)");// "#bada55");//0xff0000);
 		
 		
 		return material;
@@ -117,6 +119,8 @@ app.player = {
 				
 				r : 50,
 				
+				t : "smiley"
+				
 			},
 			
 			
@@ -136,21 +140,21 @@ app.player = {
 				
 				position : {
 					y : 40,
-					x : 170,
+					x : 70,
 					z : 0
 				},
 				
 				r : 20
 			},
 			
-						
+						/*
 			eye1 : {
 				type : "sphere",
 				
 				position : {
-					y : 140,
-					x : -70,
-					z : 0
+					y : 120,
+					x : -30,
+					z : -30
 				},
 				
 				r : 10,
@@ -161,15 +165,16 @@ app.player = {
 				type : "sphere",
 				
 				position : {
-					y : 140,
-					x : 170,
-					z : 0
+					y : 120,
+					x : 0,
+					z : -40
 				},
 				
-				r : 20,
+				r : 10,
 				
                 c : "#ffffff"
             },
+			*/
 			
 			body : {
 			
@@ -216,10 +221,10 @@ app.player = {
 	
 		var target = {
 		
-			a  : Math.random() * 200,
-			b  : Math.random() * 200,
+			a  : Math.random() * 50,
+			b  : Math.random() * 50,
 			
-			y   : Math.random() * 600,
+			y   : Math.random() * 10,
 			
 			
 		}
@@ -228,9 +233,9 @@ app.player = {
         target.x = temp.x;
         target.z = temp.z;
 		
-		target.dx = ( -item.obj.position.x + target.x ) / 300;
-		target.dz = ( -item.obj.position.z + target.z ) / 300;
-		target.dy = ( -item.obj.position.y + target.y ) / 300;
+		target.dx = ( -item.obj.position.x + target.x ) / 700;
+		target.dz = ( -item.obj.position.z + target.z ) / 700;
+		target.dy = ( -item.obj.position.y + target.y ) / 700;
 		
 		target.steps = 0;
 		
@@ -240,13 +245,13 @@ app.player = {
 	rotateDelta : function( item, dx, dy ) {
 	
 	
-		item.obj.rotation.y += dy
+		item.obj.rotation.y += dy / 2
 		
 		
 		if ( !item.target ) 
 			this.createTarget( item );
 			
-		if ( item.target.steps >= 300 ) 
+		if ( item.target.steps >= 700 ) 
 			this.createTarget( item );
 			
 		item.target.steps++;
@@ -265,7 +270,7 @@ app.player = {
 		item.spotLight.position.z = item.obj.position.z + 3 * item.target.dz
 		item.spotLight.position.y = item.obj.position.y + 3 * item.target.dy
 		*/
-		item.material1.map.offset.y += 0.0001;
+		//item.material1.map.offset.y += 0.0001;
 			
 		//item.obj.rotation.x = 0.5 - Math.random();
 		//this.obj.rotation.z += dz

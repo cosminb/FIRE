@@ -70,12 +70,23 @@ app.scene = {
 		this.camera.position.x = 500;
 		
 		
-		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2 - 500, window.innerWidth / 2-500, window.innerHeight -500, window.innerHeight / - 1 -500, -100, 10000 );
-		this.camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / (2 * window.innerHeight), 0.1, 10000 );
+		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2 - 500, window.innerWidth / 2-500, window.innerHeight -500, window.innerHeight / - 1 -500, -100, 1000 );
+		this.camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / (2 * window.innerHeight), 100, 50000 );
 
-		this.camera2.position.y = 600;
+		this.camera2.position.y = 1600;
 		this.camera2.position.x = 500;
 		this.camera2.position.z = 100;
+		
+		/*
+		var cameraHelper1 = new THREE.CameraHelper(this.camera);
+		
+		this.scene.add(cameraHelper1);
+		
+		
+		var cameraHelper2 = new THREE.CameraHelper(this.camera2);
+		
+		//this.scene.add(cameraHelper2);
+		*/
 
 	},
 	

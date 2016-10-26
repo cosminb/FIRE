@@ -45,7 +45,7 @@ app.trap = {
 		
 		
 		
-		var cube = new THREE.Mesh( new THREE.CubeGeometry( 20, 40, 20 ), new THREE.MeshNormalMaterial() );
+		var cube = new THREE.Mesh( new THREE.SphereGeometry( 10, 40, 20 ), new THREE.MeshNormalMaterial() );
 
 
 		item.obj3 = cube;
@@ -84,7 +84,7 @@ app.trap = {
 
 
 		material.side = THREE.DoubleSide;
-		material.color = new THREE.Color("hsl("+((i*30)%360 )+", 100%, 50%)");// "#bada55");//0xff0000);
+		material.color = new THREE.Color("hsl("+((i*6)%100 + 20)+", 100%, 50%)");// "#bada55");//0xff0000);
 		return material;
 	},
 	
@@ -100,10 +100,10 @@ app.trap = {
 		item.mat.opacity = item.mat.opacity + item.nextOp ;
 		item.mat2.opacity = item.mat2.opacity + item.nextOp;
 		
-		if( item.mat.opacity < -0.2 || item.mat.opacity > 1 ) item.nextOp = - item.nextOp;
+		if( item.mat.opacity < 0.2 || item.mat.opacity > 1 ) item.nextOp = - item.nextOp;
 		
 		
-		item.obj3.position.y = (item.obj3.position.y + item.nextOp );
+		item.obj3.position.y += ( item.nextOp );
 	},
 	
 	move : function ( item, x, y, z) {
@@ -113,22 +113,22 @@ app.trap = {
         var p = pos3d( x, z );
         
         item.obj.position.x = p.x;
-		item.obj.position.y = p.y  + 60;
+		item.obj.position.y = p.y + 40;
 		item.obj.position.z = p.z;
 		
         item.obj2.position.x = p.x;
-		item.obj2.position.y = p.y  + 60;
+		item.obj2.position.y = p.y  +40;
 		item.obj2.position.z = p.z;
 		
         item.obj3.position.x = p.x;
-		item.obj3.position.y = p.y  + 60;
+		item.obj3.position.y = p.y + 20;
 		item.obj3.position.z = p.z;
 		
         item.obj4.position.x = p.x;
-		item.obj4.position.y = p.y  + 60;
+		item.obj4.position.y = p.y;
 		item.obj4.position.z = p.z;
 		
-        //*
+        /*
         item.obj.position = pos3d( x, z );
         item.obj2.position = pos3d( x, z );
         item.obj3.position = pos3d( x, z );

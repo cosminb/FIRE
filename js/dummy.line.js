@@ -16,15 +16,15 @@ app.dummy.line = {
 		x1 = 100;
 		y1 = 440;
 		
-		x2 = 200;
-		y2 = 100;
+		x2 = 300;
+		y2 = 0;
 		
 		SUBDIVISIONS = 20;
 		geometry = new THREE.Geometry();
 		curve = new THREE.QuadraticBezierCurve3();
 		curve.v0 = new THREE.Vector3(x0, y0, 0);
-		curve.v1 = new THREE.Vector3(x1, y1, 0);
-		curve.v2 = new THREE.Vector3(x2, y2, 0);
+		curve.v1 = new THREE.Vector3(x1, y1, 150);
+		curve.v2 = new THREE.Vector3(x2, y2, 300);
 		for (j = 0; j < SUBDIVISIONS; j++) {
 		geometry.vertices.push( curve.getPoint(j / SUBDIVISIONS) )
 		}
