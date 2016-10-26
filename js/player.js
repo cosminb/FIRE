@@ -88,7 +88,7 @@ app.player = {
 		if ( col ) 
             material.color = new THREE.Color(col)
 		else
-            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 30%)");// "#bada55");//0xff0000);
+            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 20%)");// "#bada55");//0xff0000);
 		
 		
 		return material;
@@ -119,7 +119,7 @@ app.player = {
 				
 				r : 50,
 				
-				t : "smiley"
+				//t : "smiley"
 				
 			},
 			
@@ -245,7 +245,7 @@ app.player = {
 	rotateDelta : function( item, dx, dy ) {
 	
 	
-		item.obj.rotation.y += dy / 2
+		item.obj.rotation.y += dy
 		
 		
 		if ( !item.target ) 
@@ -270,7 +270,8 @@ app.player = {
 		item.spotLight.position.z = item.obj.position.z + 3 * item.target.dz
 		item.spotLight.position.y = item.obj.position.y + 3 * item.target.dy
 		*/
-		//item.material1.map.offset.y += 0.0001;
+		
+		item.material1.map.offset.y += 0.00001;
 			
 		//item.obj.rotation.x = 0.5 - Math.random();
 		//this.obj.rotation.z += dz

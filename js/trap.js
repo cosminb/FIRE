@@ -84,7 +84,7 @@ app.trap = {
 
 
 		material.side = THREE.DoubleSide;
-		material.color = new THREE.Color("hsl("+((i*6)%100 + 20)+", 100%, 50%)");// "#bada55");//0xff0000);
+		material.color = new THREE.Color("hsl("+((i*6)%360)+", 100%,80%)");// "#bada55");//0xff0000);
 		return material;
 	},
 	
@@ -97,10 +97,11 @@ app.trap = {
 		//item.mat2.map.offset.x += dx/6;
 		
 		
-		item.mat.opacity = item.mat.opacity + item.nextOp ;
-		item.mat2.opacity = item.mat2.opacity + item.nextOp;
+		var dop = item.nextOp ///* Math.random();
+		item.mat.opacity = item.mat.opacity + dop;
+		item.mat2.opacity = item.mat2.opacity + dop;
 		
-		if( item.mat.opacity < 0.2 || item.mat.opacity > 1 ) item.nextOp = - item.nextOp;
+		if( item.mat.opacity < -0.2 || item.mat.opacity > 1 ) item.nextOp = - item.nextOp;
 		
 		
 		item.obj3.position.y += ( item.nextOp );
