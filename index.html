@@ -35,6 +35,8 @@ app.dummy = {}
 <script src='js/floor.js'> </script>
              
 <script src='js/trap.js'></script>
+             
+<script src='js/materials.js'></script>
 
 
 <script>
@@ -113,30 +115,41 @@ function animate() {
 
     
     
+    //*
+    app.scene.camera.position.x = 2500;
+    app.scene.camera.position.z = 2500;
+    app.scene.camera.position.y = 3500;
+    
+    
+    app.scene.camera.lookAt( { x : 2500, y : 0, z : 2500 } );
+    //*/
+    /*
     if ( xpos.step >= 1000 ) {
     
 
-xpos = {
+        xpos = {
 
-	x : Math.random() * 100 * 50, 
-	y : Math.random() * 100 * 50, 
-	
-	
-}
+            x : Math.random() * 100 * 50, 
+            y : Math.random() * 100 * 50, 
+            
+            
+        }
 
-xpos.dx = ( -app.scene.camera.position.x + xpos.x ) / 1000;
-xpos.dy = ( -app.scene.camera.position.z + xpos.y ) /1000; 
+        xpos.dx = ( -app.scene.camera.position.x + xpos.x ) / 1000;
+        xpos.dy = ( -app.scene.camera.position.z + xpos.y ) /1000; 
 
-xpos.step = 0;
+        xpos.step = 0;
 
-}
+    }
 
 
-app.scene.camera.position.x += xpos.dx;
-app.scene.camera.position.z += xpos.dy;
+    app.scene.camera.position.x += xpos.dx;
+    app.scene.camera.position.z += xpos.dy;
 
-xpos.step ++;
-
+    xpos.step ++;
+    //*/
+    
+    
     app.scene.render( );
     
 

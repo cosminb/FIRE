@@ -18,6 +18,7 @@ app.player = {
 	setPlace : function (item,  obj, opt ) {
 		if ( !opt.position ) return;
 		
+        //set x,y,z from options 
 		var position = opt.position;
 		for ( var i in position ) {
 			obj.position[ i ] = position[ i ];
@@ -27,7 +28,7 @@ app.player = {
     
 	cylinder : function ( item, opt ) {
 	
-		var material = this.getMaterial();
+		var material = app.materials.m4Player( opt ) //this.getMaterial();
 		
 		var geometry = new THREE.CylinderBufferGeometry( 50, 50, opt.h, 29 );
 		
@@ -36,15 +37,12 @@ app.player = {
 		
 		this.setPlace( item, obj,opt );
 		
-		
-		item.material1 = material;
-		
 		item.group.add( obj );
 	},
 	
 	
 	sphere     : function (item, opt ) {
-		var material = this.getMaterial( opt.c , opt.t);
+		var material = app.materials.m4Player( opt);
 		
 		var geometry = new THREE.SphereBufferGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
 		
@@ -54,45 +52,11 @@ app.player = {
 		this.setPlace( item, obj, opt );
 		
 		item.group.add( obj );
-		
-		
 	},
 	
 	
 	getMaterial : function ( col, texture) {
-		var map = ten;
-		
-		if ( texture  == "smiley" ) map = smiley;
-		
-		
-		var material = new THREE.MeshBasicMaterial({
-			
-			map : map,
-			transparent: false,
-			depthTest: true,
-			depthWrite: true,
-			wireframe: false,
-			
-			
-		});
-
-		material.map.wrapS = THREE.RepeatWrapping;
-		material.map.wrapT = THREE.RepeatWrapping;
-		material.map.repeat.set( 1,1 );
-
-
-		material.side = THREE.DoubleSide;
-		
-		var i = (this.i+= 20) //Math.random() * 360;
-		
-		if ( col ) 
-            material.color = new THREE.Color(col)
-		else
-            material.color =  new THREE.Color("hsl("+((i  )%360 )+", 100%, 99%)");// "#bada55");//0xff0000);
-		
-		
-		return material;
-		
+        
 	},
 	
 	i : 20,
@@ -264,25 +228,6 @@ app.player = {
 		item.obj.position.y += item.target.dy;
 		
 		
-		
-		/*
-		item.spotLight.position.x = item.obj.position.x + 3 * item.target.dx
-		item.spotLight.position.z = item.obj.position.z + 3 * item.target.dz
-		item.spotLight.position.y = item.obj.position.y + 3 * item.target.dy
-		*/
-		
-		item.material1.map.offset.y += 0.00007;
-			
-		//item.obj.rotation.x = 0.5 - Math.random();
-		//this.obj.rotation.z += dz
-		///*
-		//this.obj2.position.y = 150;
-		//this.obj.position.y = 240;
-		
-		
-		//this.obj.position.z = 0;
-		//*/
-		//this.obj.rotation.x += dx;
-		//this.obj.rotation.y += dy;
-	}
+		//item.material1.map.offset.y += 0.00007;
+        }
 }

@@ -33,10 +33,10 @@ app.floor = {
 			planeGeometry, 
 			
 			new THREE.MeshBasicMaterial({
-				color: "#222",
+				color: new THREE.Color("#222"),
 				wireframe: true,
 				
-				opacity : 0.03
+				//opacity : 0.03
 			})
 		);	
 		
