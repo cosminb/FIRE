@@ -271,7 +271,7 @@ app.player = {
 		item.spotLight.position.y = item.obj.position.y + 3 * item.target.dy
 		*/
 		
-		item.material1.map.offset.y += 0.00001;
+		item.material1.map.offset.y += 0.00007;
 			
 		//item.obj.rotation.x = 0.5 - Math.random();
 		//this.obj.rotation.z += dz
