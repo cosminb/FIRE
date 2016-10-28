@@ -1,8 +1,8 @@
 		
 app.trap = {
 
-	add : function ( item, i ) {
-		this.render(item, i );
+	add : function ( item ) {
+		this.render(item );
 		app.scene.add( item.obj );
 		app.scene.add( item.obj3 );
 		
@@ -111,25 +111,24 @@ app.trap = {
 	
       //*
       
-        var p = pos3d( x, z );
+        //var p = pos3d( x, z );
         
-        item.obj.position.x = p.x;
-		item.obj.position.y = p.y + 40;
-		item.obj.position.z = p.z;
+        item.obj.position.x = x;
+		item.obj.position.y = y + 40;
+		item.obj.position.z = z;
 		
-        item.obj2.position.x = p.x;
-		item.obj2.position.y = p.y  +40;
-		item.obj2.position.z = p.z;
+        item.obj2.position.x = x;
+		item.obj2.position.y = y  +40;
+		item.obj2.position.z = z;
 		
-        item.obj3.position.x = p.x;
-		item.obj3.position.y = p.y + 20;
-		item.obj3.position.z = p.z;
+        item.obj3.position.x = x;
+		item.obj3.position.y = y + 20;
+		item.obj3.position.z = z;
 		
-        item.obj4.position.x = p.x;
-		item.obj4.position.y = p.y;
-		item.obj4.position.z = p.z;
-		
-		
+        item.obj4.position.x = x;
+		item.obj4.position.y = y;
+		item.obj4.position.z = z;
+           
 	}
 
 }

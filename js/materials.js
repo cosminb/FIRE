@@ -1,6 +1,6 @@
 app.materials = {
     
-     m4Player : function ( opt ) {
+     m4Player : function ( opt, hue ) {
          
 		var map = ten;
 		
@@ -25,7 +25,7 @@ app.materials = {
 
 		material.side = THREE.DoubleSide;
 		
-		var i = (this.i+= 20) //Math.random() * 360;
+		var i = hue; //(this.i+= 20) //Math.random() * 360;
 		
 		if ( opt.col ) 
             material.color = new THREE.Color(opt.col)
