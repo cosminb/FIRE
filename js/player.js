@@ -3,7 +3,6 @@ app.player = {
 	add : function ( item ) {
 		this.render(item );
 		app.scene.add( item.obj );
-				
 	},
 	
 	move : function ( item, x, y, z ) {
@@ -28,7 +27,7 @@ app.player = {
     
 	cylinder : function ( item, opt ) {
 	
-		var material = app.materials.m4Player( opt ) //this.getMaterial();
+		var material = app.materials.m4Player( opt, item.color ) //this.getMaterial();
 		
 		var geometry = new THREE.CylinderBufferGeometry( 50, 50, opt.h, 29 );
 		
@@ -42,7 +41,7 @@ app.player = {
 	
 	
 	sphere     : function (item, opt ) {
-		var material = app.materials.m4Player( opt);
+		var material = app.materials.m4Player( opt, item.color);
 		
 		var geometry = new THREE.SphereBufferGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
 		
@@ -54,11 +53,7 @@ app.player = {
 		item.group.add( obj );
 	},
 	
-	
-	getMaterial : function ( col, texture) {
-        
-	},
-	
+		
 	i : 20,
 	
 	render : function ( item ) {
@@ -111,7 +106,7 @@ app.player = {
 				r : 20
 			},
 			
-						/*
+			/*
 			eye1 : {
 				type : "sphere",
 				
@@ -138,7 +133,7 @@ app.player = {
 				
                 c : "#ffffff"
             },
-			*/
+			//s*/
 			
 			body : {
 			
@@ -153,7 +148,7 @@ app.player = {
 				h : 20
 			},
 			
-						body2 : {
+			body2 : {
 			
 				type : "cylinder",
 				
@@ -209,6 +204,10 @@ app.player = {
 	rotateDelta : function( item, dx, dy ) {
 	
 	
+		item.obj.rotation.z += dy
+		
+		item.obj.rotation.x += dy
+		
 		item.obj.rotation.y += dy
 		
 		

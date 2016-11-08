@@ -11,8 +11,8 @@ app.floor = {
 	
 	render : function ( item ) {
 	
-		var planeW = 100; // pixels
-		var planeH = 100; // pixels 
+		var planeW = 150; // pixels
+		var planeH = 150; // pixels 
 		var numW = 50; // how many wide (50*50 = 2500 pixels wide)
 		var numH = 50; // how many tall (50*50 = 2500 pixels tall)
 

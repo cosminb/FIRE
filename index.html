@@ -38,6 +38,12 @@ app.dummy = {}
              
 <script src='js/materials.js'></script>
 
+<script src='js/objects.js'></script>
+
+<script src='js/timeline.js'></script>
+
+<script src='js/test.js'></script>
+
 
 <script>
 
@@ -52,18 +58,19 @@ app.scene.addRender( app.scene.camera );
 app.scene.addRender( app.scene.camera2 );
 
 
-var x= [];
-
 for ( var i = 0 ; i < 35; i++ ) {
+    app.objects.addPlayer( "player_" + i, Math.round( i/3 ), i % 3, i *1543 );
+}
 
-	x[i] = {};
-	app.player.add(x[i]);
-	
-	app.player.move( x[i], 300 * (i / 3 ) + 50, 10, 300 * ( i % 3 ) + 50 ) ;
+
+for ( var i = 0; i < 100 ; i ++ ) {
+    app.objects.addBomb( "bomb_" + i, Math.round(i / 10 ) * 3,  ( i % 10 )* 3 );
 }
 
 
 
+
+/*
 var items = [];
 
 for ( var i = 10 ;i <11; i++ ) {
@@ -81,7 +88,7 @@ for ( var i = 10 ;i <11; i++ ) {
 	items.push( item );
 }
 
-
+*/
 
 var item = {};
 
@@ -91,21 +98,51 @@ app.dummy.line.add( );
 
 var xpos = { step : 1001 }
 
-function animate() {
+var aaa = 0;
+
+    app.scene.camera.position.x = 2500;
+    app.scene.camera.position.z = 2500;
+    app.scene.camera.position.y = 3500;
+    
+    
+    app.scene.camera.lookAt( { x : 2500, y : 0, z : 2500 } );
+
+    app.scene.camera2.lookAt( { x : 2500, y : 20, z : 2500 } );
+
+
+    app.test.init();
+    app.test.auto();
+    
+function animate( time ) {
 
     requestAnimationFrame( animate );
-
     
-    for ( var i in x ) { 
-        app.player.rotateDelta( x[i], 0.05, 0.02 );;
-    }
-
-    for ( var i in items ) { 
-        app.trap.rotateDelta( items[ i ] , 0.01, 0.02 );
+    app.timeline.runAnimations();
+/*
+    if ( aaa != 2 ) {
+		aaa++;
+		return;
     }
     
+    else {
+		aaa = 0;
+    }
+    */
+    /*
+    app.objects.eachPlayer( function ( item, id ) {
+        app.player.rotateDelta( item, 0.05, 0.03 );
+    });
+  
+    app.objects.eachTrap( function ( item, id ) {
+        app.trap.rotateDelta( item, 0.01, 0.02 );
+    });
     
     
+    //*/
+    
+    //*
+    
+    //*
     
     var timer = Date.now() * 0.0001;
 
@@ -113,13 +150,16 @@ function animate() {
     app.scene.camera2.position.z = Math.sin( timer ) * 1500;
     app.scene.camera2.position.y =1750;
     
+/*    app.scene.camera2.rotation.x += 0.01;
+    app.scene.camera2.rotation.z += 0.01; 
+    app.scene.camera2.rotation.y += 0.01;*///Math.PI/2;
+    //*/
+    
     //app.scene.camera2.rotation.x = Math.PI/2;
     
-    app.scene.camera2.lookAt( { x : 2500, y : 20, z : 2500 } );
-
     
-    
-    //*
+    //*/
+    /*
     app.scene.camera.position.x = 2500;
     app.scene.camera.position.z = 2500;
     app.scene.camera.position.y = 3500;
