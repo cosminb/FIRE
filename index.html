@@ -48,6 +48,10 @@ app.scene.init();
 app.scene.addCamera();
 
 
+app.scene.addRender( app.scene.camera );
+app.scene.addRender( app.scene.camera2 );
+
+
 var x= [];
 
 for ( var i = 0 ; i < 35; i++ ) {
@@ -62,7 +66,7 @@ for ( var i = 0 ; i < 35; i++ ) {
 
 var items = [];
 
-for ( var i = 0 ;i <100; i++ ) {
+for ( var i = 10 ;i <11; i++ ) {
 
 	if ( i == 0 ) continue;
 	

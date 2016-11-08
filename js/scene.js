@@ -13,7 +13,7 @@ app.scene = {
 		
 		the.scene = this.scene;
 		
-		
+		/*
 		this.renderer = new THREE.WebGLRenderer({antialias:true} );
 		this.renderer.setSize( window.innerWidth/2, window.innerHeight );
 				
@@ -26,21 +26,21 @@ app.scene = {
 		this.renderer2 = new THREE.WebGLRenderer({antialias:true} );
 		this.renderer2.setSize( window.innerWidth/2 - 10, window.innerHeight );
 
-		
+		/*
         this.renderer2.shadowMap.enabled = true;
         this.renderer2.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer2.gammaInput = true;
         this.renderer2.gammaOutput = true;
-
+		*/
 				
-		document.body.appendChild( this.renderer2.domElement );
-		this.renderer2.domElement.style.float = "left";
+		//document.body.appendChild( this.renderer2.domElement );
+		//this.renderer2.domElement.style.float = "left";
 		
 		
 		this.scene.add( new THREE.AmbientLight( 0xeef0ff ) );
 
 		
-		
+		/*
 	
 		var light = new THREE.DirectionalLight( 0xffddcc, 1 );
 		light.position.set( 1, 0.75, 0.5 );
@@ -48,18 +48,35 @@ app.scene = {
 		var light = new THREE.DirectionalLight( 0xccccff, 1 );
 		light.position.set(200, 400, 500 );
 		this.scene.add( light );
-		
+		*/
 
 
 	},
 	
-	addRender : function ( ) {
+	renderers : [],
 	
+	
+	addRender : function (camera ) {
+		var renderer = new THREE.WebGLRenderer({antialias:true} );
+		renderer.setSize( window.innerWidth/2, window.innerHeight );
+		
+		
+		
+		document.body.appendChild( renderer.domElement );
+		renderer.domElement.style.float = "left";
+		
+		
+		this.renderers.push ( { render : renderer, camera : camera } );
 	},
 	
 	render : function ( ) {
-		this.renderer.render( this.scene, this.camera );
-		this.renderer2.render( this.scene, this.camera2 );
+		for ( var i = 0; i< this.renderers.length; i++ ) {
+			var rend = this.renderers[ i ];
+			rend.render.render( this.scene, rend.camera );
+			
+		}
+		//this.renderer.render( this.scene, this.camera );
+		//this.renderer2.render( this.scene, this.camera2 );
 	},
 	
 	addCamera : function ( ) {
