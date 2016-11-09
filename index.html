@@ -121,7 +121,7 @@ function animate() {
 
     xcount++;
     
-    var delay = 1000 / 25;
+    var delay = 1000 /50;
     if ( xcount > 100 ) {
         delay = 100;
         xcount = 0;
@@ -173,9 +173,10 @@ function xrender( time ) {
     app.scene.camera2.position.z = Math.sin( timer ) * 1500;
     app.scene.camera2.position.y =1750;
     
-/*    app.scene.camera2.rotation.x += 0.01;
+/*  
+  app.scene.camera2.rotation.x += 0.01;
     app.scene.camera2.rotation.z += 0.01; 
-    app.scene.camera2.rotation.y += 0.01;*///Math.PI/2;
+    app.scene.camera2.rotation.y += 0.01;//*///Math.PI/2;
     //*/
     
     //app.scene.camera2.rotation.x = Math.PI/2;
