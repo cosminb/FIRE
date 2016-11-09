@@ -112,10 +112,32 @@ var aaa = 0;
 
     app.test.init();
     app.test.auto();
-    
-function animate( time ) {
+ 
+var xcount = 0;
+function animate() {
 
-    requestAnimationFrame( animate );
+
+    xrender();
+
+    xcount++;
+    
+    var delay = 1000 / 25;
+    if ( xcount > 100 ) {
+        delay = 100;
+        xcount = 0;
+    }
+    setTimeout( function() {
+
+        requestAnimationFrame( animate );
+
+    }, delay);
+
+}
+
+ 
+function xrender( time ) {
+
+    //requestAnimationFrame( animate );
     
     app.timeline.runAnimations();
 /*
@@ -132,9 +154,10 @@ function animate( time ) {
     app.objects.eachPlayer( function ( item, id ) {
         app.player.rotateDelta( item, 0.05, 0.03 );
     });
+  */
   
     app.objects.eachTrap( function ( item, id ) {
-        app.trap.rotateDelta( item, 0.01, 0.02 );
+        app.trap.rotateDelta( item, 0.05, 0.09 );
     });
     
     
