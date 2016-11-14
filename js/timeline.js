@@ -6,6 +6,49 @@ app.timeline = {
 		
 	namedAnimations : {},
 	
+    
+    steps : [],
+    currentStep : {},
+    currentStepIndex : 0,
+    objs : {},
+    
+    addScene : function ( step ) {
+         var scene = { items : [] } ;
+         
+         var index =  this.steps.push ( scene )  
+         
+         this.currentScene = scene;
+    },
+    addToScene : function ( objId,  endValue ) {
+        this.currentScene.items[ id ] = endValue
+    },
+    
+    
+    currentScene : {},
+    
+    startScene : function ( ) {
+         var nextScene = this.steps.shift();
+         var nextItems = nextScene.items;
+         
+         var currentScene = this.currentScene
+         var currentItems = currentItems.items;
+         
+         for( var i in nextItems ) {
+             var newItem = nextItems[ i ];
+             var item = currentItems[ i ];
+             
+             if ( !newItem.animation ) newItem.animation = ani.defaultAnimation;
+
+             newItem.animation.setupStage( item,  newItem );
+         }
+    },
+    
+    runStep   : function ( ) {
+        
+    },
+    
+    
+    
 	add : function ( name , obj, parameters ) {
 		
 		if ( this.namedAnimations[ name ] ) {
@@ -68,6 +111,27 @@ app.timeline = {
 }
 
 
+var ani = {}
+
+ani.defaultAnimation = {
+     setupStage : function ( item, value, steps ) {
+          item.startValues = item.endValues;
+          
+          item.endValues = value;
+          
+          item.deltas    = {};
+          
+          for ( var i in item.endValues ) {
+                item.deltas[ i ] = ( item.endValues[ i ] - item.startValues[ i ] ) / steps;
+          }
+     },
+     
+     step    : function ( item, step  ) {
+         item.values.position.x = item.startValues.x + step * item.deltas.x
+         item.values.position.y = item.startValues.y + step * item.deltas.y
+         item.values.position.z = item.startValues.z + step * item.deltas.z
+     },
+}
 app.animation = function ( obj, parameters ) {
 	
 	this.frames = [];
