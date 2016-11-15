@@ -65,6 +65,13 @@ app.scene = {
 		document.body.appendChild( renderer.domElement );
 		renderer.domElement.style.float = "left";
 		
+		//renderer.setClearColor(0xdfdfdf, 1);
+		
+		//renderer.shadowMapEnabled = true;
+		//renderer.shadowMapType = THREE.PCFShadowMap;
+		//soft shadowmap version
+		//renderer.shadowMapType = THREE.PCFSoftShadowMap;
+		
 		
 		this.renderers.push ( { render : renderer, camera : camera } );
 	},

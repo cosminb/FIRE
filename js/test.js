@@ -38,18 +38,37 @@ app.test = {
 			this.movePlayer( i );
 	},
     
-    next : function () {
+    anext : function () {
         
       app.timeline.addScene();
 
       for ( var i = 0; i< 35;i++ ) {
             var pos = this.movePlayer( i );
             
-            pos = pos3D( pos.x, pos.z );
+            pos = pos3d( pos.x, pos.z );
             
             app.timeline.addToScene( i, pos )
       }      
     },
+	
+	add : function ( ) {
+		for( var i = 0 ; i < 50; i++  ){
+			this.anext()
+		}	
+	},
+	
+	next : function () {
+		
+		app.timeline.addScene();
+		
+		for ( var i = 0; i< 35;i++ ) {
+			var pos = this.movePlayer( i );
+			app.api.moveTo( i, pos.x, pos.z );
+			//pos = pos3d( pos.x, pos.z );
+			
+			//app.timeline.addToScene( i, pos )
+		}      
+	},
 	
 	auto : function ( ) {
 		
@@ -62,7 +81,7 @@ app.test = {
 
 
 
-
+/*
 
 var xfn = function () {
     var overlay, lastCount, lastTime, timeoutFun;
@@ -99,6 +118,6 @@ var xfn = function () {
     setTimeout(timeoutFun, 1000);
 }
 
-xfn();
+xfn();*/
 
 

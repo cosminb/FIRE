@@ -29,7 +29,7 @@ app.player = {
 	
 		var material = app.materials.m4Player( opt, item.color ) //this.getMaterial();
 		
-		var geometry = new THREE.CylinderBufferGeometry( 50, 50, opt.h, 29 );
+		var geometry = new THREE.CylinderGeometry( 50, 50, opt.h, 29 );
 		
 		var obj = new THREE.Mesh( geometry, material );
 		
@@ -39,16 +39,16 @@ app.player = {
 		item.group.add( obj );
 	},
 	
-	
 	sphere     : function (item, opt ) {
 		var material = app.materials.m4Player( opt, item.color);
 		
-		var geometry = new THREE.SphereBufferGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
+		var geometry = new THREE.SphereGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
 		
 		var obj = new THREE.Mesh( geometry, material );
 		
 		
 		this.setPlace( item, obj, opt );
+		
 		
 		item.group.add( obj );
 	},
@@ -135,6 +135,7 @@ app.player = {
             },
 			//s*/
 			
+			
 			body : {
 			
 				type : "cylinder",
@@ -161,7 +162,6 @@ app.player = {
 				h : 50
 			}
 		
-			
 		}
 		
 		

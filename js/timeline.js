@@ -132,6 +132,8 @@ ani.defaultAnimation = {
          item.values.position.z = item.startValues.z + step * item.deltas.z
      },
 }
+
+
 app.animation = function ( obj, parameters ) {
 	
 	this.frames = [];

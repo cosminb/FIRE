@@ -1,4 +1,5 @@
 
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 <body>
 
@@ -9,7 +10,12 @@ body,window { padding : 0; margin : 0 }
 
 canvas { width : 50% !important; float : left }
 </style>
+
 <script src="libs/three.min.js"></script> 
+
+<script src="libs/stats.js"> </script>
+
+<script src="libs/shaderfrog-runtime.min.js"></script>
 
 <script>
 var app = {}
@@ -45,7 +51,17 @@ app.dummy = {}
 <script src='js/test.js'></script>
 
 
+
+
 <script>
+
+
+var stats = new Stats();
+stats.showPanel( 0 ); 
+stats.showPanel( 1 );
+
+// 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
 
 
 
@@ -54,7 +70,7 @@ app.scene.init();
 app.scene.addCamera();
 
 
-app.scene.addRender( app.scene.camera );
+// app.scene.addRender( app.scene.camera );
 app.scene.addRender( app.scene.camera2 );
 
 
@@ -90,6 +106,7 @@ for ( var i = 10 ;i <11; i++ ) {
 
 */
 
+
 var item = {};
 
 app.floor.add( item );
@@ -113,12 +130,24 @@ var aaa = 0;
     app.test.init();
     app.test.auto();
  
+ 
+ 				light = new THREE.DirectionalLight( 0xffffff, 0.2 );
+				light.position.set( 2500, 3505, 2500 );
+				app.scene.scene.add( light );
+				
+				//var lh = new THREE.DirectionalLightHelper( light, 50 );
+				//app.scene.scene.add( lh );
+				
+				
 var xcount = 0;
 function animate() {
 
 
     xrender();
+	requestAnimationFrame( animate );
 
+	return;
+        
     xcount++;
     
     var delay = 1000 / 25;
@@ -137,6 +166,8 @@ function animate() {
  
 function xrender( time ) {
 
+	stats.begin();
+	
     //requestAnimationFrame( animate );
     
     app.timeline.runAnimations();
@@ -221,6 +252,7 @@ function xrender( time ) {
     app.scene.render( );
     
 
+    stats.end();
 }
 
 
