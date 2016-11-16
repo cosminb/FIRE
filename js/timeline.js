@@ -62,7 +62,7 @@ app.timeline = {
              var newItem = nextItems[ i ];
              var item = currentItems[ i ];
              
-             if ( !newItem.animation ) newItem.animation = ani.defaultAnimation;
+             if ( !newItem.animation ) newItem.animation = ani.jump;
 
              newItem.animation.setupStage( item,  newItem , 50);
              
@@ -189,6 +189,36 @@ ani.defaultAnimation = {
          item.values.position.y = item.startValues.y + step * item.deltas.y
          item.values.position.z = item.startValues.z + step * item.deltas.z
      },
+}
+
+
+
+ani.jump = {
+	
+	setupStage : function ( item, value, steps ) {
+		item.startValues = item.endValues;
+		
+		item.endValues = value;
+		
+		item.deltas    = {};
+		
+		item.values = { position : {y : item.startValues.y} };
+		
+		for ( var i in item.endValues ) {
+			item.deltas[ i ] = ( item.endValues[ i ] - item.startValues[ i ] ) / steps;
+		}
+	},
+	
+	step    : function ( item, step  ) {
+		item.values.position.x = item.startValues.x + step * item.deltas.x
+		///item.values.position.y = item.startValues.y + step * item.deltas.y
+		
+		item.values.position.y += ( step < 25 ) ? 10 : -10
+		
+		item.values.position.z = item.startValues.z + step * item.deltas.z
+	},
+
+	
 }
 
 

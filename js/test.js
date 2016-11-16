@@ -6,8 +6,8 @@ app.test = {
 		var pl = this.pl[ p];
 		
 		do { 
-			var dx = Math.round( Math.random() * 2 ) -1 ;
-			var dz = Math.round( Math.random() * 2 ) -1 ;
+			var dx = Math.round( Math.random() * 4 ) -4 ;
+			var dz = Math.round( Math.random() * 4 ) -4 ;
 		} while ( (dx == 0 && dz == 0) || (dx!=0 && dz!=0)  );
 		
 		pl.xxx +=  dx;
