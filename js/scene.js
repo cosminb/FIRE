@@ -57,7 +57,7 @@ app.scene = {
 	
 	
 	addRender : function (camera ) {
-		var renderer = new THREE.WebGLRenderer({antialias:true} );
+		var renderer = new THREE.WebGLRenderer({antialias:false} );
 		renderer.setSize( window.innerWidth/2, window.innerHeight );
 		
 		

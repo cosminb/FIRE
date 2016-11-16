@@ -1,5 +1,5 @@
 
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 <body>
 
@@ -14,8 +14,6 @@ canvas { width : 50% !important; float : left }
 <script src="libs/three.min.js"></script> 
 
 <script src="libs/stats.js"> </script>
-
-<script src="libs/shaderfrog-runtime.min.js"></script>
 
 <script>
 var app = {}
@@ -77,7 +75,6 @@ app.scene.addRender( app.scene.camera2 );
 for ( var i = 0 ; i < 35; i++ ) {
     app.objects.addPlayer( "player_" + i, Math.round( i/3 ), i % 3, i *1543 );
 }
-
 
 for ( var i = 0; i < 100 ; i ++ ) {
     app.objects.addBomb( "bomb_" + i, Math.round(i / 10 ) * 3,  ( i % 10 )* 3 );
@@ -145,14 +142,15 @@ function animate() {
 
     xrender();
 	requestAnimationFrame( animate );
-
-	return;
-        
+    return;
+    
+    xrender();
+    
     xcount++;
     
-    var delay = 1000 / 25;
+    var delay = 25;
     if ( xcount > 100 ) {
-        delay = 100;
+        //delay = 1000;
         xcount = 0;
     }
     setTimeout( function() {
@@ -197,13 +195,13 @@ function xrender( time ) {
     //*
     
     //*
-    
+    /*
     var timer = Date.now() * 0.0001;
 
     app.scene.camera2.position.x = Math.cos( timer ) * 1500;
     app.scene.camera2.position.z = Math.sin( timer ) * 1500;
     app.scene.camera2.position.y =1750;
-    
+    */
 /*  
   app.scene.camera2.rotation.x += 0.01;
     app.scene.camera2.rotation.z += 0.01; 

@@ -47,7 +47,7 @@ app.test = {
             
             pos = pos3d( pos.x, pos.z );
             
-            app.timeline.addToScene( i, pos )
+            app.timeline.addToScene( i, { x: pos.x, y : pos.y, z : pos.z } )
       }      
     },
 	
@@ -71,7 +71,7 @@ app.test = {
 	},
 	
 	auto : function ( ) {
-		
+		this.add();
 		window.setInterval ( function ( ) {
 		
 			app.test.next( i );
