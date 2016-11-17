@@ -60,11 +60,14 @@ app.timeline = {
              var newItem = nextItems[ i ];
              var item = currentItems[ i ];
              
-             if ( !newItem.animation ) newItem.animation = ani.jump;
-
-             newItem.animation.setupStage( item,  newItem , 50);
+             //if ( !newItem.animation ) newItem.animation = ani.jump;
+             item.animation = newItem.animation || ani.walk;       
              
-             item.animation = newItem.animation;
+             if ( typeof item.animation == "string" ) item.animation = ani[ item.animation ];
+             
+             item.animation.setupStage( item,  newItem , 50);
+             
+             
          }
          
          this.nrSteps = 0;
@@ -104,7 +107,7 @@ app.timeline = {
 
 var ani = {}
 
-ani.defaultAnimation = {
+ani.walk = {
      setupStage : function ( item, value, steps ) {
           item.startValues = item.endValues;
           

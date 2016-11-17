@@ -6,8 +6,8 @@ app.test = {
 		var pl = this.pl[ p];
 		
 		do { 
-			var dx = Math.round( Math.random() * 10 ) -5 ;
-			var dz = Math.round( Math.random() * 10 ) -5 ;
+			var dx = Math.round( Math.random() * 2 ) -1 ;
+			var dz = Math.round( Math.random() * 2 ) -1 ;
 		} while ( (dx == 0 && dz == 0) || (dx!=0 && dz!=0)  );
 		
 		pl.xxx +=  dx;
@@ -32,27 +32,28 @@ app.test = {
 		}
 	},
 
-    next : function () {
-        
-      app.timeline.addScene();
+    addFrame : function () {
 
+      app.api.addFrame();
+      
       for ( var i = 0; i< 35;i++ ) {
             var pos = this.movePlayer( i );
             
-            pos = pos3d( pos.x, pos.z );
             
-            app.timeline.addToScene( i, { x: pos.x, y : pos.y, z : pos.z } )
+            app.api.movePlayer( i , pos.x, pos.z, Math.random() < 0.5 ? "walk" : "jump"  );
       }      
     },
 	
-	add : function ( ) {
-		for( var i = 0 ; i < 50; i++  ){
-			this.next()
-		}	
-	},
-	
 	auto : function ( ) {
-		this.add();
+		for ( var i = 0 ; i < 35; i++ ) {
+            app.api.addPlayer( i, Math.round( i/3 ), i % 3, i *1543 );
+        }
+
+        
+        for( var i = 0 ; i < 50; i++  ){
+			this.addFrame()
+		}	
+        
 	}
 }
 

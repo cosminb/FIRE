@@ -5,28 +5,31 @@ app.api = {
     },
     
     
-    moveTo : function ( p, x, z) {
-		
-		app.timeline.add( "animation_" + p, app.objects.getPlayer("player_"+p), {
-			
-			duration : 500,
-			
-			endPosition : {
-				x : app.units.getX(x),
-				z : app.units.getZ(z)
-			},
+    players : {},
+    
+    addPlayer : function ( p, x, z, color ) {
 
-		});
-		
-		
+        var pos = pos3d( x, z );
+            
+        this.players.initialPosition = pos;
         
+        app.objects.addPlayer( "player_" + p, x, z, color );
     },
-    killPlayer : function ( killMethod ) { 
-        console.log( "killed" );
+    
+    addFrame : function ( ) {
+      app.timeline.addScene();        
+    },
+    
+    movePlayer : function ( p,  x, z, animationType ) {
+        pos = pos3d( x, z );
         
-        var item = app.objects.getPlayer( p );
+        app.timeline.addToScene( p, { x: pos.x, y : pos.y, z : pos.z, animation : animationType || "walk" } )
+    }, 
+    
+    killPlayer : function ( p, killMethod ) { 
+        pos = this.initialPosition[ p ];
         
-        app.player.killIt( item  );
+        app.timeline.addToScene( p, { x : pos.x, y : pos.y, z : pos.z, animation : "jump" } ); 
     },
     
     
