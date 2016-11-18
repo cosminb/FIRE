@@ -20,7 +20,7 @@ app.floor = {
 		materialEven = new THREE.MeshBasicMaterial({color:new THREE.Color( "#162" ) , side: THREE.DoubleSide})
 		materialOdd = new THREE.MeshBasicMaterial({color: new THREE.Color( "#111" ), side: THREE.DoubleSide})
 		
-		materialOdd = new THREE.MeshPhongMaterial( { color: new THREE.Color( "#111" ), side: THREE.DoubleSide , shading: THREE.FlatShading, shininess: 6 } );
+		materialOdd = new THREE.MeshPhongMaterial( { color: new THREE.Color( "#111" ), side: THREE.BackSide , shading: THREE.FlatShading, shininess: 6 } );
 		
 		materialOdd3 = new THREE.MeshBasicMaterial({color: 0x444464, side: THREE.DoubleSide})
 		
@@ -63,13 +63,15 @@ app.floor = {
 			*/
 		);	
 		
+		plane.rotation.z =  Math.PI / 2 ;
+		
 		plane.rotation.x =  Math.PI / 2 ;
 		
-		plane.position.x = 2500;
+		plane.position.x = planeW * numW  / 2 ;
 		
 		plane.position.y = 0;
 		
-		plane.position.z = 2500;
+		plane.position.z = planeH * numH / 2;
 		
 		
 		

@@ -88,10 +88,10 @@ app.scene = {
 	
 	addCamera : function ( ) {
 		
-		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / (2 * window.innerHeight), 0.1, 10000 );
+		this.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / (2 * window.innerHeight), 0.1, 10000 );
 		this.camera.position.z = 1350;
 		this.camera.position.y = 230;
-		this.camera.position.x = 500;
+		this.camera.position.x = 1700;
 		
 		
 		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2 - 500, window.innerWidth / 2-500, window.innerHeight -500, window.innerHeight / - 1 -500, -100, 1000 );

@@ -4,7 +4,7 @@ app.units = {
       alength   : 150,
 	  ex : 30, 
 	  ez : 30,
-      y        : 0,
+      y        : 20,
       
       get3DPos : function ( x, z ) {
            return new THREE.Vector3(  x * this.awidth  + this.ex, this.y, z * this.alength + this.ez);
