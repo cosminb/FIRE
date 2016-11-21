@@ -12,4 +12,20 @@ app.camera = {
     },
     
     
+    pos : function ( ) {
+        return app.scene.camera2.position;
+    },
+    
+    rot : function ( ) {
+        return app.scene.camera2.rotation;
+    },
+    
+    
+    
+    setla : function ( a ) {
+          a  = pos3d( a[0], a[1] );
+          
+          app.scene.camera2.lookAt( a );
+    }
+    
 }

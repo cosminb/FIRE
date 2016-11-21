@@ -95,7 +95,7 @@ app.scene = {
 		
 		
 		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2 - 500, window.innerWidth / 2-500, window.innerHeight -500, window.innerHeight / - 1 -500, -100, 1000 );
-		this.camera2 = new THREE.PerspectiveCamera( 45, window.innerWidth / (2 * window.innerHeight), 100, 10000 );
+		this.camera2 = new THREE.PerspectiveCamera( 45, window.innerWidth / (2 * window.innerHeight), 1000, 10000 );
 
 		this.camera2.position.y = 1600;
 		this.camera2.position.x = 500;
