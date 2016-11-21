@@ -32,7 +32,7 @@ app.test = {
 		}
 	},
 
-    addFrame : function () {
+    addStep : function () {
 
       app.api.addFrame();
       
@@ -40,7 +40,10 @@ app.test = {
             var pos = this.movePlayer( i );
             
             
-            app.api.movePlayer( i , pos.x, pos.z, Math.random() < 0.5 ? "walk" : "jump"  );
+            app.api.movePlayer( i , pos.x, pos.z, 
+            
+            
+            Math.random() < 0.5 ? "walk" : "jump"  );
       }      
     },
 	
@@ -51,7 +54,7 @@ app.test = {
 
         
         for( var i = 0 ; i < 50; i++  ){
-			this.addFrame()
+			this.addStep()
 		}	
         
 	}

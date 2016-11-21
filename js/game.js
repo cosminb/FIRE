@@ -1,10 +1,12 @@
 app.game = {
     
     runGame : function ( game ) {
+        
+        app.api.resetAll( );
+        
         //reset
         //setare mapa
         //sadasdsad
-        //call api functions
         
         
         for ( var i in game.steps ) {

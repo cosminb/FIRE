@@ -3,6 +3,9 @@ game["001"] = {
 
     "info" : {
         "size" : 50,
+        "runda" : 1,
+        "harta" : 23,
+        "dsasd" : 34,
     },
     
     
@@ -18,7 +21,7 @@ game["001"] = {
     "players" : {
     
         "p1" : { "name" : "BRRC" },
-        "p2" : { "name" : "ECHIPA2" }
+        "p2" : { "name" : "ECHIPA2" },
     },
     
     "steps" : [
@@ -32,7 +35,7 @@ game["001"] = {
 
             { "type" : "move"   , "player" : "p3" , "posX" : 10, "posY" : 20 },
             { "type" : "explodeBomb", "posY" : 20, "posX" : 10 },
-            { "type" : "gg/killPlayer", "player" : "p3" }
+            { "type" : "gg/killPlayer", "player" : "p3" },
         
         ],
         
@@ -45,7 +48,7 @@ game["001"] = {
 
             { "type" : "move"   , "player" : "p3" , "posX" : 10, "posY" : 20 },
             { "type" : "explodeBomb", "posY" : 20, "posX" : 10 },
-            { "type" : "gg/killPlayer", "player" : "p3" }
+     { "type" : "gg/killPlayer", "player" : "p3" },
         
         ],
         
@@ -56,7 +59,7 @@ game["001"] = {
     "results" : {
     
         "p1" : 40,
-        "p2" : 66
+        "p2" : 66,
     }
 
  
