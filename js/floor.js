@@ -8,7 +8,15 @@ app.floor = {
 	},
 	
 	
-	
+	setupFloor : function ( board ) {
+      for ( var i = 0; i<map.length; i++ ) {
+
+        for ( var j = 0; j < map[ i ].length; j++ ) {
+            
+             this.set
+        }
+      }      
+    },
 	render : function ( item ) {
 	
 		var planeW = 150; // pixels
@@ -18,30 +26,20 @@ app.floor = {
 
 		
 		materialEven = new THREE.MeshBasicMaterial({color:new THREE.Color( "#162" ) , side: THREE.DoubleSide})
-		materialOdd = new THREE.MeshBasicMaterial({color: new THREE.Color( "#111" ), side: THREE.DoubleSide})
 		
 		materialOdd = new THREE.MeshPhongMaterial( { color: new THREE.Color( "#111" ), side: THREE.DoubleSide , shading: THREE.FlatShading, shininess: 6 } );
-		
-		materialOdd3 = new THREE.MeshBasicMaterial({color: 0x444464, side: THREE.DoubleSide})
-		
-		materials = [materialEven, materialOdd, materialOdd3]
+				
+		materials = [materialEven, materialOdd]
 		
 		
-		planeGeometry = new THREE.PlaneGeometry( numW* planeW, numH*planeH, numW, numH, materials),
+		planeGeometry = new THREE.PlaneGeometry( numW* planeW, numH*planeH, numW, numH, materials)
 		
-		planeGeometry.vertices.map(function (vertex) {
-			///vertex.x += -.5 + Math.random();
-			//vertex.z += Math.random()* 400  ;
-			//vertex.z = -.5 + Math.random() ;
-			return vertex;
-		});
-		
-		//planeGeometry.computeFaceNormals();
 		
 		var l = planeGeometry.faces.length;
 		
 		for ( var i = 0; i < l; i+=2 ) {
-			var ind =  Math.round( Math.random( ) );
+			
+            var ind =  Math.round( Math.random( ) );
 			
 			planeGeometry.faces[ i ].materialIndex = ind;
 			planeGeometry.faces[ i+1 ].materialIndex = ind;
@@ -53,14 +51,6 @@ app.floor = {
 		var plane = new THREE.Mesh(
 			planeGeometry, 
 			new THREE.MultiMaterial(materials)
-			/*
-			new THREE.MeshBasicMaterial({
-				color: new THREE.Color("#222"),
-				wireframe: true,
-				
-				//opacity : 0.03
-			})
-			*/
 		);	
 		
 		plane.rotation.x =  Math.PI / 2 ;
