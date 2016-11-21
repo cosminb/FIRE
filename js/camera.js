@@ -40,9 +40,11 @@ app.camera = {
 		p2.y = sina * y;
 		p2.z = sina * cosb * y + p1.z;
 		
-		app.scene.camera2.position.copy( p2 )
+		//app.scene.camera2.position.copy( p2 )
 		app.scene.camera2.lookAt( p1 );
 		
+		app.scene.camera2.rotation.x = (90 - a ) * Math.PI / 180
+		app.scene.camera2.rotation.y = (90 - b ) * Math.PI / 180
 		
 		//app.scene.camera2.updateProjectionMatrix(); 
 		
