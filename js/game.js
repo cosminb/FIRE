@@ -5,6 +5,30 @@ app.game = {
         //setare mapa
         //sadasdsad
         //call api functions
+        
+        
+        for ( var i in game.steps ) {
+            this.runStep( game.steps[ i ] );
+        }
+    },
+    
+    runStep : function( steps ) {
+        
+        for ( var i=0; i<steps.length; i++ ) {
+            
+            this.executeStep( steps[ i ] );
+        }
+    },
+    
+    executeStep : function ( step ) {
+        
+        switch ( step.type ) {
+            
+            
+            case "move" : 
+                      app.api.movePlayer( step.player, step.posX, step.posY, "walk" );
+                      break;
+        }
     }
 }
 
