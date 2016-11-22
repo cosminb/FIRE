@@ -1,4 +1,10 @@
 app.api = {
+    resetAll : function ( ) {
+        //delete players 
+        //remove all Bombs
+        //
+        
+    },
     
     initMap : function ( ) {
         

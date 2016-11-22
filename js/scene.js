@@ -58,12 +58,16 @@ app.scene = {
 	
 	addRender : function (camera ) {
 		var renderer = new THREE.WebGLRenderer({antialias:true} );
-		renderer.setSize( window.innerWidth/2, window.innerHeight );
+		//renderer.setSize( window.innerWidth/2, window.innerHeight );
+		renderer.setSize( window.innerHeight, window.innerHeight );
 		
 		
 		
 		document.body.appendChild( renderer.domElement );
 		renderer.domElement.style.float = "left";
+		renderer.domElement.style.width = window.innerHeight;
+		renderer.domElement.style.height = window.innerHeight;
+		
 		
 		//renderer.setClearColor(0xdfdfdf, 1);
 		
@@ -95,8 +99,9 @@ app.scene = {
 		
 		
 		this.camera2 = new THREE.OrthographicCamera( window.innerWidth / - 2 - 500, window.innerWidth / 2-500, window.innerHeight -500, window.innerHeight / - 1 -500, -100, 1000 );
-		this.camera2 = new THREE.PerspectiveCamera( 45, window.innerWidth / (2 * window.innerHeight), 100, 10000 );
-
+		//this.camera2 = new THREE.PerspectiveCamera(60, window.innerWidth / (2 * window.innerHeight), 100, 100000 );
+		this.camera2 = new THREE.PerspectiveCamera(60, 1, 100, 100000 );
+		
 		this.camera2.position.y = 1600;
 		this.camera2.position.x = 500;
 		this.camera2.position.z = 100;

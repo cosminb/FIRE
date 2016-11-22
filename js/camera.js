@@ -95,10 +95,49 @@ app.camera = {
 	},
     
     
+	
+	go : function ( x,z, far, a,b ) {
+		
+		var p1 = pos3d( x, z );
+		
+		a = a * Math.PI / 180;
+		b = b * Math.PI / 180;
+		
+		var p2  = { 
+			x : p1.x + far * Math.sin( a ) * Math.cos( b ),
+			z : p1.z +       far * Math.sin( a ) * Math.sin( b ),
+			y :far * Math.cos( a )
+		}
+		
+		//app.scene.camera2.rotation.copy ( new THREE.Vector3( 0, 0 , 0 ) );
+		
+		app.scene.camera2.position.copy( p2 );
+		app.scene.camera2.lookAt( p1 );
+	},
+	
+	test : function ( ) {
+		
+		var b = 0;
+		
+		
+		//app.scene.camera2.matrixAutoUpdate = false;
+		
+		var x = 600;
+		
+		if ( this.x ) window.clearInterval( this.x );
+		
+		this.x = window.setInterval( function ( ) {
+			
+			b += 0.11;
+			x+= 10;
+			
+			app.camera.go ( 25, 25, 4000, 75, b );
+			//app.scene.camera2.near += 1;
+
+		}, 30 );
+	},
 }
 
-var ax = new THREE.Object3D();
-var ay = new THREE.Object3D();
-
-ax.add( ay );
-
+window.setTimeout( function ( ) {
+app.camera.test();
+}, 4000 );

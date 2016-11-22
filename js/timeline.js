@@ -152,6 +152,7 @@ ani.jump = {
 		///item.values.position.y = item.startValues.y + step * item.deltas.y
 		
 		item.values.position.y += ( step < 25 ) ? 10 : -10
+		if ( item.values.position.y < 0 ) item.values.position.y = 0;
 		
 		item.values.position.z = item.startValues.z + step * item.deltas.z
 	},
@@ -159,3 +160,11 @@ ani.jump = {
 	
 }
 
+
+
+ani.cameraPan = {
+	
+	setup : function ( item, value, steps ) {
+		
+	}
+}

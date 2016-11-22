@@ -27,34 +27,39 @@ app.test = {
 	
 	init : function ( ) {
 		
-		for ( var i = 0; i<35; i++ ) {
+		for ( var i = 0; i<this.nr; i++ ) {
 			this.pl[ i ] = { xxx : Math.round( Math.random( ) * 50 ) , zzz : Math.round( Math.random( ) * 50 ) }
 		}
 	},
+	
+	nr : 20, 
 
-    addFrame : function () {
+    addStep : function () {
 
       app.api.addFrame();
       
-      for ( var i = 0; i< 35;i++ ) {
+      for ( var i = 0; i< this.nr;i++ ) {
             var pos = this.movePlayer( i );
-            
             
             app.api.movePlayer( i , pos.x, pos.z, Math.random() < 0.5 ? "walk" : "walk"  );
       }      
     },
 	
 	auto : function ( ) {
-		for ( var i = 0 ; i < 35; i++ ) {
+		//*
+		for ( var i = 0 ; i < this.nr; i++ ) {
             app.api.addPlayer( i, Math.round( i/3 ), i % 3, i *1543 );
         }
 
         
-        for( var i = 0 ; i < 50; i++  ){
-			this.addFrame()
-		}	
+        for( var i = 0 ; i < 10050; i++  ){
+			this.addStep()
+		}
+		
+		//*/
         
-	}
+	},
+	
 }
 
 

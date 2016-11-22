@@ -1,0 +1,66 @@
+game["001"] = {
+
+
+    "info" : {
+        "size" : 50,
+        "runda" : 1,
+        "harta" : 23,
+        "dsasd" : 34,
+    },
+    
+    
+    "board" : [
+    
+        [ "W", "_", "W", "W", "_", "_" ],
+        [ "_", "_", "_", "_", "_", "_" ],
+        [ "_", "_", "_", "I", "_", "_" ],
+        
+        //....
+    ],
+    
+    "players" : {
+    
+        "p1" : { "name" : "BRRC" },
+        "p2" : { "name" : "ECHIPA2" },
+    },
+    
+    "steps" : [
+    
+        //step 1 
+        [
+        
+            { "type" : "move"   , "player" : "p1" , "posX" : 10, "posY" : 20 },
+            { "type" : "addBomb", "player" : "p4" , "posX" : 10, "posY" : 20 },
+            { "type" : "sonar"  , "player" : "p2"  },
+
+            { "type" : "move"   , "player" : "p3" , "posX" : 10, "posY" : 20 },
+            { "type" : "explodeBomb", "posY" : 20, "posX" : 10 },
+            { "type" : "gg/killPlayer", "player" : "p3" },
+        
+        ],
+        
+        //step2 
+        [
+        
+            { "type" : "move"   , "player" : "p1" , "posX" : 10, "posY" : 20 },
+            { "type" : "addBomb", "player" : "p4" , "posX" : 10, "posY" : 20 },
+            { "type" : "sonar"  , "player" : "p2"  },
+
+            { "type" : "move"   , "player" : "p3" , "posX" : 10, "posY" : 20 },
+            { "type" : "explodeBomb", "posY" : 20, "posX" : 10 },
+     { "type" : "gg/killPlayer", "player" : "p3" },
+        
+        ],
+        
+        
+    
+    ],
+    
+    "results" : {
+    
+        "p1" : 40,
+        "p2" : 66,
+    }
+
+ 
+}
