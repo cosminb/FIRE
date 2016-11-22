@@ -3,6 +3,8 @@ app.timeline = {
     screenPlay : [],
     currentScene : null,
     nrSteps : 1000,
+	
+	frameCount : 50,
     
 
     addScene : function ( step ) {

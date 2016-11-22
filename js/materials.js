@@ -1,6 +1,6 @@
 app.materials = {
     
-     m4Player : function ( opt, hue ) {
+     playerMaterial : function ( opt, hue ) {
          
 		var map = ten;
 		
