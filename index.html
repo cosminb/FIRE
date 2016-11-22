@@ -8,12 +8,12 @@
 
 body,window { padding : 0; margin : 0 }
 
-xcanvas { width : 50% !important; float : left }
 </style>
 
 <script src="libs/three.js"></script> 
 
 <script src="libs/stats.js"> </script>
+
 
 <script>
 var app = {}
@@ -23,6 +23,7 @@ var ub  = {}
 
 app.dummy = {}
 </script>
+
 
 <script src='js/units.js' > </script> 
 
@@ -59,9 +60,6 @@ var game = {};
 
 </script>
 
-<script src='js/game001.js'></script>
-
-
 
 <script>
 
@@ -71,48 +69,16 @@ var game = {};
 var stats = new Stats();
 stats.showPanel( 0 ); 
 stats.showPanel( 1 );
-
-// 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
+
+
 
 
 
 
 app.scene.init();
 app.scene.addCamera();
-
-
-//app.scene.addRender( app.scene.camera );
 app.scene.addRender( app.scene.camera2 );
-
-//*
-
-for ( var i = 0; i < 100 ; i ++ ) {
-    app.objects.addBomb( "bomb_" + i, Math.round(i / 10 ) * 3,  ( i % 10 )* 3 );
-}
-/*/
-
-
-
-/*
-var items = [];
-
-for ( var i = 10 ;i <11; i++ ) {
-
-	if ( i == 0 ) continue;
-	
-	var item = {};
-	
-	app.trap.add(item, i);
-
-	
-	//app.trap.move( item, 300 * (i / 10 ), 10, 300 * ( i % 10 ) )
-	app.trap.move( item, Math.round(i / 10 ) * 3, 10,  ( i % 10 )* 3 )
-    
-	items.push( item );
-}
-
-*/
 
 
 var item = {};
@@ -121,160 +87,23 @@ app.floor.add( item );
 app.dummy.line.add( );
 
 
-var xpos = { step : 1001 }
 
-var aaa = 0;
-
-    app.scene.camera.position.x = -1000;
-    app.scene.camera.position.z = -1000;
-    app.scene.camera.position.y = 4500;
-    
-    
-    app.scene.camera.lookAt( { x : 2500, y : 0, z : 2500 } );
-
-    app.scene.camera2.lookAt( { x : 2500, y : 20, z : 2500 } );
-		app.scene.camera2.position.y = 1600;
-		app.scene.camera2.position.x = 500;
-		app.scene.camera2.position.z = 100;
-
-/*
-    var axisHelper = new THREE.AxisHelper( 5000 );
-app.scene.scene.add( axisHelper );
-*/
 
     app.test.init();
     app.test.auto();
+    app.camera.test();
  
  
- 				light = new THREE.DirectionalLight( 0xffffff, 0.2 );
-				light.position.set( 2500, 3505, 2500 );
-				app.scene.scene.add( light );
-				
-				//var lh = new THREE.DirectionalLightHelper( light, 50 );
-				//app.scene.scene.add( lh );
-				
-	/*
-var helper = new THREE.CameraHelper( app.scene.camera2 );
-app.scene.scene.add( helper );
-*/
-				
-var xcount = 0;
-function animate() {
 
+function animate(time) {
 
-    xrender();
+    app.scene.renderFrame(time);
 	requestAnimationFrame( animate );
     return;
-    
-    xrender();
-    
-    xcount++;
-    
-    var delay = 0;
-    if ( xcount > 100 ) {
-        delay = 400;
-        xcount = 0;
-    }
-    
-    setTimeout( function() {
-
-        requestAnimationFrame( animate );
-
-    }, delay);
-
+ 
 }
 
  
-function xrender( time ) {
-
-	stats.begin();
-	
-    //requestAnimationFrame( animate );
-    
-    app.timeline.runAnimations();
-/*
-    if ( aaa != 2 ) {
-		aaa++;
-		return;
-    }
-    
-    else {
-		aaa = 0;
-    }
-    */
-    /*
-    app.objects.eachPlayer( function ( item, id ) {
-        app.player.rotateDelta( item, 0.05, 0.03 );
-    });
-  */
-  
-    app.objects.eachTrap( function ( item, id ) {
-        app.trap.rotateDelta( item, 0.05, 0.09 );
-    });
-    
-    
-    //*/
-    
-    //*
-    
-    //*
-    /*
-    var timer = Date.now() * 0.0001;
-
-    app.scene.camera2.position.x = Math.cos( timer ) * 1500;
-    app.scene.camera2.position.z = Math.sin( timer ) * 1500;
-    app.scene.camera2.position.y =750;
-    //*/
-/*  
-  app.scene.camera2.rotation.x += 0.01;
-    app.scene.camera2.rotation.z += 0.01; 
-    app.scene.camera2.rotation.y += 0.01;//*///Math.PI/2;
-    //*/
-    
-    //app.scene.camera2.rotation.x = Math.PI/2;
-    
-    
-    //*/
-    /*
-    app.scene.camera.position.x = 2500;
-    app.scene.camera.position.z = 2500;
-    app.scene.camera.position.y = 3500;
-    
-    
-    app.scene.camera.lookAt( { x : 2500, y : 0, z : 2500 } );
-    //*/
-    /*
-    if ( xpos.step >= 1000 ) {
-    
-
-        xpos = {
-
-            x : Math.random() * 100 * 50, 
-            y : Math.random() * 100 * 50, 
-            
-            
-        }
-
-        xpos.dx = ( -app.scene.camera.position.x + xpos.x ) / 1000;
-        xpos.dy = ( -app.scene.camera.position.z + xpos.y ) /1000; 
-
-        xpos.step = 0;
-
-    }
-
-
-    app.scene.camera.position.x += xpos.dx;
-    app.scene.camera.position.z += xpos.dy;
-
-    xpos.step ++;
-    //*/
-    
-    
-    app.scene.render( );
-    
-
-    stats.end();
-}
 
 
 

@@ -16,7 +16,7 @@ app.trap = {
 		var geometry = new THREE.CylinderGeometry( 75, 25, 100, 32,8, 1,true  );
 		
 		
-		material2 = this.getMaterial(i, 1);
+		material2 = this.getMaterial(item.color, 1);
 		
 		item.mat  =material2;
 		
@@ -33,7 +33,7 @@ app.trap = {
 		var geometry = new THREE.CylinderGeometry( 75, 25, 100, 32,8, 1,true  );
 		
 		
-		material2 = this.getMaterial(i);
+		material2 = this.getMaterial(item.color);
 		
 		item.mat2  =material2;
 		

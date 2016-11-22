@@ -138,6 +138,3 @@ app.camera = {
 	},
 }
 
-window.setTimeout( function ( ) {
-app.camera.test();
-}, 4000 );

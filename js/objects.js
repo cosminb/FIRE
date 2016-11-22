@@ -22,9 +22,9 @@ app.objects = {
 		this.players [ id ] = item;
     },
     
-    addBomb   : function (id, x, y ) {
+    addBomb   : function (id, x, y, color ) {
 		
-        var item = { x, y, id };
+        var item = { x, y, id, color };
         
         app.trap.add( item );
 

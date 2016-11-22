@@ -121,5 +121,24 @@ app.scene = {
 	
 	add  : function ( obj ) {
 		this.scene.add( obj );
-	}
+	},
+    
+    renderFrame : function ( time ) {
+
+        stats.begin();
+        
+
+        app.timeline.runAnimations();
+
+        app.objects.eachTrap( function ( item, id ) {
+            app.trap.rotateDelta( item, 0.05, 0.09 );
+        });
+        
+        
+        app.scene.render( );
+        
+
+        stats.end();
+    }
+
 }

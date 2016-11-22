@@ -47,6 +47,11 @@ app.test = {
 	
 	auto : function ( ) {
 		//*
+
+        for ( var i = 0; i < 100 ; i ++ ) {
+            app.objects.addBomb( "bomb_" + i, Math.round(i / 10 ) * 3,  ( i % 10 )* 3, i );
+        }
+
 		for ( var i = 0 ; i < this.nr; i++ ) {
             app.api.addPlayer( i, Math.round( i/3 ), i % 3, i *1543 );
         }
