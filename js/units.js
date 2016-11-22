@@ -1,17 +1,17 @@
 app.units = {
     
-      awidth    : 150, 
-      alength   : 150,
-	  ex : 30, 
-	  ez : 30,
-      y        : 20,
+      width    : 150, 
+      height   : 150,
+	  ex        : 0, 
+	  ez        : 0,
+      y         : 20,
       
       get3DPos : function ( x, z ) {
-           return new THREE.Vector3(  x * this.awidth  + this.ex, this.y, z * this.alength + this.ez);
+           return new THREE.Vector3(  x * this.width  + this.ex, this.y, z * this.height + this.ez);
       },
 	  
-	  getX : function ( x ) { return x * this.awidth + this.ex },
-	  getZ : function ( z ) { return z * this.alength + this.ez },
+	  getX : function ( x ) { return x * this.width + this.ex },
+	  getZ : function ( z ) { return z * this.height + this.ez },
 	  
 }
 

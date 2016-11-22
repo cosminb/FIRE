@@ -1,17 +1,10 @@
 app.timeline = {
-	
-	
-	animations : [],
-	future     : [],
-		
-	namedAnimations : {},
-	
-    
+
     screenPlay : [],
-    currentStep : {},
-    currentStepIndex : 0,
-    objs : {},
+    currentScene : null,
+    nrSteps : 1000,
     
+
     addScene : function ( step ) {
          var scene = { items : [] } ;
          
@@ -24,8 +17,7 @@ app.timeline = {
     },
     
     
-    currentScene : null,
-    
+
     initCurrentScene : function ( ) {         
          var scene = { items : [] };
          this.currentScene = scene;
@@ -36,6 +28,8 @@ app.timeline = {
          }
          
     },
+    
+    
     startScene : function ( ) {
 
         
@@ -45,13 +39,15 @@ app.timeline = {
          
         if ( !this.currentScene ) 
                 this.initCurrentScene();
-         console.log();
 
          var nextScene = this.screenPlay.shift();
          
          if ( !nextScene ) return;
          
          var nextItems = nextScene.items;
+
+         this.frameCount = nextScene.frameCount || 50;
+         
          
          var currentScene = this.currentScene
          var currentItems = currentScene.items;
@@ -59,27 +55,23 @@ app.timeline = {
          for( var i in nextItems ) {
              var newItem = nextItems[ i ];
              var item = currentItems[ i ];
-             
-             //if ( !newItem.animation ) newItem.animation = ani.jump;
+
              item.animation = newItem.animation || ani.walk;       
              
              if ( typeof item.animation == "string" ) item.animation = ani[ item.animation ];
              
-             item.animation.setupStage( item,  newItem , 50);
-             
-             
+             item.animation.setupStage( item,  newItem , this.frameCount);             
          }
          
          this.nrSteps = 0;
     },
     
-    nrSteps : 1000,
     
     runAnimations : function ( ) {
         
            var step = this.nrSteps++;
            
-           if ( step > 50 ) 
+           if ( step > this.frameCount ) 
               this.startScene();  
           
            if ( !this.currentScene ) 
@@ -160,11 +152,3 @@ ani.jump = {
 	
 }
 
-
-
-ani.cameraPan = {
-	
-	setup : function ( item, value, steps ) {
-		
-	}
-}

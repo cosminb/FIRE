@@ -64,6 +64,28 @@ app.test = {
 		//*/
         
 	},
+    
+    animateCamera : function ( ) {
+		
+		var b = 0;
+		
+		
+		//app.scene.camera2.matrixAutoUpdate = false;
+		
+		var x = 600;
+		
+		if ( this.x ) window.clearInterval( this.x );
+		
+		this.x = window.setInterval( function ( ) {
+			
+			b += 0.11;
+			x+= 10;
+			
+			app.camera.positionAtAngle ( 25, 25, 4000, 75, b );
+			//app.scene.camera2.near += 1;
+
+		}, 30 );
+	},
 	
 }
 
