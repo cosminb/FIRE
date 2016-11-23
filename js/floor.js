@@ -9,13 +9,16 @@ app.floor = {
 
     planeW : 150, // pixels
     planeH : 150,
-    numW   : 50, // how many wide (50*50 = 2500 pixels wide)
-    numH   : 50, // how many tall (50*50 = 2500 pixels tall)
+    numW   : 100, // how many wide (50*50 = 2500 pixels wide)
+    numH   : 100, // how many tall (50*50 = 2500 pixels tall)
     
 
     colors : [ new THREE.Color("#000"), 
 			   new THREE.Color(  "#040404"), 
-			   new THREE.Color(  "#bbb"), 
+                
+                
+                new THREE.Color(  "#bbb"), 
+               
 			   new THREE.Color(  "#ccc"), 												 
 		],
         
@@ -58,19 +61,20 @@ app.floor = {
 		this.plane = planeMesh;
 		item.obj = planeMesh;
         
-        this.changeColors( null, this.colors );
+        this.updateBoard( game["Level 2 - Map 0 - Round 0"].board, 100 );
 		
         
 	},
 
     
     
-	changeColors : function ( map, colors ) {
+	updateBoard : function ( board , width ) {
 		var planeGeometry = this.plane.geometry; //planeGeometry;
 		
 		
 		var l = planeGeometry.faces.length;
 		
+        var colors = this.colors;
 
         if ( !colors ) {
             var c1 = Math.round( Math.random() * 435345 ) %360;
@@ -84,7 +88,30 @@ app.floor = {
                         ] ;		
 		               
         }
-														 
+					
+                    
+        var faceIndex = 0;
+        for ( var i = 0; i< width; i++ ) {
+            
+            
+            for ( var j = 0; j < width; j++ ) {
+                
+                  if ( board[ i][ j ] === "W" ) {
+                      var ind = 0;
+                  }
+                  else ind = 1;
+                  
+                  
+			planeGeometry.faces[ faceIndex ].color.copy( colors [ ind*2 ] ); 
+			planeGeometry.faces[ faceIndex+1 ].color.copy( colors [ ind*2+1 ] );
+			
+            
+            faceIndex += 2;
+            
+            //console.log( ind, faceIndex );
+            }
+        }
+        /*
 		for ( var i = 0; i < l; i+=2 ) {
 			
 			var ind =  Math.round( Math.random( ) );
@@ -93,6 +120,7 @@ app.floor = {
 			planeGeometry.faces[ i+1 ].color.copy( colors [ ind*2+1 ] );
 			
 		}
+        */
 		
 		planeGeometry.colorsNeedUpdate = true;
 		
