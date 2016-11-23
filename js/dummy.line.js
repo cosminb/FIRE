@@ -190,13 +190,38 @@ app.dummy.line = {
 			vec4 Ca = texture2D(tOne, uvTimeShift);
 			vec4 Cb = texture2D(tSec, uvTimeShift2);
 			
+            vec3 fragRGB ;
+            vec3 fragHSV;
+            float h;
+            
+			fragHSV = rgb2hsv(Ca.rgb);
+			 h = hue / 360.0;
+			fragHSV.x *= h;
 			
+			fragHSV.x = mod(fragHSV.x, 1.0);
+			fragRGB = hsv2rgb(fragHSV);
+
+            Ca.rgb = fragRGB;
+            
+            
+            fragHSV = rgb2hsv(Cb.rgb);
+			 h = hue / 360.0;
+			fragHSV.x *= h;
+			
+			fragHSV.x = mod(fragHSV.x, 1.0);
+			fragRGB = hsv2rgb(fragHSV);
+
+            Cb.rgb = fragRGB;
+            
+            
+            
+            
 			c = blendVividLight( Ca.rgb ,Cb.rgb);  // blending equation
 			
             float a = ( c.b + c.r + c.g ) /3.0;
             
             a = a < 0.4 ? a : a * 1.3;
-            
+            /*
 			vec3 fragHSV = rgb2hsv(c);
 			float h = hue / 360.0;
 			fragHSV.x *= h;
@@ -204,9 +229,9 @@ app.dummy.line = {
 			fragHSV.x = mod(fragHSV.x, 1.0);
 			vec3 fragRGB = hsv2rgb(fragHSV);
 			
+			*/
 			
-			
-			gl_FragColor= vec4(fragRGB, a);
+			gl_FragColor= vec4(c, a);
 		}
 		
 	`,
