@@ -31,6 +31,8 @@ app.dummy.line = {
 			
 			var delta = app.scene.clock.getDelta();
 			x.uniforms.time.value += delta;
+            x.uniforms.hue.value += 1;
+            if ( x.uniforms.hue.value > 360 ) x.uniforms.hue.value = 0;
 		}, 1 );
 		
 		
@@ -65,6 +67,7 @@ app.dummy.line = {
 		uniform float noiseScale;
 		uniform float alpha;
 		uniform float time;
+		uniform float hue;
 		
 		
 		float blendReflect(float base, float blend) {
@@ -190,8 +193,12 @@ app.dummy.line = {
 			
 			c = blendVividLight( Ca.rgb ,Cb.rgb);  // blending equation
 			
+            float a = ( c.b + c.r + c.g ) /3
+            
+            a = a < 0.4 ? a : a + 0.2
+            
 			vec3 fragHSV = rgb2hsv(c);
-			float h = 100.0 / 360.0;
+			float h = hue / 360.0;
 			fragHSV.x *= h;
 			
 			fragHSV.x = mod(fragHSV.x, 1.0);
@@ -199,7 +206,7 @@ app.dummy.line = {
 			
 			
 			
-			gl_FragColor= vec4(fragRGB, Ca.a);
+			gl_FragColor= vec4(fragRGB, a);
 		}
 		
 	`,
@@ -216,7 +223,7 @@ app.dummy.line = {
 		var attributes = {}; // custom attributes
 		
 		var t = [];
-		t[0] = new THREE.TextureLoader().load( "textures/shining.png"   )
+		t[0] = new THREE.TextureLoader().load( "textures/shining2.jpg"   )
 		t[1] = new THREE.TextureLoader().load( "textures/shining2.jpg"  )
 		
 		for ( var i in t ) { 
@@ -234,6 +241,7 @@ app.dummy.line = {
 			noiseScale:   { type: "f", value: 0.5337 },
 			alpha:        { type: "f", value: 1.0 },
 			time:         { type: "f", value: 1.0 },
+			hue:         { type: "f", value: 10.0 },
 		};
 		
 		var material = new THREE.ShaderMaterial({
