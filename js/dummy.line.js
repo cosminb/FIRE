@@ -18,7 +18,7 @@ app.dummy.line = {
 		xobj.attributes = x.attributes;
 		
 		
-		var pos = pos3d( 25, 40 );
+		var pos = pos3d( 40, 25 );
 		
 		pos.y = 200;
 		xobj.position.copy(   pos );
@@ -31,7 +31,7 @@ app.dummy.line = {
 			
 			var delta = app.scene.clock.getDelta();
 			x.uniforms.time.value += delta;
-            x.uniforms.hue.value += 1;
+            x.uniforms.hue.value += 0.01;
             if ( x.uniforms.hue.value > 360 ) x.uniforms.hue.value = 0;
 		}, 1 );
 		
@@ -193,9 +193,9 @@ app.dummy.line = {
 			
 			c = blendVividLight( Ca.rgb ,Cb.rgb);  // blending equation
 			
-            float a = ( c.b + c.r + c.g ) /3
+            float a = ( c.b + c.r + c.g ) /3.0;
             
-            a = a < 0.4 ? a : a + 0.2
+            a = a < 0.4 ? a : a * 1.3;
             
 			vec3 fragHSV = rgb2hsv(c);
 			float h = hue / 360.0;

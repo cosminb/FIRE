@@ -78,7 +78,7 @@ app.test = {
 		
 		this.x = window.setInterval( function ( ) {
 			
-			b += 0.11;
+			b += 0.01;
 			x+= 10;
 			
 			app.camera.positionAtAngle ( 25, 25, 4000, 75, b );
