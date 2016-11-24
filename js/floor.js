@@ -9,8 +9,8 @@ app.floor = {
 
     planeW : 150, // pixels
     planeH : 150,
-    numW   : 100, // how many wide (50*50 = 2500 pixels wide)
-    numH   : 100, // how many tall (50*50 = 2500 pixels tall)
+    numW   : 101, // how many wide (50*50 = 2500 pixels wide)
+    numH   : 101, // how many tall (50*50 = 2500 pixels tall)
     
 
     colors : [ new THREE.Color("#000"), 
@@ -60,8 +60,6 @@ app.floor = {
         
 		this.plane = planeMesh;
 		item.obj = planeMesh;
-        
-        this.updateBoard( game["Level 2 - Map 0 - Round 0"].board, 100 );
 		
         
 	},

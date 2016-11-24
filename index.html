@@ -120,26 +120,23 @@ init();
 
 draw( true );
 
-var ass = 0;
+
 function animate(time) {
 
     app.scene.renderFrame(time);
-    if ( ass < 100 ) {
     draw();
-    ass = 0;
-    } 
-    
-    ass++;
 	requestAnimationFrame( animate );
     return;
  
 }
 
+
+
+
+
+app.game.runGame( game["Level 2 - Map 0 - Round 0"] );
+
 animate();
 
-
-
-
-app.game.runGame( game["Level 1 - Map 2 - Round 1"] );
 
 </script>

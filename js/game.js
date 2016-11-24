@@ -1,13 +1,14 @@
 app.game = {
     
     runGame : function ( game ) {
-        
+
+       this.matchId = game.info.matchId;
+       this.boardSize = game.info.size;
+       
         app.api.resetAll( );
-        
-        //reset
-        //setare mapa
-        //sadasdsad
-        
+        app.floor.updateBoard( game.board, this.boardSize );
+      //  app.api.updateBoard(game.board, game.info);
+        // app.game.runGame( game[matchId] );
         
         for ( var i in game.steps ) {
             this.runStep( game.steps[ i ] );
@@ -30,6 +31,21 @@ app.game = {
             case "move" : 
                       app.api.movePlayer( step.player, step.posX, step.posY, "walk" );
                       break;
+            case "Bomb" :
+                    app.api.addBomb();
+                    break;
+            case "explodeBomb":
+                    app.api.explodeBomb();
+                    break;
+            case "kilL":
+                    app.api.killPlayer(step.player, killMethod );
+                    break;
+            case "useSonar":
+                    app.api.useSonar();
+                    break;
+            case "win":
+                    app.api.playerWin();
+                    break;
         }
     }
 }

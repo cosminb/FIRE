@@ -46,5 +46,13 @@ app.api = {
     explodeBomb : function ( ) {
         
     },
+    
+    useSonar : function(){
+
+    },
+
+    playerWin : function(){
+
+    },
 
 }
