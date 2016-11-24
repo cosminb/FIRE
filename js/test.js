@@ -14,9 +14,9 @@ app.test = {
 		pl.zzz +=  dz;
 
 		if ( pl.xxx < 0 ) pl.xxx = 0;
-		if ( pl.xxx > 34 ) pl.xxx = 34;
+		if ( pl.xxx > 100 ) pl.xxx = 100;
 		if ( pl.zzz< 0 ) pl.zzz = 0;
-		if ( pl.zzz > 34 ) pl.zzz = 34;
+		if ( pl.zzz > 100 ) pl.zzz = 100;
 		
 		//app.api.moveTo( p, pl.xxx, pl.zzz );
         
@@ -28,7 +28,7 @@ app.test = {
 	init : function ( ) {
 		
 		for ( var i = 0; i<this.nr; i++ ) {
-			this.pl[ i ] = { xxx : Math.round( Math.random( ) * 50 ) , zzz : Math.round( Math.random( ) * 50 ) }
+			this.pl[ i ] = { xxx : Math.round( Math.random( ) * 100 ) , zzz : Math.round( Math.random( ) * 100 ) }
 		}
 	},
 	
@@ -78,10 +78,10 @@ app.test = {
 		
 		this.x = window.setInterval( function ( ) {
 			
-			b += 0.01;
+			b += 0.1;
 			x+= 10;
 			
-			app.camera.positionAtAngle ( 25, 25, 4000, 75, b );
+			app.camera.positionAtAngle ( 25, 25, 5000, 75, b );
 			//app.scene.camera2.near += 1;
 
 		}, 30 );

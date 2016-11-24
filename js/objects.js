@@ -9,12 +9,12 @@ app.objects = {
 	obj : {},
 	
     
-    addPlayer : function (id, x, y, color ) {		
-        var item = { x, y, id, color };
+    addPlayer : function (id, x, z, color ) {		
+        var item = { x, z, id, color, initialX : x, initialZ : z };
          
         app.player.add(item);
          
-        var pos = pos3d( x, y );
+        var pos = pos3d( x, z );
 	
         app.player.move( item, pos.x, pos.y, pos.z ) ; //300 * (i / 3 ) + 50, 10, 300 * ( i % 3 ) + 50 ) ;
     

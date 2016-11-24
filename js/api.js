@@ -29,7 +29,7 @@ app.api = {
     movePlayer : function ( p,  x, z, animationType ) {
         pos = pos3d( x, z );
         
-        app.timeline.addToScene( p, { x: pos.x, y : pos.y, z : pos.z, animation : animationType || "walk" } )
+        app.timeline.addToScene( p, { x: pos.x, y : pos.y, z : pos.z, point : { x , z }, animation : animationType || "walk" } )
     }, 
     
     killPlayer : function ( p, killMethod ) { 

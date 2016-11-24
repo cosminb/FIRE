@@ -137,9 +137,10 @@ app.player = {
 			
 		}
 		
-		mesh = new THREE.Mesh(combined, this.material);
+		mesh = new THREE.Mesh(combined.clone(), this.material);
 
 		item.obj = mesh;
+		
 		
 	},
 	

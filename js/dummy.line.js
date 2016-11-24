@@ -12,7 +12,7 @@ app.dummy.line = {
 	
 		var x = this.getMaterial() ; 
 		
-		var geo = new THREE.CylinderGeometry(575, 250, 1500, 32,8, 1,true  )
+		var geo = new THREE.CylinderGeometry(130, 130, 4500, 32,8, 1,true  )
 		var xobj = new THREE.Mesh( geo, x.material );
 		
 		xobj.attributes = x.attributes;
@@ -220,7 +220,7 @@ app.dummy.line = {
 			
             float a = ( c.b + c.r + c.g ) /3.0;
             
-            a = a < 0.4 ? a : a * 1.3;
+            a = a < 0.4 ? a : a + 0.4;
             /*
 			vec3 fragHSV = rgb2hsv(c);
 			float h = hue / 360.0;
@@ -254,7 +254,7 @@ app.dummy.line = {
 		for ( var i in t ) { 
 			t[ i ].wrapS = THREE.RepeatWrapping;
 			t[i].wrapT = THREE.RepeatWrapping;
-			t[i].repeat.set( 150,1 );
+			t[i].repeat.set( 1,1 );
 		}
 		
 		var uniforms = {    // custom uniforms (your textures)
@@ -277,7 +277,7 @@ app.dummy.line = {
 			fragmentShader: fragShader,
 			
 			side : THREE.DoubleSide,
-			transparent : true, 
+			//transparent : true, 
 			
 			
 		});

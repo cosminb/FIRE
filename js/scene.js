@@ -43,7 +43,7 @@ app.scene = {
 	},
 	
 	addCamera : function ( ) {
-		this.camera2 = new THREE.PerspectiveCamera(60, 1, 100, 100000 );
+		this.camera2 = new THREE.PerspectiveCamera(90, 1, 100, 100000 );
 	},
 	
 	add  : function ( obj ) {

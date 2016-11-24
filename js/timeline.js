@@ -65,6 +65,8 @@ app.timeline = {
              item.animation.setupStage( item,  newItem , this.frameCount);             
          }
          
+         
+         
          this.nrSteps = 0;
     },
     
@@ -89,9 +91,11 @@ app.timeline = {
                var player = app.objects.getPlayer( "player_" + i );
                
                
-               for ( var i in item.values.position ) 
-                   
-                player.obj.position[ i ]  = item.values.position[ i ];
+               for ( var i in item.values.position ) {
+				   
+				   player.obj.position[ i ]  = item.values.position[ i ];
+				   
+				}
           }
     },
 	
