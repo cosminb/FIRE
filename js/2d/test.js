@@ -62,7 +62,7 @@ function draw(isa) {
 	ctx.beginPath();            /// add a beginPath here
 	
 	ctx.rect( 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT );
-	ctx.clip();
+	//ctx.clip();
 	
 	
 	ctx.clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT);

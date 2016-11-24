@@ -54,18 +54,27 @@ app.timeline = {
          var currentScene = this.currentScene
          var currentItems = currentScene.items;
          
+         console.log( "STARTING SCENE", nextItems);
+
          for( var i in nextItems ) {
              var newItem = nextItems[ i ];
              var item = currentItems[ i ];
 
              item.animation = newItem.animation || ani.walk;       
              
+
+             item.skip = false;
              if ( typeof item.animation == "string" ) item.animation = ani[ item.animation ];
              
              item.animation.setupStage( item,  newItem , this.frameCount);             
          }
-         
-         
+
+         for ( var i in currentItems ) {
+            if ( nextItems[i]) continue;
+              currentItems[i].skip = true;
+         }
+
+
          
          this.nrSteps = 0;
     },
@@ -86,14 +95,15 @@ app.timeline = {
           
           for ( var i in this.currentScene.items ) {
                 var item = this.currentScene.items[ i ];
+               if( item.skip ) continue;
                item.animation.step( item, step );
                
-               var player = app.objects.getPlayer( "player_" + i );
-               
-               
+               var player = app.objects.getPlayer(  i );
+
                for ( var i in item.values.position ) {
 				   
-				   player.obj.position[ i ]  = item.values.position[ i ];
+
+				  player.obj.position[ i ]  = item.values.position[ i ];
 				   
 				}
           }

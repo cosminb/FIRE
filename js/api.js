@@ -1,8 +1,8 @@
 app.api = {
     resetAll : function ( ) {
-        //delete players 
+        //dmove players 
         //remove all Bombs
-        //
+        //reset idol
         
     },
     
@@ -19,7 +19,7 @@ app.api = {
             
         this.players.initialPosition = pos;
         
-        app.objects.addPlayer( "player_" + p, x, z, color );
+        app.objects.addPlayer( "p" + p, x, z, color );
     },
     
     addFrame : function ( ) {
@@ -32,8 +32,8 @@ app.api = {
         app.timeline.addToScene( p, { x: pos.x, y : pos.y, z : pos.z, point : { x , z }, animation : animationType || "walk" } )
     }, 
     
-    killPlayer : function ( p, killMethod ) { 
-        pos = this.initialPosition[ p ];
+    killPlayer : function ( p ) { 
+      //  pos = this.initialPosition[ p ];
         
         app.timeline.addToScene( p, { x : pos.x, y : pos.y, z : pos.z, animation : "jump" } ); 
     },
@@ -53,6 +53,27 @@ app.api = {
 
     playerWin : function(){
 
+    },
+
+    resetPlayersPosition : function( players ){
+      
+
+      app.objects.eachPlayer( function ( item, id ) {
+
+console.log( id, players );
+
+            item.initialX = players[ id ].startX;
+            item.initialZ = players[ id ].startY;
+
+            item.xx = players[ id ].startX;
+            item.xz = players[ id ].startY;
+
+
+            app.api.movePlayer( id, item.xx, item.xz, "walk" );
+
+
+
+      }) 
     },
 
 }

@@ -2,20 +2,27 @@ app.game = {
     
     runGame : function ( game ) {
 
+
+
+        app.api.addFrame();
+
        this.matchId = game.info.matchId;
        this.boardSize = game.info.size;
        
         app.api.resetAll( );
         app.floor.updateBoard( game.board, this.boardSize );
       //  app.api.updateBoard(game.board, game.info);
-        // app.game.runGame( game[matchId] );
         
+        app.api.resetPlayersPosition(game.players);
+
         for ( var i in game.steps ) {
             this.runStep( game.steps[ i ] );
         }
     },
     
     runStep : function( steps ) {
+
+        app.api.addFrame();
         
         for ( var i=0; i<steps.length; i++ ) {
             
@@ -29,22 +36,30 @@ app.game = {
             
             
             case "move" : 
-                      app.api.movePlayer( step.player, step.posX, step.posY, "walk" );
-                      break;
+                    var player = app.objects.getPlayer( step.player );
+
+                    console.log( player.xx, player.xz );
+                    player.xx -= -step.x;
+                    player.xz -= -step.y;
+
+                    console.log( step.player, player.xx, player.xz, step.x, step.y );
+                    app.api.movePlayer( step.player, player.xx, player.xz, "walk" );
+                    break;
+            case "kill":
+                   // app.api.killPlayer(step.player );
+                       break;         
             case "Bomb" :
-                    app.api.addBomb();
+    //                app.api.addBomb();
                     break;
             case "explodeBomb":
-                    app.api.explodeBomb();
+      //              app.api.explodeBomb();
                     break;
-            case "kilL":
-                    app.api.killPlayer(step.player, killMethod );
-                    break;
+           
             case "useSonar":
-                    app.api.useSonar();
+        //            app.api.useSonar();
                     break;
             case "win":
-                    app.api.playerWin();
+          //          app.api.playerWin();
                     break;
         }
     }

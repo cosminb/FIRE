@@ -114,7 +114,9 @@ app.dummy.line.add( );
 //tests for simulation. this should be removed 
 app.test.init();
 app.test.auto();
-app.test.animateCamera();
+//app.test.animateCamera();
+
+app.camera.positionBySquare( 50, 50, 50, 0, 90 )
 
 init();
 
@@ -129,13 +131,15 @@ function animate(time) {
     return;
  
 }
+/*
+for (var i=0 ; i<5 ; i++){
+	app.api.addPlayer();
+}
 
-
-
-
+*/
 
 app.game.runGame( game["Level 2 - Map 0 - Round 0"] );
-
+//debugger;
 animate();
 
 
