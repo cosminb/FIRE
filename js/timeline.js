@@ -196,7 +196,7 @@ ani.jump = {
 		item.values.position.x = item.startValues.x + step * item.deltas.x
 		///item.values.position.y = item.startValues.y + step * item.deltas.y
 		
-		item.values.position.y += ( step < 25 ) ? 100 : -100
+		item.values.position.y += 100; // ( step < 25 ) ? 100 : -100
 		if ( item.values.position.y < 0 ) item.values.position.y = 0;
 		
 		item.values.position.z = item.startValues.z + step * item.deltas.z

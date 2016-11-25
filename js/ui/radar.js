@@ -50,7 +50,41 @@ app.ui.radar = {
 		
 	},
 	
-	
+	traps : {},
+    
+    reset : function ( ) {
+        
+        console.log( this.traps, "reseT" );
+        
+      for ( var i in this.traps ) {
+            
+            app.ui.scene.scene.removeChild( this.traps[ i ] );
+            
+            //delete
+      }      
+    },
+    addBomb : function ( id, x, y ) {
+        
+      var trap = new createjs.Shape();
+      
+      var ctx = trap.graphics;
+      
+      
+      
+        ctx.beginFill("red").drawRect(0,0,8, 8);
+  
+  
+        //trap.cache( 0, 0, 20, 20 ) ;
+        
+        
+        this.traps[ id ] = trap;
+        
+		trap.x = app.units.radar.left - (-x - 0.5) * this.blockSize -4 , 
+		trap.y = app.units.radar.top -(-y - 0.5)* this.blockSize - 4;
+
+        app.ui.scene.add( trap );
+
+    },
 	addPlayer : function ( id ) {
 		
         var playerColor = app.persistent.data( id ).color;

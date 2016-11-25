@@ -97,6 +97,11 @@ app.ui.logs = {
             "(gg) [$0] is going to rest.", 
             
         ],
+        
+        bomb : [
+            "(bomb) [$0] added an awesome bomb at ([$1],[$2])!",
+            "(bomb) [$0] added a bomb at ([$1],[$2])! Watch out!",
+        ]
 		
 	}
 }

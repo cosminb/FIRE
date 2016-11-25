@@ -2,7 +2,6 @@ app.game = {
     
     runGame : function ( game, id ) {
         
-        
      app.timeline.pause();
      
         app.ui.info.NewMatch();
@@ -16,7 +15,7 @@ app.game = {
         
       app.timeline.reset( );
 
-
+        app.ui.radar.reset();
 
       
 	   app.events.newGame();
@@ -26,6 +25,11 @@ app.game = {
        this.matchId = game.info.matchId;
        this.boardSize = game.info.size;
   
+  
+  
+        app.test.center = Math.floor( this.boardSize / 2  );
+        app.test.dist = Math.floor( this.boardSize / 2 + 10 ) * 150;
+        
         app.api.resetAll( game );
 		
 		app.ui.logs.clear();
@@ -73,7 +77,7 @@ app.game = {
                    app.api.killPlayer(playerId);
                   break;         
             case "bomb" :
-                app.api.addBomb( step.x, step.y );
+                app.api.addBomb( playerId, step.x, step.y );
                 
     //                app.api.addBomb();
                     break;

@@ -28,7 +28,8 @@ app.dummy.line = {
 		
 		this.obj = xobj;
 		
-		
+		this.obj.scale.set( 2, 2, 2);
+        
 		
 		window.setInterval( function ( ) {
 			

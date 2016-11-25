@@ -73,7 +73,8 @@ app.test = {
     animateCamera : function ( ) {
 		
 		var b = 0;
-		
+            
+            var that = this;
 		
 		//app.scene.camera2.matrixAutoUpdate = false;
 		
@@ -86,7 +87,7 @@ app.test = {
 			b += 0.1;
 			x+= 10;
 			
-			app.camera.positionAtAngle ( 50, 50, 5000, 75, b );
+			app.camera.positionAtAngle ( that.center, that.center, that.dist, 75, b );
 			//app.scene.camera2.near += 1;
 
 		}, 50 );

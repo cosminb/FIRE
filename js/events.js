@@ -7,9 +7,7 @@ app.events = {
 	
 	nextStep : function ( i ) {
 		i = i - 1;
-        
-        console.log( i );
-        
+
         if ( this.isFirstStep ) return this.firstStep();
 		
                 
@@ -20,6 +18,16 @@ app.events = {
 		
 		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
         app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
+        
+        
+        var bombs = app.stats.data.steps[ i ].bombs;
+        
+        for ( var i in bombs ) {
+              app.objects.addBomb( bombs[i].id, bombs[i].x, bombs[i].y, bombs[i].color );
+            app.ui.radar.addBomb(  bombs[i].id, bombs[i].x, bombs[i].y );
+
+        }
+        
         
         //app.camera.reposition ( i ) ;
 	},

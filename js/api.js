@@ -14,7 +14,7 @@ app.api = {
         app.units.idol = { x : Math.floor( app.game.boardSize / 2 ),z : Math.floor( app.game.boardSize / 2 ) };        
         app.dummy.line.move( pos3d( app.units.idol.x, app.units.idol.z ) );
         
-        
+        app.objects.removeAllBombs();
     },
     
     initMap : function ( ) {
@@ -74,9 +74,14 @@ app.api = {
     
     nextId : 1, 
     
-    addBomb : function ( x, y ) {
-        //id = "bomb_" + this.nextId++
-        //app.objects.addBomb( id, x, y );
+    addBomb : function ( p, x, y ) {
+        id = "bomb_" + this.nextId++
+        
+        app.stats.log( "bomb", [ p , x, y] );
+		
+        app.stats.addBomb( id, x, y, this.nextId );
+        
+        //app.ui.radar.addBomb( id, x, y );
         
     },
     

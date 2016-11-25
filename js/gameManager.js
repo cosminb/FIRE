@@ -5,12 +5,18 @@ app.gameManager = {
     
     parseGames : function ( ) {
         for ( var i in game ) {
-            
+             
             this.parseGame( game[ i ], i )
             this.games.push ( game [ i ] );
             
             
         }
+        
+        
+        this.games.sort( function( a, b) {
+            
+            return b.info.matchId < a.info.matchId ;
+        });
     },
     
     parseGame : function ( game, i ) {
@@ -18,9 +24,9 @@ app.gameManager = {
         var tokens = reg.exec( i  );
         
         
-        game.level = tokens[ 1 ];
-        game.map   = tokens[ 2] ;
-        game.rount = tokens [ 3 ];
+        game.level = 1*tokens[ 1 ];
+        game.map   = 1*tokens[ 2] ;
+        game.rount = 1*tokens [ 3 ];
         
     },
     
