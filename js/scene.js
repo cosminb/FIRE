@@ -60,8 +60,6 @@ app.scene = {
 	},
     
     renderFrame : function ( time ) {
-
-        stats.begin();
         
 
         app.timeline.runAnimations();
@@ -72,9 +70,6 @@ app.scene = {
         
         
         app.scene.render( );
-        
-
-        stats.end();
     }
 
 }

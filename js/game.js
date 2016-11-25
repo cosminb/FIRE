@@ -1,27 +1,43 @@
 app.game = {
     
     runGame : function ( game, id ) {
-
+        
+        
+     app.timeline.pause();
+     
+        app.ui.info.NewMatch();
+        
       this.gameId = id;
+      
+      app.stats.clear();
 
       app.persistent.matchPlayers( game );
         
+        
+      app.timeline.reset( );
+
+
+
+      
 	   app.events.newGame();
 
 	   app.api.addFrame();
 
        this.matchId = game.info.matchId;
        this.boardSize = game.info.size;
-       
-       
+  
         app.api.resetAll( game );
 		
-		
+		app.ui.logs.clear();
+        
 		app.producer.newGame( game );
 		
         for ( var i in game.steps ) {
             this.runStep( game.steps[ i ] );
         }
+        
+        
+        app.timeline.resume ( );
     },
     
     runStep : function( steps ) {
@@ -54,9 +70,11 @@ app.game = {
                     app.api.movePlayer( playerId, player.xx, player.xz, "walk", step );
                     break;
             case "kill":
-                   // app.api.killPlayer(playerId);
-                       break;         
-            case "Bomb" :
+                   app.api.killPlayer(playerId);
+                  break;         
+            case "bomb" :
+                app.api.addBomb( step.x, step.y );
+                
     //                app.api.addBomb();
                     break;
             case "explodeBomb":

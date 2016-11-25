@@ -47,7 +47,11 @@ app.units = {
 		this.info = {
 			left : 10,
 			
-			top : this.board3d.height + 20
+			top : this.board3d.height + 20,
+            
+            width : this.board3d.width,
+            
+            height : this.window.height - this.board3d.height - 20
 		}
 	  }
 	  

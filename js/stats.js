@@ -15,7 +15,7 @@ app.stats = {
 	
 	addStep : function ( ) {
 	
-		var step = { logs : [], players : [], id : this.data.steps.length }
+		var step = { logs : [], players : [], id : this.data.steps.length, removedPlayers : {} }
 		
 		this.data.steps.push( step );
 		
@@ -32,4 +32,8 @@ app.stats = {
 	updatePlayer : function ( p, x, z ) {
 		this.currentStep.players[ p ] = { x : x, z : z }
 	},
+    
+    removePlayer : function ( p ) {
+       this.currentStep.removedPlayers[ p ] = true;
+    }
 }

@@ -85,15 +85,31 @@ app.ui.radar = {
 		//player.updateCache( );
 	},
 	
-	showPlayer : function ( id ) {
-		
-	},
+
 	
 	updateAllPlayers : function ( players ) {
-		for ( var i in players )
+		for ( var i in players ) {
+            
+            this.players[ i ].visible = true;
 			this.movePlayer( i, players[ i ].x , players[ i ].z );
+        }
 	},
-	
+    
+    removePlayers : function ( players ) {
+        for ( var i in players ) {
+            
+            console.log ("hidding" );
+            
+            this.hidePlayer( i );
+        }
+    },
+    
+    hidePlayer : function ( id ) {
+        this.players[ id ].visible = false;
+    },
+    showPlayer : function ( id ) {
+        this.players[ id ].visible = true;
+	},
 	
 	update : function ( ) {
 		

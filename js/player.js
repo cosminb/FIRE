@@ -162,9 +162,12 @@ app.player = {
 		
 		mesh = new THREE.Mesh(combined.clone(), this.material);
 
+        
 		item.obj = mesh;
 		
 		
+        item.obj.scale.set( 4, 4, 4 );
+        
 	},
 	
 

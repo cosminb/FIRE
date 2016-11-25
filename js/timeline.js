@@ -9,6 +9,17 @@ app.timeline = {
     cameraShots : {},
     
     
+    reset : function ( ) {
+        
+      this.cameraShots = {};
+      this.nrSteps = 50;
+      this.screenPlay = [];
+      this.currentScene = null;
+      this.frameCount = 50;
+      this.inputScene = null;
+      
+    },
+    
 
     addScene : function ( step ) {
          var scene = { items : [], index : this.screenPlay.length } ;
@@ -185,7 +196,7 @@ ani.jump = {
 		item.values.position.x = item.startValues.x + step * item.deltas.x
 		///item.values.position.y = item.startValues.y + step * item.deltas.y
 		
-		item.values.position.y += ( step < 25 ) ? 10 : -10
+		item.values.position.y += ( step < 25 ) ? 100 : -100
 		if ( item.values.position.y < 0 ) item.values.position.y = 0;
 		
 		item.values.position.z = item.startValues.z + step * item.deltas.z

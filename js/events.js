@@ -7,22 +7,27 @@ app.events = {
 	
 	nextStep : function ( i ) {
 		i = i - 1;
+        
+        console.log( i );
+        
         if ( this.isFirstStep ) return this.firstStep();
 		
-        
-        app.camera.reposition ( i ) ;
-	},
-	
-	stepMiddle : function ( i ) {
-		
-        i = i-1;
-        
+                
 		var logs = app.stats.data.steps[i].logs;
 		
 		
 		app.ui.logs.append( i, logs );
 		
 		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
+        app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
+        
+        //app.camera.reposition ( i ) ;
+	},
+	
+	stepMiddle : function ( i ) {
+		
+        i = i-1;
+
 	},
 	
 	firstStep : function ( ) {
@@ -31,5 +36,21 @@ app.events = {
     
     matchEnded : function ( ) {
         console.log( "match ended", app.game.gameId );
+
+       var i = app.stats.data.steps.length - 1;
+       
+		var logs = app.stats.data.steps[i].logs;
+		
+		
+		app.ui.logs.append( i, logs );
+		
+		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
+        app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
+        
+
+        
+        app.ui.info.EndOfMatch ( );
+        
+        
     },
 }

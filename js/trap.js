@@ -50,7 +50,7 @@ app.trap = {
 
 		item.obj3 = cube;
 
-
+item.obj2.scale.set( 1, 20, 1 ); 
 		
 	},
 	

@@ -48,14 +48,19 @@ app.test = {
 	auto : function ( ) {
 		//*
 
+        /*
         for ( var i = 0; i < 100 ; i ++ ) {
             app.objects.addBomb( "bomb_" + i, Math.round(i / 10 ) * 3,  ( i % 10 )* 3, i );
         }
 
+        */
+        
+        /*
 		for ( var i = 1 ; i < this.nr; i++ ) {
             app.api.addPlayer( i, Math.round( i/3 ), i % 3, i *1543 );
         }
 
+        */
         /*
         for( var i = 0 ; i < 10050; i++  ){
 			this.addStep()
@@ -81,7 +86,7 @@ app.test = {
 			b += 0.1;
 			x+= 10;
 			
-			app.camera.positionAtAngle ( 25, 25, 4000, 75, b );
+			app.camera.positionAtAngle ( 50, 50, 5000, 75, b );
 			//app.scene.camera2.near += 1;
 
 		}, 50 );

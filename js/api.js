@@ -30,11 +30,11 @@ app.api = {
             
         this.players.initialPosition = pos;
         
-        var color = app.persistent.data( "P" + p ).color;
+        var color = app.persistent.data( p ).color;
         
-        app.objects.addPlayer( "P" + p, x, z, color );
+        app.objects.addPlayer( p, x, z, color );
 		
-		app.ui.radar.addPlayer( "P" + p );
+		app.ui.radar.addPlayer(  p );
 		
     },
     
@@ -58,12 +58,25 @@ app.api = {
     
     killPlayer : function ( p ) { 
       //  pos = this.initialPosition[ p ];
+      
+      var item = app.objects.getPlayer( p );
+      var pos = pos3d( item.initialX, item.initialZ );
+      
+      app.timeline.addToScene( p, { x: pos.x, y : 10000, z : pos.z, point : { x  : item.initialX , z : item.initialZ }, animation : "jump" } )
+ 
+ 	  app.stats.log( "kill", [ p ] );
+		
+        app.stats.removePlayer( p )
         
-        app.timeline.addToScene( p, { x : pos.x, y : pos.y, z : pos.z, animation : "jump" } ); 
+      //app.timeline.addToScene( p, { x : pos.x, y : pos.y, z : pos.z, animation : "jump" } ); 
     },
     
     
-    addBomb : function ( ) {
+    nextId : 1, 
+    
+    addBomb : function ( x, y ) {
+        //id = "bomb_" + this.nextId++
+        //app.objects.addBomb( id, x, y );
         
     },
     

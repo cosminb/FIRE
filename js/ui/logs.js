@@ -19,11 +19,15 @@ app.ui.logs = {
 			
 			width : app.units.logs.width
 			
-		});
+		}).addClass( "logs_container" );
 		
 		$("body").append( this.node );
 		
 	},
+    
+    clear : function ( ) {
+      this.node.html( "" );  
+    },
 	
 	append : function ( step, logs ) {
 		
@@ -57,9 +61,7 @@ app.ui.logs = {
 			if ( path === "0" ) {
 				var player = app.persistent.data( val[ path ] );
                 
-				var value =  "<span class='log_player' style='border-bottom:1px solid "+ player.color +"; color : "+player.color+"'>" + player.name+ "</span>";
-				
-				
+				var value =  "<span class='log_player' style='border-bottom:1px solid "+ player.color +"; color : "+player.color+"'>" + player.name+ "</span>";	
 			}
 			
 			
@@ -78,16 +80,23 @@ app.ui.logs = {
 		
 		move : [
 		
-		"[$0] decided to move to ( [$1], [$2] )",
-		" a fantastic move from [$0] : ( [$1], [$2] )",
+		"(move) [$0] decided to move to ( [$1], [$2] )",
+		"(move) a fantastic move from [$0] : ( [$1], [$2] )",
 		
 		],
 		sonar : [
 		
-		"[$0] looking around to see the winning move",
-		"[$0] looking around with the sonar",
+		"(sonar) [$0] looking around to see the winning move",
+		"(sonar) [$0] looking around with the sonar",
 		
 		],
+        
+        kill : [
+        
+            "(gg) [$0] has left the building", 
+            "(gg) [$0] is going to rest.", 
+            
+        ],
 		
 	}
 }

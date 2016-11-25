@@ -6,7 +6,7 @@ app.persistent = {
         var players = {};
         
         
-        var firstGame = Object.keys( game );
+        var firstGame = Object.keys( game )[ 0 ];
         
         var agame = game[ firstGame ];
         
@@ -24,6 +24,9 @@ app.persistent = {
             
             this.PLAYER[ i ] = player;
             count ++; 
+            
+            console.log( i );
+            app.api.addPlayer( i ,0, 0,  player.color );
         }
         
 

@@ -1,3 +1,4 @@
+//--allow-file-access-from-files
 
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -11,24 +12,41 @@ body,window { padding : 0; margin : 0; overflow : hidden; }
 
 body { background : #222; }
 
+
+.logs_container { 
+
+}
+
 .logs { 
 	font-variant : small-caps;
-	font-size 	 : 17px;
+	font-size 	 : 20px;
 	color : #ddd;
+    z-index : 20000;
+    
+}
+
+.logs_container:hover {
+    overflow : auto !important;
 }
 
 .logs .digit {
-	font-size : 14px;
+	font-size : 16px;
 }
 
 .log_step { 
-	margin-top : 10px;
+	margin-top : 20px;
 	font-weight : bolder;
 	border-bottom : 1px solid #777;
 	animation : none !important;
 }
 
-.info  {
+
+.info { 
+    z-index : 10000;
+    background : rgba( 40, 40, 40, 0.97 );
+}
+
+.info #title {
 	font-size : 90px;
 	color     : #444;
 }
@@ -56,8 +74,6 @@ body { background : #222; }
 
 
 <script src="libs/three.js"></script> 
-
-<script src="libs/stats.js"> </script>
 
 <script src="libs/createjs-2015.11.26.min.js"></script>
 
@@ -120,6 +136,8 @@ app.dummy = {}
 
 <script src='js/persistent.js'></script>
 
+<script src='js/gameManager.js'></script>
+
 <script>
 
 var game = {};
@@ -129,8 +147,10 @@ var game = {};
 
 
 <script src='logs/test/log2.js'></script>
+<script src='logs/test/Level 2 - Map 1 - Round 0.log'></script>
 
 <script>
+
 
 
 
@@ -145,16 +165,6 @@ app.camera.positionAtAngle( 50, 50, 15000, 70, 40 )
 */
 
 
-//*
-var stats = new Stats();
-stats.showPanel( 0 ); 
-stats.showPanel( 1 );
-document.body.appendChild( stats.dom );
-//*/
-
-
-
-app.persistent.init();
 
 
 app.scene.clock = new THREE.Clock();
@@ -167,6 +177,8 @@ app.scene.init();
 app.scene.addCamera();
 app.scene.addRender( app.scene.camera2 );
 
+
+
 app.ui.scene.init();
 app.ui.scene.update();
 
@@ -178,6 +190,11 @@ app.ui.logs.render();
 
 app.ui.info.render();
 
+
+app.persistent.init();
+
+
+
 app.floor.add(  );
 app.dummy.line.add( );
 //app.dummy.glow.add( );
@@ -188,7 +205,7 @@ app.dummy.line.add( );
 //tests for simulation. this should be removed 
 app.test.init();
 app.test.auto();
-//app.test.animateCamera();
+app.test.animateCamera();
 
 //app.camera.positionBySquare( 50, 50, 50, 0, 90 )
 
@@ -230,9 +247,11 @@ for (var i=0 ; i<5 ; i++){
 
 */
 
-app.game.runGame( game["Level 2 - Map 0 - Round 0"], "Level 2 - Map 0 - Round 0" );
+//app.game.runGame( game["Level 2 - Map 1 - Round 0"], "Level 2 - Map 1 - Round 0" );
 //debugger;
-animate();
+//animate();
 
+app.gameManager.parseGames();
+app.gameManager.runNextGame()
 
 </script>
