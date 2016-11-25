@@ -1,7 +1,9 @@
 
 app.floor = {
-	add : function ( item ) {
+	add : function (  ) {
 	
+        var item = this.item = {};
+        
 		this.render( item );
 		
 		app.scene.add( item.obj );
@@ -65,8 +67,21 @@ app.floor = {
 	},
 
     
-    
+    removeBoard : function ( ) {
+      app.scene.scene.remove( this.item.obj );
+      delete ( this.item );
+      
+    },
 	updateBoard : function ( board , width ) {
+        
+        if ( this.numW != width ) {
+                this.numW = width
+                this.numH = width;
+                
+                this.removeBoard( );
+                this.add();
+        }
+        
 		var planeGeometry = this.plane.geometry; //planeGeometry;
 		
 		
@@ -105,8 +120,6 @@ app.floor = {
 			
             
             faceIndex += 2;
-            
-            //console.log( ind, faceIndex );
             }
         }
         /*

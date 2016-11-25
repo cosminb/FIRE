@@ -22,5 +22,9 @@ app.events = {
 	
 	firstStep : function ( ) {
 		this.isFirstStep = false;
-	}
+	},
+    
+    matchEnded : function ( ) {
+        console.log( "match ended", app.game.gameId );
+    },
 }

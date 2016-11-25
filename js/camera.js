@@ -24,9 +24,7 @@ app.camera = {
 		
 		
 		var far = l * app.units.width;
-		
-		console.log( far );
-		
+
 		var p1 = pos3d( x, z );
 		
 		a = a * Math.PI / 180;

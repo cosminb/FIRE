@@ -10,9 +10,7 @@ app.ui.radar = {
 	},
 	
 	renderBoard : function ( ){
-		
-		console.log( "Redenre" );
-		
+
 		this.board  = new createjs.Shape();
 		this.board.setTransform( app.units.radar.left, app.units.radar.top );
 		
@@ -55,6 +53,7 @@ app.ui.radar = {
 	
 	addPlayer : function ( id ) {
 		
+        var playerColor = app.persistent.data( id ).color;
 		
 		var player = new createjs.Shape();
 
@@ -63,7 +62,7 @@ app.ui.radar = {
 		
 		var ctx = player.graphics;
 		ctx.clear();
-		ctx.beginFill( "red" );
+		ctx.beginFill( playerColor );
 		
 		ctx.drawCircle(8,8,8);
 		

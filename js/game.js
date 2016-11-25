@@ -1,7 +1,11 @@
 app.game = {
     
-    runGame : function ( game ) {
+    runGame : function ( game, id ) {
 
+      this.gameId = id;
+
+      app.persistent.matchPlayers( game );
+        
 	   app.events.newGame();
 
 	   app.api.addFrame();
@@ -9,16 +13,15 @@ app.game = {
        this.matchId = game.info.matchId;
        this.boardSize = game.info.size;
        
-        app.api.resetAll(game );
+       
+        app.api.resetAll( game );
 		
 		
 		app.producer.newGame( game );
 		
-		for ( var j = 0; j < 100 ; j++ ) {
-			for ( var i in game.steps ) {
-				this.runStep( game.steps[ i ] );
-			}
-		}
+        for ( var i in game.steps ) {
+            this.runStep( game.steps[ i ] );
+        }
     },
     
     runStep : function( steps ) {
@@ -32,19 +35,24 @@ app.game = {
     
     executeStep : function ( step ) {
         
+        
+        
+        var playerId = app.persistent.getPlayer( step.player );
+        
+
         switch ( step.type ) {
             
             
             case "move" : 
-                    var player = app.objects.getPlayer( step.player );
+                    var player = app.objects.getPlayer( playerId );
 
                     player.xx -= -step.x;
                     player.xz -= -step.y;
 
-                    app.api.movePlayer( step.player, player.xx, player.xz, "walk", step );
+                    app.api.movePlayer( playerId, player.xx, player.xz, "walk", step );
                     break;
             case "kill":
-                   // app.api.killPlayer(step.player );
+                   // app.api.killPlayer(playerId);
                        break;         
             case "Bomb" :
     //                app.api.addBomb();
@@ -54,7 +62,7 @@ app.game = {
                     break;
            
             case "sonar":
-                    app.api.useSonar(step.player);
+                    app.api.useSonar(playerId);
                     break;
             case "win":
           //          app.api.playerWin();

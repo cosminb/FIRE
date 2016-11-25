@@ -104,33 +104,33 @@ game["Level 2 - Map 0 - Round 0"]= {
 ,  [ "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "_", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W" ]
 ] 
 , "players" : {
-  "p1" : { "name" : "t1" , "startX": 0, "startY": 50}
-, "p2" : { "name" : "t2" , "startX": 51, "startY": 100}
-, "p3" : { "name" : "t3" , "startX": 100, "startY": 48}
-, "p4" : { "name" : "t4" , "startX": 47, "startY": 0}
+  "P1" : { "name" : "t1" , "startX": 0, "startY": 50}
+, "P2" : { "name" : "t2" , "startX": 51, "startY": 100}
+, "P3" : { "name" : "t3" , "startX": 100, "startY": 48}
+, "P4" : { "name" : "t4" , "startX": 47, "startY": 0}
 }
-, "steps": [ [{"type" : "sonar" , "player" : "p1" }, {"type" : "sonar" , "player" : "p2" }, {"type" : "sonar" , "player" : "p3" }, {"type" : "sonar" , "player" : "p4" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "p1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p2" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"x" : "1" , "y" : "0" , "type" : "move" , "player" : "p1" }, {"x" : "1" , "y" : "-1" , "type" : "move" , "player" : "p2" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "p2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p4" }], [
-{"x" : "2" , "y" : "49" , "type" : "bomb" , "player" : "p1" }, {"x" : "53" , "y" : "98" , "type" : "bomb" , "player" : "p2" }, {"x" : "98" , "y" : "48" , "type" : "bomb" , "player" : "p3" }, {"x" : "46" , "y" : "2" , "type" : "bomb" , "player" : "p4" }], [
-{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "p2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p4" }], [
-{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "p2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p4" }], [
-{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "p2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"type" : "sonar" , "player" : "p2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"type" : "sonar" , "player" : "p1" }, {"x" : "56" , "y" : "98" , "type" : "bomb" , "player" : "p2" }, {"x" : "98" , "y" : "44" , "type" : "bomb" , "player" : "p3" }, {"x" : "43" , "y" : "4" , "type" : "bomb" , "player" : "p4" }], [
-{"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p1" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"type" : "sonar" , "player" : "p3" }, {"type" : "sonar" , "player" : "p4" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p1" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p2" }], [
-{"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p4" }, {"type" : "kill" , "player" : "P2" }
+, "steps": [ [{"type" : "sonar" , "player" : "P1" }, {"type" : "sonar" , "player" : "P2" }, {"type" : "sonar" , "player" : "P3" }, {"type" : "sonar" , "player" : "P4" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P2" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P1" }, {"x" : "1" , "y" : "-1" , "type" : "move" , "player" : "P2" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P4" }], [
+{"x" : "2" , "y" : "49" , "type" : "bomb" , "player" : "P1" }, {"x" : "53" , "y" : "98" , "type" : "bomb" , "player" : "P2" }, {"x" : "98" , "y" : "48" , "type" : "bomb" , "player" : "P3" }, {"x" : "46" , "y" : "2" , "type" : "bomb" , "player" : "P4" }], [
+{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P4" }], [
+{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P4" }], [
+{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P1" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"type" : "sonar" , "player" : "P2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"type" : "sonar" , "player" : "P1" }, {"x" : "56" , "y" : "98" , "type" : "bomb" , "player" : "P2" }, {"x" : "98" , "y" : "44" , "type" : "bomb" , "player" : "P3" }, {"x" : "43" , "y" : "4" , "type" : "bomb" , "player" : "P4" }], [
+{"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P1" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P2" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"type" : "sonar" , "player" : "P3" }, {"type" : "sonar" , "player" : "P4" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P1" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P2" }], [
+{"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }, {"type" : "kill" , "player" : "P2" }
 ], [
-{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "p4" }, {"type" : "kill" , "player" : "P1" }
+{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }, {"type" : "kill" , "player" : "P1" }
 ], [
-{"x" : "98" , "y" : "41" , "type" : "bomb" , "player" : "p3" }, {"x" : "43" , "y" : "7" , "type" : "bomb" , "player" : "p4" }], [
-{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p3" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p4" }], [
-{"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p3" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "p4" }], [
-{"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p3" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "p4" }], [
-{"x" : "95" , "y" : "41" , "type" : "bomb" , "player" : "p3" }, {"x" : "41" , "y" : "7" , "type" : "bomb" , "player" : "p4" }], [
-{"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "p4" }, {"type" : "kill" , "player" : "P3" }
+{"x" : "98" , "y" : "41" , "type" : "bomb" , "player" : "P3" }, {"x" : "43" , "y" : "7" , "type" : "bomb" , "player" : "P4" }], [
+{"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P3" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P4" }], [
+{"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P4" }], [
+{"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P3" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
+{"x" : "95" , "y" : "41" , "type" : "bomb" , "player" : "P3" }, {"x" : "41" , "y" : "7" , "type" : "bomb" , "player" : "P4" }], [
+{"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P4" }, {"type" : "kill" , "player" : "P3" }
 , {"type" : "win" , "player" : "P4" }
 ] ], "results": {
  "P2" : 0 , "P1" : 0 , "P3" : 0 ,"P4" : 5 }

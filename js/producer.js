@@ -19,10 +19,17 @@ app.producer = {
 		watchList.sort( function ( a, b ) { return b.score - a.score } );
 		
 		console.log( watchList );
+        
+        
+        this.target = 0;
+        this.hero = 0;
+        this.stepnr = 0;
 	},
 	
 	addStep : function ( ) {
-		
+		if ( this.target == 0 ) {
+             
+        } 
 	},
 	
 	addAction : function ( type ) {

@@ -11,6 +11,10 @@ app.api = {
 		app.api.resetPlayersPosition(game.players);
 
         
+        app.units.idol = { x : Math.floor( app.game.boardSize / 2 ),z : Math.floor( app.game.boardSize / 2 ) };        
+        app.dummy.line.move( pos3d( app.units.idol.x, app.units.idol.z ) );
+        
+        
     },
     
     initMap : function ( ) {
@@ -26,9 +30,11 @@ app.api = {
             
         this.players.initialPosition = pos;
         
-        app.objects.addPlayer( "p" + p, x, z, color );
+        var color = app.persistent.data( "P" + p ).color;
+        
+        app.objects.addPlayer( "P" + p, x, z, color );
 		
-		app.ui.radar.addPlayer( "p" + p );
+		app.ui.radar.addPlayer( "P" + p );
 		
     },
     
@@ -76,8 +82,14 @@ app.api = {
 
     resetPlayersPosition : function( players ){
       
-      app.objects.eachPlayer( function ( item, id ) {
+      
+      for ( var id in players ) {
+            
+            var itemId = app.persistent.getPlayer( id );
 
+            var item = app.objects.getPlayer( itemId );
+
+            
             item.initialX = players[ id ].startX;
             item.initialZ = players[ id ].startY;
 
@@ -89,7 +101,7 @@ app.api = {
 
             app.api.movePlayer( id, item.xx, item.xz, "walk" );
 
-      }) 
+      } 
     },
 
 }

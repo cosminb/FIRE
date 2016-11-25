@@ -1,0 +1,1008 @@
+
+<svg id='defs'>
+	<defs>
+	  <filter id="theBlur3">
+		<feGaussianBlur in="SourceGraphic" stdDeviation="10"  result="blur2"/>
+				<feMerge>
+				<feMergeNode in="blur2" />
+				<feMergeNode in="SourceGraphic" />
+			</feMerge>
+	  </filter>
+	</defs>
+</svg>
+
+
+
+<svg width="1400" height="1400" style='position:absolute; left : -10000px; ;'
+xmlns="http://www.w3.org/2000/svg" version="1.1"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+<defs>
+  <filter id="theBlur2">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="10"  result="blur2"/>
+            <feMerge>
+            <feMergeNode in="blur2" />
+            <feMergeNode in="SourceGraphic" />
+        </feMerge>
+  </filter>
+
+</defs>
+
+</svg>
+
+
+
+<style>
+#defs { display : none; }
+ 
+    body { overflow : hidden; margin-left : 300px;font-family : Hack; color : white; perspective: 1300px;background: #1F1F1F;}
+
+/*
+    svg {
+
+transform: matrix3d(0.7109, 0, -0.703279, 0,
+0, 1, 0, 0,
+0.703279, 0, 0.7109, 0,
+0, 0, 0, 1);
+
+}
+
+*/
+
+#clock {    -webkit-filter: url(#theBlur3);
+ color : #BADA55; position : absolute; left : 1200px; top : 10px; font-size : 50px; }
+
+#rang { position : absolute; left : 0px; top : 10px; }
+
+#next { position : absolute; left : 400px; top : 490px; }
+
+#notes { z-index : 200; position : absolute; left : 500px; top: 690px; overflow : hidden; height : 240px; width : 950px;}
+
+#notes:hover {  overflow : auto; }
+
+#rank {     padding-top: 140px; }
+@font-face {
+  font-family: 'Hack';
+  src: url('/fonts/eot/latin/hack-regular-latin-webfont.eot');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+</style>
+
+
+<div id='clock'></div>
+<div id='rank'></div>
+<div id='next'></div>
+
+<div id='notes'></div>
+
+
+<canvas id="f_canvas" width=200 height=200 style='position : absolute; left : 0px; top : 0px;'> </canvas>
+
+<script src="libs/raphael-min.js"></script>
+<script src="input.js"></script>
+
+<script>
+
+"using strict";
+
+
+var ui = {}
+ui.z = {};
+
+var cfg = {
+
+	//cfg for zoomPreview
+	z : {
+		rowCount : 16,
+		colCount : 32,
+
+		dist : 30,
+	},
+
+	//cfg for fullPreview
+	f : {
+	},
+
+
+	//to be updated
+	rowCount : 500,
+	colCount : 1000,
+	startX   : 0,
+	startY   : 0,
+
+	colors : [
+		"#BADA55",
+		"#5ADBEE"
+	],
+
+	gateStart : 0,
+	gateEnd : 0,
+
+
+	maxRow   : 500,
+	maxCol   : 1000,
+
+	animationStep : 200,
+}
+
+var game = {
+	currentX : 0,
+	currentY : 0,
+
+	init : function ( ) {
+
+        this.currentX = cfg.startX;
+        this.currentY = cfg.startY;
+
+	}
+}
+
+
+var api = {
+
+	render : function ( ) {
+	},
+
+	startCompetition : function ( rows, cols, startX, startY ) {
+
+		cfg.rowCount = rowCount;
+        cfg.colCount = colCount;
+
+        cfg.startX = startX;
+        cfg.startY = startY;
+
+
+
+        arena.init();
+        zPreview.init();
+
+	},
+
+	startGame : function (rows, cols, startX, startY ) {
+
+        this.startCompetition( rows, cols, startX, startY );
+
+	},
+
+	addNextMove : function ( ) {
+	},
+
+	addTrap : function ( ) {
+	},
+
+}
+
+
+
+
+function Region ( x1, y1, x2, y2 ) {
+	this.x1 = x1;
+	this.y1 = y1;
+	this.x2 = x2;
+	this.y2 = y2;
+}
+
+Region.prototype.setXYWH = function ( x, y, w, h ) {
+	this.x1 = x;
+	this.y1 = y;
+	this.x2 = x + w;
+	this.y2 = y + h;
+}
+
+
+
+var arena = {
+	gateStart : 0,
+	gateEnd : 0,
+
+
+	init : function ( ) {
+		this.computeDimensions();
+	},
+
+	computeDimensions : function ( ) {
+
+	    cfg.gateStart = Math.floor(2 / 5 * cfg.rowCount);
+        cfg.gateEnd = Math.floor(3 / 5 * cfg.rowCount);
+
+	},
+}
+
+
+ui.z.draw = {
+	canvas : function ( ) {
+	},
+
+	line : function ( path, style ) {
+	},
+
+	rectangle : function ( ) {
+	},
+
+	elf : function ( ) {
+	},
+
+
+}
+
+
+
+ui.z.style = {
+
+	offsetX : 500,
+	offsetY : 150,
+
+	grid : {
+		'stroke': "rgb(200,200,200,0.7)",
+		'stroke-width': 1
+	},
+}
+
+ui.z.board = {
+
+	render : function ( ) {
+	    this.paper = Raphael(0, 0, 2000, 1000);
+
+	    console.log( this.paper );
+	},
+
+
+	fillRect : function ( x1, y1, w, h, color ) {
+		var rect = this.paper.rect( x1, y1, w, h );
+		rect.attr("fill", color );
+		return rect;
+	},
+
+	path : function ( path ) {
+		var line = this.paper.path( path );
+		return line;
+	},
+
+	pathWithFilter : function ( path, filter ) {
+		var line = this.path( path );
+			line.node.setAttribute( "filter", filter);
+		return line;
+	},
+
+	animateLine : function ( line, animationStep ) {
+			line.show();
+			var path = line.node;
+			//path.setAttribute( "class", "z_move");
+
+			var length = path.getTotalLength();
+			// Clear any previous transition
+			path.style.transition = path.style.WebkitTransition =
+			'none';
+			// Set up the starting positions
+			path.style.strokeDasharray = length + ' ' + length;
+			path.style.strokeDashoffset = length;
+			path.style.strokeWidth = 13;
+			// Trigger a layout so styles are calculated & the browser
+			// picks up the starting position before animating
+			path.getBoundingClientRect();
+			// Define our transition
+			path.style.transition = path.style.WebkitTransition =
+			'all '+(animationStep/1000)+'s linear';
+			// Go!
+			path.style.strokeDashoffset = '0';
+			path.style.strokeWidth = 3;
+
+
+	}
+
+}
+
+ui.z.main =  {
+
+
+	render : function ( ) {
+		ui.z.board.render();
+		ui.z.grid.render();
+		ui.z.oldLines.render();
+
+		ui.z.gates.render();
+
+		ui.z.icons.render();
+		
+		ui.notice.render( );
+	},
+
+	init : function ( ) {
+		ui.z.movesMatrix.init();
+		ui.z.region.init();
+	},
+
+	addMove : function ( player, x1, y1, x2, y2 ) {
+		if ( ui.z.region.isOutside(x1, y1, x2, y2 ) ){
+
+			var mustUpdate = ui.z.region.update( x1, y1, x2, y2 );
+			if ( mustUpdate ) {
+				window.requestAnimationFrame( this.refresh );
+			}
+		}
+
+
+		window.requestAnimationFrame( function ( ) {
+			ui.z.moves.add( player, x1, y1, x2, y2 );
+			ui.z.movesMatrix.addMove(player, x1, y1, x2, y2 );
+		});
+	},
+
+	refresh : function ( ) {
+		ui.z.oldLines.update();
+		ui.z.moves.clear();
+
+	},
+
+}
+
+ui.z.icons = {
+	render : function ( ) {
+		var html =
+					"<path d='" +this.renderPath(  ) + "'fill='none' stroke='#5ADB33' stroke-width=3 filter='url(#theBlur2)'></path>" 
+					
+					+ this.images.join( " ");
+					/*+
+					"<path d='M400,150L430 180L430 210L430 240L460 240L490 240L505 240' fill='none' stroke='#BADA55' stroke-width=3 filter='url(#theBlur2)'></path>" +
+					"<image width='40' height='40' x=400 y=120 style='position:absolute;left:300px;top : 300px;' xlink:href='welcome.png'/>" +
+					"<image width='40' height='40' x = 500 y=200 xlink:href='pizza.png'/>" +
+					"<image width='40' height='40' x = 960 y=400 xlink:href='cup.png'/>" +
+					"<image width='40' height='40' x = 600 y=150 xlink:href='laptop.png'/>" +
+
+					"<image width='40' height='40' x = 650 y=300 xlink:href='FAQ.png'/>"
+*/
+					
+console.log( html );
+		ui.z.board.paper.canvas.innerHTML+= html
+	},
+	
+	renderPath : function  ( ) {
+		var path = this.path  =[];
+		var images = this.images = [];
+		
+		var offsetX = ui.z.style.offsetX;
+		var offsetY = ui.z.style.offsetY;
+		
+		
+		var pointX = offsetX;
+		var pointY = offsetY  + 16 * 30;
+		
+		var x = 0;
+		var y = 16;
+		for ( var i = 0; i<input.milestones.length; i++ ) {
+			
+			
+			x = input.milestones[ i ].posX;
+			y = 16- input.milestones[ i ].posY;
+			
+			console.log( x, y );
+			path.push( "M", x * 30 + offsetX , y * 30 + offsetY, "L", pointX, pointY );
+			pointX = x * 30 + offsetX ;
+			pointY = y * 30 + offsetY ;
+			
+			
+			if ( input.milestones[i].img ) {
+	
+			  this.images.push ( "<image filter='url(#theBlur2)' width='40' height='40' x ="+(x * 30 + offsetX) +" y=" + (y * 30 + offsetY) +" xlink:href='" + input.milestones[ i ] .img  + "'/>" );
+			  this.images.push ( "  <text fill='white' filter='url(#theBlur2)' x="  +(x * 30 + offsetX + 10) +" y="+ (y * 30 + offsetY) +" font-family='Verdana'  font-size='15'> " + input.milestones[i].time+" </text> " );
+			}
+			
+		}
+		
+		return path.join ( " " );
+	},
+}
+
+ui.z.grid = {
+	render : function ( ) {
+
+		var dist = cfg.z.dist;
+		var offsetX = ui.z.style.offsetX;
+		var offsetY = ui.z.style.offsetY;
+
+		var path = [];
+
+
+		for (var i = 0; i <= cfg.z.colCount; i++) {
+			var x1 = i * dist + offsetX;
+			var y1 = offsetY;
+
+			var x2 = x1;
+			var y2 = cfg.z.rowCount * dist + offsetY;
+			var pathStr = "M " + x1 + " " + y1 + " L" + x2 + " " + y2;
+
+			path.push( pathStr );
+
+		}
+
+
+		for (var i = 0; i <= cfg.z.rowCount; i++) {
+			var y1 = i * dist + offsetY;
+			var x1 = 0 + offsetX;
+
+			var y2 = y1;
+			var x2 = cfg.z.colCount * dist + offsetX;
+
+			var pathStr = "M" + x1 + "  " + y1 + " L" + x2 + "  " + y2;
+
+			path.push( pathStr );
+		}
+
+
+		var line = ui.z.board.path(path.join(" "));
+
+		line.attr(ui.z.style.grid);
+
+
+		//?remember ?
+		this.gridLine = line;
+
+	},
+}
+
+ui.z.gates = {
+	obj : {
+		middle : undefined,
+		left : undefined,
+		right : undefined
+	},
+
+	render : function ( ) {
+
+			var dist = cfg.z.dist;
+			var gateHeight = (cfg.gateEnd - cfg.gateStart) * dist;
+			var gateWidth = dist *10;
+			var gateStart = cfg.gateStart * dist
+			var middleX = cfg.colCount / 2 * dist;
+
+			//border
+			//var border = ui.z.board.path( 0, 0, cfg.colCount * dist, cfg.rowCount * dist, "rgba(255, 255, 255, 0.7 )" );
+
+			//middle
+			this.obj.middle = ui.z.board.fillRect (  middleX,  0, dist * 2, cfg.rowCount * dist, "rgba(255, 255, 255, 0.7 )"  );
+
+			//left gate
+			this.obj.left = ui.z.board.fillRect ( 0, gateStart , gateWidth, gateHeight, "rgba(255, 255, 255, 0.7 )");
+
+			//right gate
+			this.obj.right = ui.z.board.fillRect ( cfg.colCount * dist - gateWidth, gateStart, gateWidth, gateHeight, "rgba(255, 255, 255, 0.7 )");
+
+	}
+}
+
+ui.z.traps = {
+	add : function ( x1, y1, x2, y2 ) {
+
+	},
+
+	render : function ( trap ) {
+	},
+}
+
+ui.z.elfs = {
+}
+
+ui.z.moves = {
+	add : function (player, x1, y1, x2, y2 ) {
+
+
+		var dist = cfg.z.dist;
+		var dist = cfg.z.dist;
+		var offsetX = ui.z.region.x1*dist - ui.z.style.offsetX;
+		var offsetY = ui.z.region.y1*dist - ui.z.style.offsetY;
+
+
+		var  path = [
+					 "M", x1 * dist - offsetX,
+						  y1 * dist - offsetY,
+					 "L", x2 * dist - offsetX,
+						  y2 * dist - offsetY
+					];
+		var path = path.join(" ");
+
+		var line = this.getLine();
+
+		var color = cfg.colors[ player ];
+
+
+		window.requestAnimationFrame( function ( ) {
+			ui.z.moves.animateLine( line, path,color  );
+		});
+
+	},
+
+	animateLine : function( line, path, color ) {
+
+		line.attr("path" , path );
+		line.attr("stroke",color );
+		line.attr("stroke-linecap", "round" );
+
+
+		ui.z.board.animateLine( line, cfg.animationStep );
+
+	},
+
+
+	used : [],
+	pool : [],
+
+	clear: function() {
+		for ( var i=0; i<this.used.length; i++ ) {
+			this.used[i].hide();
+		}
+
+
+		this.pool.push.apply( this.pool, this.used ) // = this.pool.concat( this.used );
+		this.used.length = 0; // = [];
+	},
+
+	getLine : function ( ) {
+		var line;
+
+
+		if ( this.used.length > 25 ) {
+			//ui.arena.repaintLines();
+			ui.z.oldLines.update();
+			this.clear();
+		}
+
+
+
+		if (!this.pool.length ) {
+
+			line = ui.z.board.pathWithFilter(["M", 0, 0, "L", 0, 0], "url(#theBlur)");
+
+		} else {
+			line = this.pool.pop();
+		}
+
+		this.used.push( line );
+		return line;
+	},
+}
+
+ui.z.oldLines = {
+	lines : [
+
+	],
+	render : function ( ) {
+		var dist = cfg.z.dist;
+		var clip =  [ ui.z.style.offsetX, ui.z.style.offsetY,  cfg.z.colCount * dist , cfg.z.rowCount * dist ]
+
+		line = ui.z.board.pathWithFilter(["M", 0, 0, "L", 10, 0], "url(#theBlur)");
+		line.attr( "stroke", cfg.colors[0] );
+		line.attr( "stroke-width" , 3 );
+		//line.attr( "clip-rect", clip );
+		this.lines[0] = line;
+
+
+		line = ui.z.board.pathWithFilter(["M", 0, 0, "L", 10, 0], "url(#theBlur)");
+		line.attr( "stroke", cfg.colors[1] );
+		line.attr( "stroke-width" , 3 );
+		//line.attr( "clip-rect", clip );
+		this.lines[1] = line;
+	},
+
+	update : function ( ) {
+		var path;
+
+		var dist = cfg.z.dist;
+		var offsetX = -ui.z.region.x1*dist + ui.z.style.offsetX;
+		var offsetY = -ui.z.region.y1*dist + ui.z.style.offsetY;
+		this.transform = "T " + offsetX + " "+offsetY;
+//*
+		this.path1 = ui.z.movesMatrix.getPath( 0, ui.z.region );
+
+
+		this.path2 = ui.z.movesMatrix.getPath( 1, ui.z.region );
+	//*/
+
+		window.requestAnimationFrame( function ( ) { ui.z.oldLines.updateLines() } );
+	},
+
+	updateLines : function ( )  {
+
+			this.lines[0].attr("path", this.path1 );
+		this.lines[0].transform( this.transform );
+
+				this.lines[1].attr("path", this.path2 );
+		this.lines[1].transform( this.transform );
+
+	},
+}
+
+ui.z.region = {
+	x1 : 0,
+	y1 : 0,
+	x2 : 10,
+	y2 : 10,
+
+	old : {
+		x1 : 0,
+		y1 : 0,
+		x2 : 0,
+		y2 : 0
+	},
+
+	update : function ( x1, y1, x2, y2 ) {
+
+		var x = this.x1, y = this.y1;
+
+		if (this.x1 > x1 || this.x1 > x2) {
+			x = this.x1 - 5;
+		}
+		if (this.x2 < x1 || this.x2 < x2) {
+			x = this.x1 + 5;
+		}
+		if (this.y1 > y1 || this.y1 > y2) {
+			y = this.y1 - 5;
+		}
+		if (this.y2 < y1 || this.y2 < y2) {
+			y = this.y1 + 5;
+		}
+		if ( x < 0 ) x = 0;
+		if ( y < 0 ) y = 0;
+
+		if ( x % 5 != 0 ) x = x - x % 5;
+
+		if ( y % 5 != 0 ) y = y - y % 5;
+
+
+		if ( x==this.x1 && y == this.y1 ) return false;
+
+
+		this.setXY( x, y );
+
+		return true;
+
+	},
+
+	setXY : function ( x1, y1 ) {
+		this.old.x1 = this.x1;
+		this.old.x2 = this.x2;
+
+		this.old.y1 = this.y1;
+		this.old.y2 = this.y2;
+
+
+		this.x1 = x1;
+		this.y1 = y1;
+
+		this.x2 = x1 + cfg.z.colCount -1;
+		this.y2 = y1 + cfg.z.rowCount -1;
+	},
+	isOutside : function ( x1, y1, x2, y2 ) {
+		if (this.x1 > x1 || this.x1 > x2) return true;
+		if (this.x2 < x1 || this.x2 < x2) return true;
+		if (this.y1 > y1 || this.y1 > y2) return true;
+		if (this.y2 < y1 || this.y2 < y2) return true;
+	},
+	init : function ( ) {
+		this.setXY(
+			Math.floor( cfg.startX - cfg.z.rowCount / 2 ),
+			Math.floor( cfg.startY - cfg.z.colCount / 2 )
+	    );
+	}
+}
+
+ui.z.movesMatrix = {
+	matrix : [],
+
+	init : function ( ) {
+		var maxRow = cfg.maxRow;
+		var maxCol = cfg.maxCol;
+
+		for ( var k= 0; k<2; k++ ) {
+			this.matrix[k] = new Array( maxRow+1 );
+
+			for ( var i = 0; i<= maxRow; i++ ) {
+				this.matrix[k][i] = new Array( maxCol+1 );
+
+				for ( var j = 0; j<= maxCol; j++ ) {
+					this.matrix[k][i][j] =  "";
+				}
+			}
+		}
+	},
+
+	clear : function ( maxCol, maxRow) {
+		for ( var k= 0; k<2; k++ ) {
+			for ( var i = 0; i<= maxRow; i++ ) {
+				for ( var j = 0; j<= maxCol; j++ ) {
+					delete this.matrix[k][i][j] ;
+					this.matrix[k][i][j] = "";
+				}
+			}
+		}
+	},
+
+	addMove : function ( color, x1, y1, x2, y2) {
+
+		/*
+		 _
+		|\  (r,c) = (xmin,ymin)
+									?wut
+		/   (r,c) = (xmin,ymin)
+
+		*/
+
+		var r = Math.floor( Math.min( x1, x2 ) / 5 );
+		var c = Math.floor( Math.min( y1, y2 ) / 5 );
+
+		var dist = cfg.z.dist;
+
+		var subpath = "M"+x1*dist+","+y1*dist+"L"+x2*dist+","+y2*dist;
+
+		this.matrix[ color ][ r ][ c ] += subpath;
+
+	},
+
+	getPath : function ( color, region) {
+		var arr = [];
+
+		var lines = this.matrix[ color ];
+
+		var i1 = Math.floor( region.x1 / 5 );
+		var i2 = Math.floor( region.x2 / 5 );
+
+		var j1 = Math.floor( region.y1 / 5 );
+		var j2 = Math.floor( region.y2 / 5 );
+
+
+		for ( var i = i1; i<=i2; i++ ) {
+			for ( var j = j1; j<=j2; j++ ) {
+				arr.push( lines[i ][j] )
+			}
+		}
+
+		var str = arr.join("");
+
+		delete arr;
+
+		return str;
+
+	},
+}
+
+ui.f = {}
+
+ui.f.style = {
+
+	offsetX : 10,
+	offsetY : 20,
+
+	width : 0,
+	height: 0,
+	dist  : 0,
+
+
+}
+
+
+ui.f.board = {
+	render : function ( ) {
+		this.canvas = document.getElementById('f_canvas');
+
+		this.update();
+
+		if (this.canvas.getContext){
+			  this.ctx = this.canvas.getContext('2d');
+		}
+
+	},
+
+	update: function ( ) {
+
+		this.canvas.width = cfg.f.width ;
+		this.canvas.height= cfg.f.height;
+
+		this.canvas.style.left = ui.f.style.offsetX;
+		this.canvas.style.top  = ui.f.style.offsetY;
+
+	},
+
+	line : function ( x1, y1, x2, y2, color ) {
+		this.ctx.lineWidth = 1;
+
+		this.ctx.strokeStyle = color;
+
+		this.ctx.beginPath();
+		this.ctx.moveTo( x1, y1 );
+		this.ctx.lineTo( x2, y2 );
+
+		this.ctx.stroke();
+	},
+
+	rect : function ( x1, y1, w, h, color ) {
+		this.ctx.lineWidth = 1;
+
+		this.ctx.strokeStyle = color;
+
+		this.ctx.strokeRect( x1, y1, w, h );
+	},
+
+	fillRect : function ( x1, y1, w, h, color ) {
+		this.ctx.lineWidth = 0;
+
+		this.ctx.fillStyle = "white" //color;
+
+		this.ctx.fillRect( x1, y1, w, h );
+
+		console.log( x1, y1, w, h, color  );
+	},
+}
+
+ui.f.main = {
+	render : function ( ) {
+		ui.f.board.render();
+		ui.f.gates.render();
+	},
+	init : function ( ) {
+		cfg.f.dist   = 200 / (cfg.rowCount);
+		cfg.f.width  = (cfg.colCount + 1)  * cfg.f.dist;
+		cfg.f.height = (cfg.rowCount + 1)* cfg.f.dist;
+
+		console.log( cfg.f );
+	},
+
+	addMove : function ( color, x1, y1, x2, y2 ) {
+		ui.f.moves.add( color, x1, y1, x2, y2 );
+	},
+}
+
+ui.f.grid = {
+	render : function (  ) {
+	}
+}
+
+ui.f.gates = {
+	render : function (  ) {
+
+			var dist = cfg.f.dist;
+			var gateHeight = (cfg.gateEnd - cfg.gateStart) * dist;
+			var gateWidth = dist *10;
+			var gateStart = cfg.gateStart * dist
+			var middleX = cfg.colCount / 2 * dist;
+
+			//border
+			ui.f.board.rect( 0, 0, cfg.colCount * dist, cfg.rowCount * dist, "rgba(255, 255, 255, 0.7 )" );
+
+			//middle
+			ui.f.board.fillRect ( middleX, 0, dist * 2, cfg.rowCount * dist, "rgba(255, 255, 255, 0.7 )"  );
+
+
+			//left gate
+			ui.f.board.fillRect ( 0, gateStart , gateWidth, gateHeight, "rgba(255, 255, 255, 0.7 )");
+
+			//right gate
+			ui.f.board.fillRect ( cfg.colCount * dist - gateWidth, gateStart, gateWidth, gateHeight, "rgba(255, 255, 255, 0.7 )");
+
+	},
+}
+
+ui.f.elfs = {
+}
+
+ui.f.traps = {
+}
+
+ui.f.moves = {
+	add : function ( player, x1, y1, x2, y2 ) {
+		var color = cfg.colors[ player ] ;
+		var dist = cfg.f.dist;
+		window.requestAnimationFrame( function ( ) {
+		ui.f.board.line ( x1 * dist, y1 * dist, x2 * dist, y2 * dist, color );
+		});
+    },
+}
+
+
+ui.clock = {
+	start : new Date('November 25, 2016 20:00:00'),
+	end   : new Date('November 26, 2016 20:00:00'),
+
+	render : function ( ) {
+	},
+
+	update : function (  ){
+		var d = ui.clock.end - new Date();
+
+        if ( d < 0 ) return;
+        
+        
+		var r = {};  
+		r["miliseconds"] = d % 1000;
+		
+		d = ( d - r.miliseconds ) / 1000;
+		
+		
+		var s = {                                                                  // structure
+			hour: 3600 ,
+			minute: 60 ,
+			second: 1
+		};
+
+		Object.keys(s).forEach(function(key){
+			r[key] = Math.floor(d / s[key]);
+			if ( r[key] < 10 ) r[key] = "0" + r[key];
+			d -= r[key] * s[key];
+		});
+
+
+		var html = r.hour + ":" + r.minute + ":" + r.second + "." + r.miliseconds;
+
+		document.getElementById("clock").innerHTML = html;
+
+		requestAnimationFrame( ui.clock.update );
+
+	},
+}
+
+
+ui.rank = {
+	render : function ( ) {
+	},
+
+	computeScore : function ( ) {
+		for ( var i in input.teams ) {
+			input.teams[i].score = 0;
+			
+			for ( var j in input.teams[ i ].points ) {
+				input.teams[i].score+= input.teams[ i ].points[j].score
+			}
+		}
+	},
+	update : function ( ) {
+		var html = "";
+		this.computeScore();
+		
+		input.teams.sort( function ( a, b ) {
+			return a.score < b.score;
+		} )
+		for ( var i = 0; i<input.teams.length; i++ ) {
+			html += "<div class='team' >" +
+					"<span class='name' style=' color:"+input.teams[i].color+"'>"+ input.teams[i].name + "</span>  " +
+					"<span class='score'>"+input.teams[i].score + "pts</span>" + 
+					"</div>"
+		}
+
+		document.getElementById("rank").innerHTML = html;
+	},
+}
+
+
+ui.notice = {
+	render : function (  ) {
+		var html = "";
+		for ( var i in input.notes )  {
+			html +=  this.noticeHTML( input.notes[ i ] );
+		}
+		console.log( html );
+		document.getElementById( "notes" ).innerHTML = html;
+	},
+	
+	noticeHTML : function  ( note) {
+		var html = "<div class='note'><span class='title'>" + note.title + "</span> " + note.content + "</div>";
+		
+		return html;
+	}
+}
+</script>
+
+<style>
+
+	#notes .note { margin-bottom : 30px }
+	#notes { font-size : 55px; color : #eee; }
+	#notes .title { text-decoration : underline; font-weight:bold; } 
+	.team { color : white; margin-top : 3px; border-bottom : 1px solid #777; width : 400px; }
+	.team .name { width:300px; display : inline-block; font-size:26px;font-weight:bold; }
+	.team .status { font-size : 26px; font-variant : small-caps }
+	.team .score { font-size : 26px; font-variant : small-caps }
+</style>
+
+
+<script src="test.board.js"></script>

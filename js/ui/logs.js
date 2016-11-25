@@ -55,8 +55,9 @@ app.ui.logs = {
 			})
 			
 			if ( path === "0" ) {
-				
-				var value =  "<span class='log_player' style='border-bottom:1px solid hsl(255, 50%, 70%); color : hsl(255, 50%, 70%)'>" + value+ "</span>";
+				var player = app.persistent.data( val[ path ] );
+                
+				var value =  "<span class='log_player' style='border-bottom:1px solid "+ player.color +"; color : "+player.color+"'>" + player.name+ "</span>";
 				
 				
 			}

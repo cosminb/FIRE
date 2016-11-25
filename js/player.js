@@ -143,7 +143,7 @@ app.player = {
 	render : function ( item ) {
 	
 		this.material =  app.materials.playerMaterial( {}, item.color);
-		
+
 		var combined = new THREE.Geometry();
 		
 		

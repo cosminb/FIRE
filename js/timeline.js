@@ -34,8 +34,15 @@ app.timeline = {
     
     startScene : function ( ) {
 
+        if ( this.currentScene && this.screenPlay.length == 0 ) {
+            
+             this.pause();
+             app.events.matchEnded( );
+             
+        }
         
-        if ( this.screenPlay.length < 2 ) 
+        
+        if ( !this.currentScene && this.screenPlay.length < 2 ) 
              return;
          
          
@@ -44,8 +51,9 @@ app.timeline = {
 
          var nextScene = this.screenPlay.shift();
          
-         if ( !nextScene ) return;
-         
+         if ( !nextScene ) {
+             return;
+         }
 		 
 		 this.currentSceneId = nextScene.index;
 		

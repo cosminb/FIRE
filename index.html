@@ -118,6 +118,8 @@ app.dummy = {}
 
 <script src='js/producer.js'></script>
 
+<script src='js/persistent.js'></script>
+
 <script>
 
 var game = {};
@@ -152,6 +154,8 @@ document.body.appendChild( stats.dom );
 
 
 
+app.persistent.init();
+
 
 app.scene.clock = new THREE.Clock();
 
@@ -174,9 +178,7 @@ app.ui.logs.render();
 
 app.ui.info.render();
 
-var item = {};
-
-app.floor.add( item );
+app.floor.add(  );
 app.dummy.line.add( );
 //app.dummy.glow.add( );
 
@@ -228,7 +230,7 @@ for (var i=0 ; i<5 ; i++){
 
 */
 
-app.game.runGame( game["Level 2 - Map 0 - Round 0"] );
+app.game.runGame( game["Level 2 - Map 0 - Round 0"], "Level 2 - Map 0 - Round 0" );
 //debugger;
 animate();
 

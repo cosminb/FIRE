@@ -6,7 +6,10 @@ app.dummy.line = {
 		app.scene.add( this.obj );
 	},
 	
-	
+	move : function ( pos ) {
+        
+      this.obj.position.copy( pos );
+    },
 	render : function ( opt ) {
 	
 	
@@ -18,7 +21,7 @@ app.dummy.line = {
 		xobj.attributes = x.attributes;
 		
 		
-		var pos = pos3d( 50,50 );
+		var pos = pos3d( 0,0 );
 		
 		pos.y = 200;
 		xobj.position.copy(   pos );
