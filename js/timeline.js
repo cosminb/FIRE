@@ -53,7 +53,7 @@ app.timeline = {
 		
          var nextItems = nextScene.items;
 
-         this.frameCount = nextScene.frameCount || 50;
+         this.frameCount = nextScene.frameCount || 30;
 		 
 		 this.frameMiddleCount = Math.round( this.frameCount / 2 )
          

@@ -24,7 +24,7 @@ body { background : #222; }
 .log_step { 
 	margin-top : 10px;
 	font-weight : bolder;
-	border-bottom : 1px solid #999;
+	border-bottom : 1px solid #777;
 	animation : none !important;
 }
 
@@ -198,7 +198,7 @@ init();
 
 
 requestAnimationFrame = function ( callback ) {
-  var currTime = Date.now(), timeToCall = Math.max( 0, 20 - ( currTime - lastTime ) );
+  var currTime = Date.now(), timeToCall = Math.max( 0, 25 - ( currTime - lastTime ) );
   var id = self.setTimeout( function() { callback( currTime + timeToCall ); }, timeToCall );
   lastTime = currTime + timeToCall;
   return id;

@@ -28,7 +28,7 @@ app.ui.radar = {
 		
 		if ( !this.board ) this.renderBoard();
 		
-		var blockSize = 1; //300 / size;
+		var blockSize = 300 / size;
 		
 		this.blockSize = blockSize;
 		this.blockMiddle = blockSize / 2;
@@ -47,6 +47,8 @@ app.ui.radar = {
 		}
 		
 		this.board.updateCache();
+		
+		//app.ui.scene.setIndex( this.board, 0 );
 		
 	},
 	

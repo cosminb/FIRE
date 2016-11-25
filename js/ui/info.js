@@ -3,7 +3,7 @@ app.ui.info = {
 	
 	render : function ( ) {
 		
-		this.node = $("<div class='info'>/ACI/S24/5</div>");
+		this.node = $("<div class='info'>/ACI/S24/5/14</div>");
 		
 		this.node.css ( {
 			

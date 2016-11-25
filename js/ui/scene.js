@@ -16,8 +16,14 @@ app.ui.scene = {
 	},
 	
 	
-	add : function ( obj ) {
-		this.scene.addChild( obj );
+	add : function ( obj , index ) {
+		this.scene.addChildAt( obj, index || 0 );
+		//this.scene.setChildIndex( obj, index || 0 );
+	},
+	
+	
+	sendToBack : function ( obj, index ) {
+		this.scene.setChildIndex(obj, this.scene.children.length - 1 );		
 	},
 	
 	remove : function ( ) {
