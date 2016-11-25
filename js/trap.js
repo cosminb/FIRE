@@ -13,7 +13,7 @@ app.trap = {
 		//app.scene.add( item.obj4 );
 	},
 	render : function (item) {
-		var geometry = new THREE.CylinderGeometry( 75, 25, 100, 32,8, 1,true  );
+		var geometry = new THREE.CylinderGeometry( 85, 65, 200, 32,8, 1,true  );
 		
 		
 		material2 = this.getMaterial(item.color, 1);
@@ -30,7 +30,7 @@ app.trap = {
 		
 		
 		
-		var geometry = new THREE.CylinderGeometry( 75, 25, 100, 32,8, 1,true  );
+		var geometry = new THREE.CylinderGeometry( 85, 65, 200, 32,8, 1,true  );
 		
 		
 		material2 = this.getMaterial(item.color);
@@ -45,7 +45,7 @@ app.trap = {
 		
 		
 		
-		var cube = new THREE.Mesh( new THREE.SphereGeometry( 10, 40, 20 ), new THREE.MeshNormalMaterial() );
+		var cube = new THREE.Mesh( new THREE.SphereGeometry( 50, 40, 20 ), new THREE.MeshNormalMaterial() );
 
 
 		item.obj3 = cube;
@@ -71,7 +71,7 @@ app.trap = {
 			depthWrite: true,
 			wireframe: false,
 			
-			opacity :0.2
+			opacity :1
 		});
 
 		
@@ -84,11 +84,14 @@ app.trap = {
 
 
 		material.side = THREE.DoubleSide;
-		material.color = new THREE.Color("hsl("+((i*6)%360)+", 100%,80%)");// "#bada55");//0xff0000);
+		material.color = new THREE.Color("hsl("+((i*6)%360)+", 100%,40%)");// "#bada55");//0xff0000);
 		return material;
 	},
 	
 	rotateDelta : function( item,dx, dy ) {
+		
+		return;
+		
 		//this.obj.rotation.x += dx;
 		item.obj.rotation.y += dx * 2;
 		item.obj2.rotation.y -= dx/3;

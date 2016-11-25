@@ -21,12 +21,19 @@ body,window { padding : 0; margin : 0 }
 
 <script src="libs/stats.js"> </script>
 
+<script src="libs/createjs-2015.11.26.min.js"></script>
+
+
+
 
 <script>
 var app = {}
 var api = {}
 var the = {}
 var ub  = {}
+
+app.ui = {};
+
 
 app.dummy = {}
 </script>
@@ -60,6 +67,10 @@ app.dummy = {}
 <script src='js/camera.js'></script>
 
 <script src='js/game.js'></script>
+
+
+<script src='js/ui/scene.js'></script>
+<script src='js/ui/radar.js'></script>
 
 <script>
 
@@ -103,6 +114,9 @@ app.scene.addCamera();
 app.scene.addRender( app.scene.camera2 );
 
 
+app.ui.scene.init();
+app.ui.scene.update();
+
 var item = {};
 
 app.floor.add( item );
@@ -118,14 +132,14 @@ app.test.animateCamera();
 
 init();
 
-draw( true );
+//draw( true );
 
 var ass = 0;
 function animate(time) {
 
     app.scene.renderFrame(time);
     if ( ass < 100 ) {
-    draw();
+    //draw();
     ass = 0;
     } 
     

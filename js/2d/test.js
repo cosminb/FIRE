@@ -1,3 +1,5 @@
+
+
 var sun = new Image();
 var moon = new Image();
 var earth = new Image();
