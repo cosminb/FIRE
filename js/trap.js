@@ -90,7 +90,7 @@ app.trap = {
 	
 	rotateDelta : function( item,dx, dy ) {
 		
-		return;
+		//return;
 		
 		//this.obj.rotation.x += dx;
 		item.obj.rotation.y += dx * 2;

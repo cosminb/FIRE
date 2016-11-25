@@ -29,13 +29,15 @@ app.ui.logs = {
 		
 		var header = this.getLog( "step", [ step ] );
 		
-		this.node.append( header + logs.join("" ));
+		this.node.prepend( header + logs.join("" ));
 		
-		this.node.scrollTop( this.node.get(0).scrollHeight )
+		//this.node.scrollTop( this.node.get(0).scrollHeight )
 	},
 	
 	
 	reg : /\[\$(\d+)\]/g, 
+	digitReg : /\d+/g,
+	
 	getLog : function( type, val ) {
 		
 		var tpls = this.tpls[ type ];
@@ -46,6 +48,9 @@ app.ui.logs = {
 			return val[ path ];
 		});
 		
+		str = str.replace( this.digitReg, function( all ) {
+			return "<span class='digit'>" + all + "</span>";
+		})
 		return "<div class='log_"+type+" '>" + str + "</div>";
 	},
 	

@@ -29,12 +29,12 @@ app.ui.radar = {
 		var ctx = this.board.graphics;
 		
 		ctx.clear();
-		ctx.beginFill( "#444" );
+		ctx.beginFill( "#ddd" );
 		
 		
 		for ( var i = 0 ; i< size ; i++ ) {
 			for ( var j = 0; j<size; j++ ) {
-				if ( map[ i ][j] == "W" )
+				if ( map[ i ][j] !== "W" )
 				ctx.rect( i * blockSize, j* blockSize, blockSize, blockSize );
 			}
 		}

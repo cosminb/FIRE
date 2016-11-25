@@ -6,26 +6,32 @@
 
 <style>
 
-body,window { padding : 0; margin : 0 }
+body,window { padding : 0; margin : 0; overflow : hidden; }
 
+
+body { background : #222; }
 
 .logs { 
 	font-variant : small-caps;
-	font-size 	 : 16px;
-	color : #333;
+	font-size 	 : 17px;
+	color : #ddd;
 }
 
-.logs div { 
-    font-size: smaller;
-    text-transform: uppercase;
+.logs .digit {
+	font-size : 14px;
 }
 
 .log_step { 
 	margin-top : 10px;
 	font-weight : bolder;
-	border-bottom : 1px solid red;
+	border-bottom : 1px solid #999;
 }
 
+.info  {
+	font-size : 90px;
+	color     : #444;
+}
+	
 </style>
 
 
@@ -94,6 +100,7 @@ app.dummy = {}
 <script src='js/ui/scene.js'></script>
 <script src='js/ui/radar.js'></script>
 <script src='js/ui/logs.js'></script>
+<script src='js/ui/info.js'></script>
 
 <script>
 
@@ -120,11 +127,12 @@ app.camera.positionAtAngle( 50, 50, 15000, 70, 40 )
 */
 
 
-
+//*
 var stats = new Stats();
 stats.showPanel( 0 ); 
 stats.showPanel( 1 );
 document.body.appendChild( stats.dom );
+//*/
 
 
 
@@ -132,12 +140,12 @@ document.body.appendChild( stats.dom );
 app.scene.clock = new THREE.Clock();
 
 
+app.units.init();
+
+
 app.scene.init();
 app.scene.addCamera();
 app.scene.addRender( app.scene.camera2 );
-
-
-app.units.init();
 
 app.ui.scene.init();
 app.ui.scene.update();
@@ -147,6 +155,8 @@ app.stats.init();
 app.ui.radar.render();
 
 app.ui.logs.render();
+
+app.ui.info.render();
 
 var item = {};
 
@@ -169,8 +179,21 @@ init();
 //draw( true );
 
 
+
+
+requestAnimationFrame = function ( callback ) {
+  var currTime = Date.now(), timeToCall = Math.max( 0, 25 - ( currTime - lastTime ) );
+  var id = self.setTimeout( function() { callback( currTime + timeToCall ); }, timeToCall );
+  lastTime = currTime + timeToCall;
+  return id;
+};
+
+
+lastTime = Date.now();
 function animate(time) {
 
+    if ( app.timeline.paused ) return;
+    
     app.scene.renderFrame(time);
     //draw();
     
@@ -180,6 +203,8 @@ function animate(time) {
     return;
  
 }
+
+
 /*
 for (var i=0 ; i<5 ; i++){
 	app.api.addPlayer();

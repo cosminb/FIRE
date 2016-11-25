@@ -20,9 +20,7 @@ app.game = {
     },
     
     runStep : function( steps ) {
-
         app.api.addFrame();
-		
         
         for ( var i=0; i<steps.length; i++ ) {
             

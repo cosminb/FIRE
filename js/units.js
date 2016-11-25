@@ -18,13 +18,15 @@ app.units = {
 		  
 		  this.window = { width : window.innerWidth, height : window.innerHeight };
 		  
-		  this.board3d = { width : window.innerHeight, height : window.innerHeight };
+		  this.board3d = { width : window.innerHeight - 150, height : window.innerHeight - 150 };
+		  
+		  this.board3d.right =  this.board3d.width + 10;
 		  
 		  
 		  this.sidebar = {
 			  height : this.window.height,
-			  width : this.window.width - this.board3d.width - 20, 
-			  left : this.board3d.width +10 ,
+			  width : this.window.width - this.board3d.width - 30, 
+			  left : this.board3d.right +10 ,
 			  top : 0
 		}
 			
@@ -39,6 +41,12 @@ app.units = {
 		  }
 		
 		
+		
+		this.info = {
+			left : 10,
+			
+			top : this.board3d.height + 20
+		}
 	  }
 	  
 }

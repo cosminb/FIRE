@@ -22,14 +22,20 @@ app.scene = {
 	
 	addRender : function (camera , box ) {
 		var renderer = new THREE.WebGLRenderer({antialias:true} );
-		renderer.setSize( window.innerHeight, window.innerHeight );
+		renderer.setSize(app.units.board3d.width,  app.units.board3d.width );
 		
 		
 		
 		document.body.appendChild( renderer.domElement );
-		renderer.domElement.style.float = "left";
-		renderer.domElement.style.width =  window.innerHeight;
-		renderer.domElement.style.height = window.innerHeight;
+		
+		$(renderer.domElement ).css( {
+			"position" : "absolute",
+			 width :   app.units.board3d.width,
+			 height : app.units.board3d.width,
+			 left : 10,
+			 top : 10
+		});
+		
 
 		this.renderers.push ( { render : renderer, camera : camera } );
 	},

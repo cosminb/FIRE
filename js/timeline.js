@@ -87,8 +87,17 @@ app.timeline = {
     },
     
     
+	pause : function ( ) {
+		this.paused = true;
+	},
+	resume : function ( ) {
+		this.paused = false;
+		animate();
+	},
     runAnimations : function ( ) {
         
+		if ( this.paused ) return;
+		
            var step = this.nrSteps++;
            
            if ( step > this.frameCount ) 
