@@ -66,7 +66,17 @@ app.player = {
 			},
 			
 			h : 50
-		}
+		},
+		
+		base : {
+			type : "circle",
+			
+			r : 60, 
+			
+			position : {
+				y : 0
+			}
+		},
 		
 	},
 	
@@ -111,6 +121,19 @@ app.player = {
 		var geometry = new THREE.SphereGeometry( opt.r, 13, 13, 0, Math.PI * 2, 0,  1.7* Math.PI / 3 );		
 		
 		var obj = new THREE.Mesh( geometry, material );
+		
+		this.setPlace( item, obj, opt );
+		
+		return obj;
+	},
+	
+	circle : function ( item, opt, material ) {
+		var material = this.material;
+		var geometry = new THREE.CircleGeometry(opt.r, 32 );
+		
+		var obj = new THREE.Mesh( geometry, material );
+		
+		obj.rotation.x = Math.PI / 2;
 		
 		this.setPlace( item, obj, opt );
 		

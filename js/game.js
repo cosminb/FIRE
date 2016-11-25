@@ -12,6 +12,8 @@ app.game = {
         app.api.resetAll(game );
 		
 		
+		app.producer.newGame( game );
+		
 		for ( var j = 0; j < 100 ; j++ ) {
 			for ( var i in game.steps ) {
 				this.runStep( game.steps[ i ] );

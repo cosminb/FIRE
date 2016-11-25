@@ -27,7 +27,7 @@ app.ui.logs = {
 	
 	append : function ( step, logs ) {
 		
-		var header = this.getLog( "step", [ step ] );
+		var header = this.getLog( "step", [ 0, step ] );
 		
 		this.node.prepend( header + logs.join("" ));
 		
@@ -44,20 +44,35 @@ app.ui.logs = {
 		
 		var tpl = tpls[ Math.round( (tpls.length -1 ) * Math.random() ) ];
 		
+		var that = this;
+		
 		var str = tpl.replace( this.reg, function ( all, path ) {
-			return val[ path ];
+
+			value = val[ path ] + "";
+							  
+			value = value.replace( that.digitReg, function( all ) {
+				return "<span class='digit'>" + all + "</span>";
+			})
+			
+			if ( path === "0" ) {
+				
+				var value =  "<span class='log_player' style='border-bottom:1px solid hsl(255, 50%, 70%); color : hsl(255, 50%, 70%)'>" + value+ "</span>";
+				
+				
+			}
+			
+			
+			return value;
 		});
 		
-		str = str.replace( this.digitReg, function( all ) {
-			return "<span class='digit'>" + all + "</span>";
-		})
+		
 		return "<div class='log_"+type+" '>" + str + "</div>";
 	},
 	
 	tpls : {
 		
 		step : [
-			"step [$0]"
+			"step [$1]"
 		],
 		
 		move : [

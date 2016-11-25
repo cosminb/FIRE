@@ -27,6 +27,9 @@ app.api = {
         this.players.initialPosition = pos;
         
         app.objects.addPlayer( "p" + p, x, z, color );
+		
+		app.ui.radar.addPlayer( "p" + p );
+		
     },
     
     addFrame : function ( ) {
@@ -42,6 +45,8 @@ app.api = {
         app.timeline.addToScene( p, { x: pos.x, y : pos.y, z : pos.z, point : { x , z }, animation : animationType || "walk" } )
 		
 		app.stats.log( "move", [ p, x , z ] );
+		
+		app.stats.updatePlayer( p, x, z );
 		
     }, 
     
@@ -79,6 +84,8 @@ app.api = {
             item.xx = players[ id ].startX;
             item.xz = players[ id ].startY;
 
+			app.ui.radar.showPlayer( id );
+			app.ui.radar.movePlayer( id, item.xx, item.xz );
 
             app.api.movePlayer( id, item.xx, item.xz, "walk" );
 

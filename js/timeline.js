@@ -61,14 +61,11 @@ app.timeline = {
          var currentScene = this.currentScene
          var currentItems = currentScene.items;
          
-         console.log( "STARTING SCENE", nextItems);
-
          for( var i in nextItems ) {
              var newItem = nextItems[ i ];
              var item = currentItems[ i ];
 
              item.animation = newItem.animation || ani.walk;       
-             
 
              item.skip = false;
              if ( typeof item.animation == "string" ) item.animation = ani[ item.animation ];

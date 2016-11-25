@@ -29,7 +29,7 @@ app.stats = {
 		this.currentStep.logs.push( log );
 	},
 	
-	updatePlayers : function ( ) {
-		
+	updatePlayer : function ( p, x, z ) {
+		this.currentStep.players[ p ] = { x : x, z : z }
 	},
 }

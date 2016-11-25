@@ -1,5 +1,7 @@
 app.ui.radar = {
 	
+	players : {},
+	
 	
 	render : function ( ) {
 		
@@ -8,6 +10,8 @@ app.ui.radar = {
 	},
 	
 	renderBoard : function ( ){
+		
+		console.log( "Redenre" );
 		
 		this.board  = new createjs.Shape();
 		this.board.setTransform( app.units.radar.left, app.units.radar.top );
@@ -24,7 +28,10 @@ app.ui.radar = {
 		
 		if ( !this.board ) this.renderBoard();
 		
-		var blockSize = 300 / size;
+		var blockSize = 1; //300 / size;
+		
+		this.blockSize = blockSize;
+		this.blockMiddle = blockSize / 2;
 		
 		var ctx = this.board.graphics;
 		
@@ -41,9 +48,51 @@ app.ui.radar = {
 		
 		this.board.updateCache();
 		
+	},
+	
+	
+	addPlayer : function ( id ) {
 		
+		
+		var player = new createjs.Shape();
+
+		player.alpha = 0.8;
+		player.cache(0, 0, 20, 20 );
+		
+		var ctx = player.graphics;
+		ctx.clear();
+		ctx.beginFill( "red" );
+		
+		ctx.drawCircle(8,8,8);
+		
+		player.updateCache( );
+		
+		this.players[ id ] = player;
+		
+		this.movePlayer( id , 10, 10 );
+		
+		app.ui.scene.add( player );
 		
 	},
+	
+	movePlayer : function ( id, x, y ) {
+		var player = this.players[ id ];
+		
+		player.x = app.units.radar.left + (x + 0.5) * this.blockSize -8 , 
+		player.y = app.units.radar.top +(y + 0.5)* this.blockSize - 8;
+				
+		//player.updateCache( );
+	},
+	
+	showPlayer : function ( id ) {
+		
+	},
+	
+	updateAllPlayers : function ( players ) {
+		for ( var i in players )
+			this.movePlayer( i, players[ i ].x , players[ i ].z );
+	},
+	
 	
 	update : function ( ) {
 		

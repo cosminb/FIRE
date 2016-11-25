@@ -81,10 +81,10 @@ app.test = {
 			b += 0.1;
 			x+= 10;
 			
-			app.camera.positionAtAngle ( 25, 25, 5000, 75, b );
+			app.camera.positionAtAngle ( 25, 25, 4000, 75, b );
 			//app.scene.camera2.near += 1;
 
-		}, 30 );
+		}, 50 );
 	},
 	
 }

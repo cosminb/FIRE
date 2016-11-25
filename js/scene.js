@@ -52,8 +52,11 @@ app.scene = {
 		this.camera2 = new THREE.PerspectiveCamera(90, 1, 100, 100000 );
 	},
 	
-	add  : function ( obj ) {
+	add  : function ( obj, index ) {
 		this.scene.add( obj );
+		
+		if ( index !== undefined)
+			this.scene.setChildIndex(obj, index );
 	},
     
     renderFrame : function ( time ) {

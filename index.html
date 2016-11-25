@@ -25,13 +25,27 @@ body { background : #222; }
 	margin-top : 10px;
 	font-weight : bolder;
 	border-bottom : 1px solid #999;
+	animation : none !important;
 }
 
 .info  {
 	font-size : 90px;
 	color     : #444;
 }
+
+.logs > div {
 	
+	animation : reveal 2s;
+}
+
+.log_player {
+	font-weight : bolder;
+}
+
+@keyframes reveal {
+  0%   { color : #222; }
+  100% { color: #ddd; }
+}
 </style>
 
 
@@ -101,6 +115,8 @@ app.dummy = {}
 <script src='js/ui/radar.js'></script>
 <script src='js/ui/logs.js'></script>
 <script src='js/ui/info.js'></script>
+
+<script src='js/producer.js'></script>
 
 <script>
 
@@ -182,7 +198,7 @@ init();
 
 
 requestAnimationFrame = function ( callback ) {
-  var currTime = Date.now(), timeToCall = Math.max( 0, 25 - ( currTime - lastTime ) );
+  var currTime = Date.now(), timeToCall = Math.max( 0, 20 - ( currTime - lastTime ) );
   var id = self.setTimeout( function() { callback( currTime + timeToCall ); }, timeToCall );
   lastTime = currTime + timeToCall;
   return id;

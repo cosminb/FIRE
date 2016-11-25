@@ -61,7 +61,6 @@ app.objects = {
 	},
     
     getPlayer : function ( id ) {
-   //     console.log( id, this.players[id], this.players)
         return this.players[ id ];
     },
     

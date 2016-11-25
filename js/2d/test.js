@@ -103,8 +103,6 @@ function draw(isa) {
 	});
 	ctx.restore();
 	
-	
-	//console.log( poss );
 	return;
 	isa = true;
 	

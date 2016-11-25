@@ -45,16 +45,11 @@ app.trap = {
 		
 		
 		
-		var cube = new THREE.Mesh( new THREE.SphereGeometry( 50, 40, 20 ), new THREE.MeshNormalMaterial() );
+		var cube = new THREE.Mesh( new THREE.SphereGeometry( 30, 40, 20 ), new THREE.MeshNormalMaterial() );
 
 
 		item.obj3 = cube;
 
-		
-		var cube = new THREE.Mesh( new THREE.SphereGeometry( 12 ), new THREE.MeshNormalMaterial() );
-
-
-		item.obj4 = cube;
 
 		
 	},
@@ -117,21 +112,17 @@ app.trap = {
         //var p = pos3d( x, z );
         
         item.obj.position.x = x;
-		item.obj.position.y = y + 40;
+		item.obj.position.y = y + 80;
 		item.obj.position.z = z;
 		
         item.obj2.position.x = x;
-		item.obj2.position.y = y  +40;
+		item.obj2.position.y = y  +80;
 		item.obj2.position.z = z;
 		
         item.obj3.position.x = x;
-		item.obj3.position.y = y + 20;
+		item.obj3.position.y = y + 60;
 		item.obj3.position.z = z;
 		
-        item.obj4.position.x = x;
-		item.obj4.position.y = y;
-		item.obj4.position.z = z;
-           
 	},
 
 	delteTrap : function(item){
