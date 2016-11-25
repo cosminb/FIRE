@@ -1,7 +1,10 @@
 app.game = {
     
     runGame : function ( game, id ) {
-        
+       
+
+    this.currentGame = game;
+       
      app.timeline.pause();
      
         app.ui.info.NewMatch();

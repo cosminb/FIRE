@@ -74,6 +74,9 @@ app.ui.logs = {
 	
 	tpls : {
 		
+        "results" : [
+            "[$0]  has [$1] points"
+        ],
 		step : [
 			"step [$1]"
 		],

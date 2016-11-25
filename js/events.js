@@ -60,5 +60,17 @@ app.events = {
         app.ui.info.EndOfMatch ( );
         
         
+        
+        var logs = [];
+        var results = app.game.currentGame.results
+        for ( var i in results ) {
+            var playerId = app.persistent.getPlayer( i );
+
+            logs.push ( app.ui.logs.getLog("results", [ playerId, results[ i ] ] ) );
+            
+        }   
+
+        app.ui.logs.append( "results" , logs );
+        
     },
 }
