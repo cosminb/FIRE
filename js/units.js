@@ -30,7 +30,9 @@ app.units = {
 			  top : 0
 		}
 			
-		  this.radar = { height : 300, width : 300, top : 10, left : this.sidebar.left , bottom : 310, right : this.sidebar.left + 300 +  10}
+		  this.radar = { height : 300, width : 300, top : 10, 
+                left : this.sidebar.left , 
+                bottom : 310, right : this.sidebar.left + 300 +  10}
 		 
 		 
 		  this.logs  = { 

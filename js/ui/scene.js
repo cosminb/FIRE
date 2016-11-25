@@ -3,6 +3,11 @@ app.ui.scene = {
 	
 	init : function ( ) {
 		
+        var c = $("#canvas").get( 0 );
+        
+        c.height = app.units.window.height;
+        c.width = app.units.window.width;
+        
 		var scene = new createjs.Stage("canvas");
 		
 		this.scene = scene;
