@@ -11,9 +11,12 @@ app.game = {
        
         app.api.resetAll(game );
 		
-        for ( var i in game.steps ) {
-            this.runStep( game.steps[ i ] );
-        }
+		
+		for ( var j = 0; j < 100 ; j++ ) {
+			for ( var i in game.steps ) {
+				this.runStep( game.steps[ i ] );
+			}
+		}
     },
     
     runStep : function( steps ) {
