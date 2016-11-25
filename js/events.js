@@ -6,12 +6,17 @@ app.events = {
 	},
 	
 	nextStep : function ( i ) {
-		if ( this.isFirstStep ) return this.firstStep();
+		i = i - 1;
+        if ( this.isFirstStep ) return this.firstStep();
 		
+        
+        app.camera.reposition ( i ) ;
 	},
 	
 	stepMiddle : function ( i ) {
 		
+        i = i-1;
+        
 		var logs = app.stats.data.steps[i].logs;
 		
 		

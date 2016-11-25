@@ -6,6 +6,9 @@ app.timeline = {
 	
 	frameCount : 50,
     
+    cameraShots : {},
+    
+    
 
     addScene : function ( step ) {
          var scene = { items : [], index : this.screenPlay.length } ;
@@ -40,8 +43,7 @@ app.timeline = {
              app.events.matchEnded( );
              
         }
-        
-        
+
         if ( !this.currentScene && this.screenPlay.length < 2 ) 
              return;
          

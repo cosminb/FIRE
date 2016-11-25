@@ -41,6 +41,16 @@ app.camera = {
 	},
 	
 	
+    reposition : function ( frame ) {
+        
+           var cameraMovement = app.timeline.cameraShots[ frame ];
+           if ( !cameraMovement ) return;
+           
+                      console.log( frame, cameraMovement );
+
+           this.positionBySquare.apply( this, cameraMovement.shot.params );
+           
+    },
 	
 
 }

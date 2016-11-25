@@ -31,6 +31,8 @@ app.game = {
             
             this.executeStep( steps[ i ] );
         }
+        
+        app.producer.afterAddingStep ( );
     },
     
     executeStep : function ( step ) {
