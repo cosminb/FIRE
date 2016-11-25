@@ -8,6 +8,24 @@
 
 body,window { padding : 0; margin : 0 }
 
+
+.logs { 
+	font-variant : small-caps;
+	font-size 	 : 18px;
+	color : #333;
+}
+
+.logs div { 
+    font-size: smaller;
+    text-transform: uppercase;
+}
+
+.log_step { 
+	margin-top : 20px;
+	text-decoration:underline;
+	font-size : 21px;
+}
+
 </style>
 
 
@@ -23,6 +41,7 @@ body,window { padding : 0; margin : 0 }
 
 <script src="libs/createjs-2015.11.26.min.js"></script>
 
+<script src='libs/jquery.js'></script>
 
 
 
@@ -68,9 +87,13 @@ app.dummy = {}
 
 <script src='js/game.js'></script>
 
+<script src='js/stats.js'></script>
+
+<script src='js/events.js'></script>
 
 <script src='js/ui/scene.js'></script>
 <script src='js/ui/radar.js'></script>
+<script src='js/ui/logs.js'></script>
 
 <script>
 
@@ -114,8 +137,16 @@ app.scene.addCamera();
 app.scene.addRender( app.scene.camera2 );
 
 
+app.units.init();
+
 app.ui.scene.init();
 app.ui.scene.update();
+
+app.stats.init();
+
+app.ui.radar.render();
+
+app.ui.logs.render();
 
 var item = {};
 
@@ -125,35 +156,40 @@ app.dummy.line.add( );
 
 
 
+
 //tests for simulation. this should be removed 
 app.test.init();
 app.test.auto();
 app.test.animateCamera();
 
+//app.camera.positionBySquare( 50, 50, 50, 0, 90 )
+
 init();
 
 //draw( true );
 
-var ass = 0;
+
 function animate(time) {
 
     app.scene.renderFrame(time);
-    if ( ass < 100 ) {
     //draw();
-    ass = 0;
-    } 
     
-    ass++;
+	app.ui.scene.update();
+		
 	requestAnimationFrame( animate );
     return;
  
 }
+/*
+for (var i=0 ; i<5 ; i++){
+	app.api.addPlayer();
+}
 
+*/
+
+app.game.runGame( game["Level 2 - Map 0 - Round 0"] );
+//debugger;
 animate();
 
-
-
-
-app.game.runGame( game["Level 1 - Map 2 - Round 1"] );
 
 </script>

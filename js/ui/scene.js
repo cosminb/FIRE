@@ -3,25 +3,26 @@ app.ui.scene = {
 	
 	init : function ( ) {
 		
-		var stage = new createjs.Stage("canvas");
+		var scene = new createjs.Stage("canvas");
 		
-		this.stage = stage;
+		this.scene = scene;
 		
-		
-		var circle = new createjs.Shape();
-		circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-		circle.x = 100;
-		circle.y = 100;
-		this.add( circle ) ; //stage.addChild(circle);
+		this.box = app.scene.box;
 	},
 	
+	
 	update : function ( ) {
-		this.stage.update();
+		this.scene.update();
 	},
 	
 	
 	add : function ( obj ) {
-		this.stage.addChild( obj );
+		this.scene.addChild( obj );
+	},
+	
+	remove : function ( ) {
+		console.error( "not implemented" );
 	}
+	
 	
 }

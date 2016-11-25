@@ -132,6 +132,10 @@ app.trap = {
 		item.obj4.position.y = y;
 		item.obj4.position.z = z;
            
+	},
+
+	delteTrap : function(item){
+
 	}
 
 }

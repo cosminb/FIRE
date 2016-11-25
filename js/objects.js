@@ -36,8 +36,32 @@ app.objects = {
         this.obj[ id ] = item;
 		this.traps[ id ] = item;
     },
+	
+	removeBomb : function ( x,y ) {
+		var bomb;
+		for ( var i in this.traps ) {
+			if ( this.traps[i].x == x && this.traps[i].y == y ) {
+				app.scene.scene.remove( this.traps[ i ].obj );
+				
+				delete this.traps[ i ];
+				delete this.obj[ i ];
+			}
+		}
+		
+	},
+	removeAllBombs : function (  ) {
+		
+		for ( var i in this.traps ) {
+			app.scene.scene.remove( this.traps[ i ].obj )
+			
+			delete this.obj[ i ];
+		}
+		
+		this.traps = {};
+	},
     
     getPlayer : function ( id ) {
+   //     console.log( id, this.players[id], this.players)
         return this.players[ id ];
     },
     

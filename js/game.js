@@ -1,20 +1,25 @@
 app.game = {
     
     runGame : function ( game ) {
-        
-        app.api.resetAll( );
-        
-        //reset
-        //setare mapa
-        //sadasdsad
-        
-        
+
+	   app.events.newGame();
+
+	   app.api.addFrame();
+
+       this.matchId = game.info.matchId;
+       this.boardSize = game.info.size;
+       
+        app.api.resetAll(game );
+		
         for ( var i in game.steps ) {
             this.runStep( game.steps[ i ] );
         }
     },
     
     runStep : function( steps ) {
+
+        app.api.addFrame();
+		
         
         for ( var i=0; i<steps.length; i++ ) {
             
@@ -28,8 +33,29 @@ app.game = {
             
             
             case "move" : 
-                      app.api.movePlayer( step.player, step.posX, step.posY, "walk" );
-                      break;
+                    var player = app.objects.getPlayer( step.player );
+
+                    player.xx -= -step.x;
+                    player.xz -= -step.y;
+
+                    app.api.movePlayer( step.player, player.xx, player.xz, "walk", step );
+                    break;
+            case "kill":
+                   // app.api.killPlayer(step.player );
+                       break;         
+            case "Bomb" :
+    //                app.api.addBomb();
+                    break;
+            case "explodeBomb":
+      //              app.api.explodeBomb();
+                    break;
+           
+            case "sonar":
+                    app.api.useSonar(step.player);
+                    break;
+            case "win":
+          //          app.api.playerWin();
+                    break;
         }
     }
 }

@@ -18,7 +18,7 @@ app.dummy.line = {
 		xobj.attributes = x.attributes;
 		
 		
-		var pos = pos3d( 40, 25 );
+		var pos = pos3d( 50,50 );
 		
 		pos.y = 200;
 		xobj.position.copy(   pos );

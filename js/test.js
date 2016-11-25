@@ -32,7 +32,7 @@ app.test = {
 		}
 	},
 	
-	nr : 20, 
+	nr : 5, 
 
     addStep : function () {
 
@@ -52,11 +52,11 @@ app.test = {
             app.objects.addBomb( "bomb_" + i, Math.round(i / 10 ) * 3,  ( i % 10 )* 3, i );
         }
 
-		for ( var i = 0 ; i < this.nr; i++ ) {
+		for ( var i = 1 ; i < this.nr; i++ ) {
             app.api.addPlayer( i, Math.round( i/3 ), i % 3, i *1543 );
         }
 
-        
+        /*
         for( var i = 0 ; i < 10050; i++  ){
 			this.addStep()
 		}
