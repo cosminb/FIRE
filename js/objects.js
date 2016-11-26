@@ -40,11 +40,16 @@ app.objects = {
 	removeBomb : function ( x,y ) {
 		var bomb;
 		for ( var i in this.traps ) {
+            
+            console.log( this.traps[i], x, y );
+            
 			if ( this.traps[i].x == x && this.traps[i].y == y ) {
 				app.scene.scene.remove( this.traps[ i ].obj );
 				
 				delete this.traps[ i ];
 				delete this.obj[ i ];
+                
+                return i;
 			}
 		}
 		

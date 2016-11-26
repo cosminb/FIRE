@@ -77,7 +77,10 @@ app.game = {
                     app.api.movePlayer( playerId, player.xx, player.xz, "walk", step );
                     break;
             case "kill":
-                   app.api.killPlayer(playerId);
+            
+                    var player = app.objects.getPlayer( playerId );
+
+                   app.api.killPlayer(playerId, player.xx, player.xz);
                   break;         
             case "bomb" :
                 app.api.addBomb( playerId, step.x, step.y );

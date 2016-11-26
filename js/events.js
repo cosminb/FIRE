@@ -17,16 +17,41 @@ app.events = {
 		app.ui.logs.append( i, logs );
 		
 		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
+        
         app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
         
         
+        var deadPlayers = app.stats.data.steps[ i ].removedPlayers;
+        
+        for ( var j in deadPlayers ) {
+            
+            console.log(  deadPlayers[j], j  )
+             var player = app.stats.data.steps[ i ].players[ j ];
+             
+             
+             console.log( "dead " ,j ,  player );
+             
+
+             bomb = app.objects.removeBomb( deadPlayers[j].x, deadPlayers[j].z );   
+             
+             console.log( bomb );
+             
+             if ( bomb ) 
+                 console.log ( bomb , app.ui.radar.traps[ id ] );
+             
+        }
+        
+        
         var bombs = app.stats.data.steps[ i ].bombs;
+        
         
         for ( var i in bombs ) {
               app.objects.addBomb( bombs[i].id, bombs[i].x, bombs[i].y, bombs[i].color );
             app.ui.radar.addBomb(  bombs[i].id, bombs[i].x, bombs[i].y );
 
         }
+        
+        
         
         
         //app.camera.reposition ( i ) ;

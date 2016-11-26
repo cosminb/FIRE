@@ -56,7 +56,7 @@ app.api = {
 		
     }, 
     
-    killPlayer : function ( p ) { 
+    killPlayer : function ( p, x, z ) { 
       //  pos = this.initialPosition[ p ];
       
       var item = app.objects.getPlayer( p );
@@ -66,7 +66,7 @@ app.api = {
  
  	  app.stats.log( "kill", [ p ] );
 		
-        app.stats.removePlayer( p )
+        app.stats.removePlayer( p, x, z )
         
       //app.timeline.addToScene( p, { x : pos.x, y : pos.y, z : pos.z, animation : "jump" } ); 
     },
@@ -75,7 +75,7 @@ app.api = {
     nextId : 1, 
     
     addBomb : function ( p, x, y ) {
-        id = "bomb_" + this.nextId++
+        id = p + "_bomb_" + this.nextId++
         
         app.stats.log( "bomb", [ p , x, y] );
 		
