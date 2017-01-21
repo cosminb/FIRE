@@ -6,7 +6,7 @@ app.api = {
 		
 		app.floor.updateBoard( game.board, app.game.boardSize );
 		
-		app.ui.radar.updateBoard( game.board, app.game.boardSize );
+		//app.ui.radar.updateBoard( game.board, app.game.boardSize );
 		
 		app.api.resetPlayersPosition(game.players);
 
@@ -34,7 +34,7 @@ app.api = {
         
         app.objects.addPlayer( p, x, z, color );
 		
-		app.ui.radar.addPlayer(  p );
+		//app.ui.radar.addPlayer(  p );
 		
     },
     
@@ -114,8 +114,8 @@ app.api = {
             item.xx = players[ id ].startX;
             item.xz = players[ id ].startY;
 
-			app.ui.radar.showPlayer( id );
-			app.ui.radar.movePlayer( id, item.xx, item.xz );
+			//app.ui.radar.showPlayer( id );
+			//app.ui.radar.movePlayer( id, item.xx, item.xz );
 
             app.api.movePlayer( id, item.xx, item.xz, "walk" );
 

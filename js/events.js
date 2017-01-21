@@ -16,9 +16,9 @@ app.events = {
 		
 		app.ui.logs.append( i, logs );
 		
-		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
+// 		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
         
-        app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
+//         app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
         
         
         var deadPlayers = app.stats.data.steps[ i ].removedPlayers;
@@ -36,8 +36,8 @@ app.events = {
              
              console.log( bomb );
              
-             if ( bomb ) 
-                 console.log ( bomb , app.ui.radar.traps[ id ] );
+//              if ( bomb ) 
+//                  console.log ( bomb , app.ui.radar.traps[ id ] );
              
         }
         
@@ -47,7 +47,7 @@ app.events = {
         
         for ( var i in bombs ) {
               app.objects.addBomb( bombs[i].id, bombs[i].x, bombs[i].y, bombs[i].color );
-            app.ui.radar.addBomb(  bombs[i].id, bombs[i].x, bombs[i].y );
+//             app.ui.radar.addBomb(  bombs[i].id, bombs[i].x, bombs[i].y );
 
         }
         
@@ -77,8 +77,8 @@ app.events = {
 		
 		app.ui.logs.append( i, logs );
 		
-		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
-        app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
+// 		app.ui.radar.updateAllPlayers( app.stats.data.steps[ i ].players );
+//         app.ui.radar.removePlayers( app.stats.data.steps[ i ].removedPlayers);
         
 
         

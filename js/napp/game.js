@@ -6,16 +6,17 @@ napp.game = {
 	runGame : function ( game ) {		
 		if ( !this.isInitialize ) 
 			this.init(game.players);
-		
-		this.setupBoards ( game.board , game.info.size );
-		//this.resetPlayers( game.players);
+
 		
 		this.score = game.results;
 		
-		var steps = napp.steps.build( game.players, game.steps );
 		
-		napp.timeline.setFrames( steps );
+		var frames = napp.frameBuilder.build( game.players, game.steps );
 		
+		napp.timeline.setFrames( frames );
+		
+		this.removeTraps ( );
+		this.setupBoards ( game.board , game.info.size );
 	},
 	
 	
@@ -23,6 +24,8 @@ napp.game = {
 		this.isInitialize = true;
 		
 		napp.players.init( players );
+		
+		napp.radar.render();
 		
 	},
 	
@@ -32,9 +35,11 @@ napp.game = {
 	},
 	
 	resetPlayers : function ( players ) {
-		napp.timeline.resetAll( players );
 	},
 	
+	removeTraps : function ( ) {
+		napp.radar.removeAllTraps( );
+	},
 	parse : function ( ) {
 		
 	},
@@ -44,10 +49,11 @@ napp.players = {
 	items : {},
 	names : {},
 	ids   : {},
-	
 	count : 0,
 	
 	init : function ( inputs ) {
+		this.count = 0;
+		
 		for ( var i in inputs ) {
 			this.createPlayer( i, inputs[ i ] );
 		}

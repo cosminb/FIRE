@@ -1,7 +1,7 @@
 napp.radar = {
 	
 	players : {},
-	
+	traps   : {},
 	
 	blockSize : 1,
 	render : function ( ) {
@@ -36,8 +36,6 @@ napp.radar = {
 		this.blockMiddle = blockSize / 2;
 		
 		
-		console.log( this.blockSize );
-		
 		var ctx = this.board.graphics;
 		
 		ctx.clear();
@@ -53,49 +51,68 @@ napp.radar = {
 		
 		this.board.updateCache();
 		
-		//app.ui.scene.setIndex( this.board, 0 );
 		
 	},
 	
-	traps : {},
-    
-    reset : function ( ) {
-        
-        console.log( this.traps, "reseT" );
-        
-      for ( var i in this.traps ) {
-            
-            app.ui.scene.scene.removeChild( this.traps[ i ] );
-            
-            //delete
-      }      
-    },
-    addBomb : function ( id, x, y ) {
-        
-      var trap = new createjs.Shape();
-      
-      var ctx = trap.graphics;
-      
-      
+	removeAllTraps : function ( ) {
+		for ( var i in this.traps ) 
+			app.ui.scene.scene.removeChild( this.traps[i] );
+	},
+	
+	setTraps : function ( traps ) {
+		for ( var i in traps ) {
+			if ( !traps[ i] ) continue;
+			if ( this.traps[ i ] ) continue;
+			
+			this.addTrap( traps[ i ] );
+		}
+		
+		for ( var i in this.traps ) {
+			if ( traps[ i ] ) continue;
+			
+			this.removeTrap( i );
+			
+			delete this.traps[ i ];
+		}
+	},
+	
+    addTrap : function ( trap ) {
+		
+		var id = trap.id;
+		
+		//assume that only a bomb per location
+		if ( this.traps[ id ] ) return;
+		
+		var shape = new createjs.Shape();
+		
+		var ctx = shape.graphics;
+		
+		
       
         ctx.beginFill("red").drawRect(0,0,8, 8);
-  
-  
-        //trap.cache( 0, 0, 20, 20 ) ;
         
+        this.traps[ id ] = shape;
         
-        this.traps[ id ] = trap;
-        
-		trap.x = app.units.radar.left - (-x - 0.5) * this.blockSize -4 , 
-		trap.y = app.units.radar.top -(-y - 0.5)* this.blockSize - 4;
-
-        app.ui.scene.add( trap );
-
+		this.move( shape, trap.x, trap.y );
+		shape.visible = true;
+		
+        app.ui.scene.add( shape , 1);
+		
     },
+	removeTrap : function ( trapId ) {
+		var shape = this.traps[ trapId ];
+		app.ui.scene.scene.removeChild( shape );
+		
+	},
+	
+	move : function ( shape, x, y ) {
+		
+		shape.x = this.offsetX - (-x - 0.5) * this.blockSize -4 , 
+		shape.y = this.offsetY -(-y - 0.5)* this.blockSize - 4;
+		
+	},
 	addPlayer : function ( player ) {
-		
-		console.log( "napp", "addPlayer", player );
-		
+
         var playerColor = player.color.base;
 		
 		var shape = new createjs.Shape();
@@ -103,7 +120,7 @@ napp.radar = {
 		shape.alpha = 0.8;
 		shape.cache(0, 0, 20, 20 );
 		
-		shape.setTransform( app.units.radar.left+20, 300 );
+		//shape.setTransform( app.units.radar.left+20, 300 );
 		
 		
 		
@@ -126,8 +143,6 @@ napp.radar = {
 	},
 	
 	movePlayer : function ( id, x, y ) {
-		
-		console.log( "napp", id, x, y ,this.offsetX,  x , this.blockSize -8);
 		
 		var player = this.players[ id ];
 		

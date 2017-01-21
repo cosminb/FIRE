@@ -1,1 +1,7 @@
+[done]
 1. start chrome with local flag 
+
+
+
+[todo]
+2. 2d radar bombs behind grid

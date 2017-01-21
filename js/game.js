@@ -18,7 +18,7 @@ app.game = {
         
       app.timeline.reset( );
 
-        app.ui.radar.reset();
+        //app.ui.radar.reset();
 
       
 	   app.events.newGame();

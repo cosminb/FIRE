@@ -1,4 +1,4 @@
-napp.steps = {
+napp.frameBuilder = {
 	
 	
 	build : function ( players, input ) {
@@ -53,7 +53,7 @@ napp.steps = {
 		
 		var cause = 0;
 		
-		if ( frame.traps[ posId ] || frame.trapsRem[ posId ]) {
+		if ( frame.traps[ posId ] || frame.removedTraps[ posId ]) {
 			cause = 1;
 		}
 		else if ( true  ) { //board has walls 
@@ -103,13 +103,11 @@ napp.steps = {
 	}
 }
 
-var count = 10;
-
 napp.FrameState = function (  traps ) {
-	this.players = new Array( count )
+	this.players = new Array( napp.players.count )
 	this.traps   = Object.create( traps );
-	this.trapsAdded = {};
-	this.trapsRem  = {};
+	this.addedTraps = {};
+	this.removedTraps = {};
 }
 
 napp.FrameState.prototype.clone = function ( ) {
@@ -124,10 +122,10 @@ napp.FrameState.prototype.clone = function ( ) {
 
 napp.FrameState.prototype.addTrap = function ( trap ) {
 	this.traps[ trap.id ] = trap;
-	this.trapsAdded[ trap.id ] = trap;
+	this.addedTraps[ trap.id ] = trap;
 }
 napp.FrameState.prototype.removeTrap = function ( trapId ) {
-	this.trapsRem[ trapId ] = this.traps[ trapId ];
+	this.removedTraps[ trapId ] = this.traps[ trapId ];
 	this.traps[ trapId ] = null;
 }
 
