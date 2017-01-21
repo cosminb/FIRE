@@ -1,5 +1,5 @@
-//--allow-file-access-from-files
-//app.gameManager.runNextGame()
+<!-- --allow-file-access-from-files -->
+<!-- app.gameManager.runNextGame() -->
 
 
 
@@ -93,10 +93,15 @@ var api = {}
 var the = {}
 var ub  = {}
 
+var napp = {}
+
 app.ui = {};
 
 
 app.dummy = {}
+
+
+
 </script>
 
 <script src='js/dummy.line.js' ></script>
@@ -143,6 +148,15 @@ app.dummy = {}
 <script src='js/persistent.js'></script>
 
 <script src='js/gameManager.js'></script>
+
+
+
+<script src='js/napp/game.js'></script>
+<script src='js/napp/timeline.js'></script>
+<script src='js/napp/steps.js'></script>
+
+
+<script src='js/napp/radar.js'></script>
 
 <script>
 
@@ -192,12 +206,15 @@ app.stats.init();
 
 app.ui.radar.render();
 
+napp.radar.render();
+
 app.ui.logs.render();
 
 app.ui.info.render();
 
 
 app.persistent.init();
+
 
 
 

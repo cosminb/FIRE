@@ -36,6 +36,8 @@ app.gameManager = {
       
       
       app.game.runGame( ngame );
+	  
+	  napp.game.runGame( ngame );
     },
     
     
