@@ -4,7 +4,7 @@ napp.timeline = {
 
 	},
 	
-	frameDuration : 500, 
+	frameDuration : 700, 
 	auto : true, 
 	
 	play : function ( frameId ) {
@@ -13,6 +13,7 @@ napp.timeline = {
 		
 		this.currentFrame = frameId || 0;
 		
+		window.clearTimeout( this.timer );
 		
 		
 		this.goto( this.currentFrame ) ;
@@ -26,8 +27,10 @@ napp.timeline = {
 	
 	scheduleNextFrame : function ( ) {
 		
-		if ( !this.auto || this.currentFrame >= this.frames.length ) 
+		if ( !this.auto || this.currentFrame >= this.frames.length )  {
+			//this.smoothTransition  = false;
 			return;
+		}
 			
 		var that = this;
 		
@@ -53,10 +56,44 @@ napp.timeline = {
 	},
 	
 	
+	updateTransition : function ( ) {
+		if ( !this.smoothTransition ) return;
+		
+		var time = Date.now();
+		
+		var percent = (time - this.startTime )/ this.frameDuration;
+		
+		if ( percent > 1 ) {
+			percent = 1;
+			this.smoothTransition = false;
+		}
+		
+		for ( var i in this.delta ) {
+			if ( !this.delta[ i ] )  continue;
+			
+			var delta = this.delta[ i ];
+			
+			var x = delta.sx + percent*delta.dx;
+			var y = delta.sy + percent*delta.dy;
+			var z = delta.sz + percent*delta.dz;
+			
+			napp.arena3d.players.movePlayer( i, x, y, z );
+		}
+		
+	},
+	
 	transitionTo : function ( id ) {
 		
 		var frame = this.frames[ id ];
 		if ( !frame ) return;
+		
+		
+		this.startTime = Date.now();
+		
+		this.endTime   = this.startTime + this.frameDuration
+		
+		this.smoothTransition = true;
+		
 		
 		for ( var i in frame.players ) {
 			this.updatePlayer( frame.players[ i ] );
@@ -69,6 +106,29 @@ napp.timeline = {
 		for ( var i in frame.removedTraps ) {
 			this.removeTrap( frame.removedTraps[ i ] );
 		}
+		
+		
+		var prevFrame = this.frames[ id - 1 ];
+		
+		this.delta = [];
+		
+		for ( var i in frame.players ) {
+			var dp = {};
+			
+			dp.sx = prevFrame.players[ i ].sx;
+			dp.sy = prevFrame.players[ i ].sy;
+			dp.sz = prevFrame.players[ i ].sz;
+			
+			dp.dx = frame.players[ i ] . sx - prevFrame.players[ i ].sx;
+			dp.dy = frame.players[ i ] . sy - prevFrame.players[ i ].sy;
+			dp.dz = frame.players[ i ] . sz - prevFrame.players[ i ].sz;
+			dp.times = 1;
+			
+			if ( !dp.dx && !dp.dy && !dp.dz ) continue;
+			
+			this.delta[ i ] = dp;
+		}
+		
 	},
 	
 	
@@ -89,14 +149,20 @@ napp.timeline = {
 		//no transitions
 		
 		napp.radar.setTraps ( traps );
+		
+		napp.arena3d.traps.setTraps( traps );
 	},
 	
 	addTrap : function ( trap ) {
 		napp.radar.addTrap( trap );
+		
+		napp.arena3d.traps.add( trap );
 	},
 	
 	removeTrap : function ( trap ) {
 		napp.radar.removeTrap( trap.id );
+		napp.arena3d.traps.remove( trap.id );
+		
 	},
 	
 	updatePlayer : function ( player ) {

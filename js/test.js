@@ -81,13 +81,21 @@ app.test = {
 		var x = 600;
 		
 		if ( this.x ) window.clearInterval( this.x );
+		this.dist = 3000;
+
 		
-		this.x = window.setInterval( function ( ) {
+		
+		this.x = window.setTimeout( function ( ) {
+			
+		//this.x = window.setInterval( function ( ) {
 			
 			b += 0.1;
 			x+= 10;
 			
-			app.camera.positionAtAngle ( that.center, that.center, that.dist, 75, b );
+			that.dist = 9000;
+			
+			
+			app.camera.positionAtAngle ( that.center, that.center, that.dist,75, b );
 			//app.scene.camera2.near += 1;
 
 		}, 50 );

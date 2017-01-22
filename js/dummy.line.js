@@ -15,7 +15,7 @@ app.dummy.line = {
 	
 		var x = this.getMaterial() ; 
 		
-		var geo = new THREE.CylinderGeometry(130, 130, 4500, 32,8, 1,true  )
+		var geo = new THREE.CylinderGeometry(80, 80, 4500, 32,8, 1,true  )
 		var xobj = new THREE.Mesh( geo, x.material );
 		
 		xobj.attributes = x.attributes;
@@ -35,8 +35,8 @@ app.dummy.line = {
 			
 			var delta = app.scene.clock.getDelta();
 			x.uniforms.time.value += delta;
-            x.uniforms.hue.value += 0.01;
-            if ( x.uniforms.hue.value > 360 ) x.uniforms.hue.value = 0;
+            x.uniforms.hue.value += 0.05;
+            if ( x.uniforms.hue.value > 565 ) x.uniforms.hue.value = 0;
 		}, 1 );
 		
 		
@@ -209,7 +209,7 @@ app.dummy.line = {
             
             
             fragHSV = rgb2hsv(Cb.rgb);
-			 h = hue / 360.0;
+			 //h = hue / 360.0;
 			fragHSV.x *= h;
 			
 			fragHSV.x = mod(fragHSV.x, 1.0);
@@ -222,9 +222,9 @@ app.dummy.line = {
             
 			c = blendVividLight( Ca.rgb ,Cb.rgb);  // blending equation
 			
-            float a = ( c.b + c.r + c.g ) /3.0;
+            float a = ( c.b + c.r + c.g );
             
-            a = a < 0.4 ? a : a + 0.4;
+            a = a < 0.8 ? 0.8: 1.0;
             /*
 			vec3 fragHSV = rgb2hsv(c);
 			float h = hue / 360.0;
@@ -234,6 +234,7 @@ app.dummy.line = {
 			vec3 fragRGB = hsv2rgb(fragHSV);
 			
 			*/
+			
 			
 			gl_FragColor= vec4(c, a);
 		}
@@ -252,8 +253,8 @@ app.dummy.line = {
 		var attributes = {}; // custom attributes
 		
 		var t = [];
-		t[0] = new THREE.TextureLoader().load( "textures/shining2.jpg"   )
-		t[1] = new THREE.TextureLoader().load( "textures/shining2.jpg"  )
+		t[0] = new THREE.TextureLoader().load( "textures/shine3.jpg"   )
+		t[1] = new THREE.TextureLoader().load( "textures/shine3.jpg"  )
 		
 		for ( var i in t ) { 
 			t[ i ].wrapS = THREE.RepeatWrapping;
@@ -281,7 +282,7 @@ app.dummy.line = {
 			fragmentShader: fragShader,
 			
 			side : THREE.DoubleSide,
-			//transparent : true, 
+			transparent : true, 
 			
 			
 		});

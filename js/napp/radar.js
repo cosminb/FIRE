@@ -12,7 +12,7 @@ napp.radar = {
 
 		
 		this.board  = new createjs.Shape();
-		this.board.setTransform( app.units.radar.left+20, 300 );
+		this.board.setTransform( app.units.radar.left+10, 10 );
 		
 		this.offsetX = app.units.radar.left+20;
 		this.offsetY = 300;
@@ -55,8 +55,10 @@ napp.radar = {
 	},
 	
 	removeAllTraps : function ( ) {
-		for ( var i in this.traps ) 
+		for ( var i in this.traps ) {
 			app.ui.scene.scene.removeChild( this.traps[i] );
+			delete this.traps[ i ];
+		}
 	},
 	
 	setTraps : function ( traps ) {

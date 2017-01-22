@@ -9,7 +9,6 @@ napp.frameBuilder = {
 		for ( var i = 0; i <input.length;i++ )
 			this.addStep( steps, i, input[ i ] );
 		
-		
 		return steps;
 	},
 	
@@ -66,6 +65,8 @@ napp.frameBuilder = {
 			
 			frame.removeTrap( posId );
 		}
+		
+		player.sy = 2540;
 	},
 	
 	addBomb   : function ( frame, input ) {
@@ -130,25 +131,28 @@ napp.FrameState.prototype.removeTrap = function ( trapId ) {
 }
 
 
-napp.PlayerState= function ( id, x, y, removed ) {
+napp.PlayerState= function ( id, x, y, removed, direction, sy ) {
 	this.id = id;
 	this.x = x;
 	this.y = y;
 	
 	//3d space coords
 	this.sx = 0;
-	this.sy = 0;
+	this.sy = sy || 0;
 	this.sz = 0;
 	
 	this.removed = removed;
 	this.action   = 0;
-	this.direction = "0__0";
+	this.direction = direction || "0__0";
+	
+	this.update3d();
 }
 
 napp.PlayerState.prototype.update3d = function ( ) {
-	this.sx = this.x;
-	this.sy = this.y;
-	//this.sz = 0;
+	this.sx = app.units.getX( this.x );
+	//this.sy = this.y;
+	this.sz = app.units.getZ(this.y);
+	
 }
 
 napp.PlayerState.prototype.setPos = function ( x, y ) {
@@ -171,7 +175,10 @@ napp.PlayerState.prototype.setAction = function ( action  ){
 }
 
 napp.PlayerState.prototype.clone = function ( ) {
-	return new napp.PlayerState( this.id, this.x, this.y, this.removed );
+	var player =  new napp.PlayerState( this.id, this.x, this.y, this.removed , this.direction, this.sy);
+	
+	
+	return player;
 }
 
 
@@ -191,11 +198,13 @@ napp.Trap= function ( playerId, x, y) {
 	
 	//
 	this.playerId = playerId;
+	
+	this.update3d();
 }
 
-napp.PlayerState.prototype.update3d = function ( ) {
-	this.sx = this.x;
-	this.sy = this.y;
-	//this.sz = 0;
+napp.Trap.prototype.update3d = function ( ) {
+	this.sx = app.units.getX( this.x );
+	//this.sy = this.y;
+	this.sz = app.units.getZ(this.y);
 }
 

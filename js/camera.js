@@ -19,6 +19,10 @@ app.camera = {
 		
 		app.scene.camera2.position.copy( p2 );
 		app.scene.camera2.lookAt( p1 );
+		
+		
+		napp.spaceScene.camera.position.copy( p2 );
+		napp.spaceScene.camera.lookAt( p1 );
 	},
 	positionBySquare : function ( x, z, l, a,b ) {
 		
@@ -38,6 +42,10 @@ app.camera = {
 		
 		app.scene.camera2.position.copy( p2 );
 		app.scene.camera2.lookAt( p1 );
+		
+		
+		napp.spaceScene.camera.position.copy( p2 );
+		napp.spaceScene.camera.lookAt( p1 );
 	},
 	
 	

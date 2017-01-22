@@ -27,11 +27,16 @@ napp.game = {
 		
 		napp.radar.render();
 		
+		napp.arena3d.grid.add();
+		
+		napp.arena3d.idol.add();
 	},
 	
 	
 	setupBoards : function ( board , boardSize ) {
 		napp.radar.updateBoard( board, boardSize );
+		napp.arena3d.grid.update( board, boardSize );
+		napp.arena3d.idol.update( boardSize );
 	},
 	
 	resetPlayers : function ( players ) {
@@ -98,5 +103,7 @@ napp.players = {
 	
 	addToUI : function ( player ) {
 		napp.radar.addPlayer( player );
+		
+		napp.arena3d.players.addPlayer( player );
 	},
 }

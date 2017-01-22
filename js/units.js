@@ -18,7 +18,7 @@ app.units = {
 		  
 		  this.window = { width : window.innerWidth, height : window.innerHeight };
 		  
-		  this.board3d = { width : window.innerHeight - 150, height : window.innerHeight - 150 };
+		  this.board3d = { width : window.innerHeight - 150, height : window.innerHeight };
 		  
 		  this.board3d.right =  this.board3d.width + 10;
 		  

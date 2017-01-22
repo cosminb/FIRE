@@ -160,13 +160,15 @@ app.player = {
 			
 		}
 		
+		//if ( !this.material ) this.material = napp.arena3d.idol.getMaterial();
+		
 		mesh = new THREE.Mesh(combined.clone(), this.material);
 
         
 		item.obj = mesh;
 		
 		
-        item.obj.scale.set( 4, 4, 4 );
+        item.obj.scale.set( 2.5,2,2.5 );
         
 	},
 	
