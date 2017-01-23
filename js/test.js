@@ -96,7 +96,7 @@ app.test = {
 			app.test.dist = Math.floor( napp.game.boardSize / 2 + 10 ) * 150;
 			
 			
-			b -= 0.1;
+			b -= 0.03;
 			x+= 10;
 			
 			that.dist = 9000;

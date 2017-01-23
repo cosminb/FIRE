@@ -74,6 +74,10 @@ var input = {
 	"title": "Welcome",
 	"content": "to the fourth edition of the <b>ACI Student24</b> Challenge !!"
 }, 
+{
+	"title": "Welcome",
+	"content": "to the fourth edition of the <b>ACI Student24</b> Challenge !!"
+}, 
 
 
 //END NOTES 
