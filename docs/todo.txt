@@ -5,3 +5,10 @@
 
 [todo]
 2. 2d radar bombs behind grid
+3. sound fx
+4. game over score board
+5. droid texture wit light pulsing
+6. board tracking
+7. cinematic camera effects
+8. idol in 2d
+9 bomb explode fx and camera shaking

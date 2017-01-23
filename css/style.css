@@ -1,0 +1,13 @@
+
+.player { font-size : 15pt; color:#eee; line-height : 20pt;}
+
+.direction { font-size : 15pt;  transition:  all 0.5s ease; display : inline-block; width : 1em; height : 1em;} 
+.direction { text-align : center; vertical-align:middle; line-height:1em }
+.direction { transform-origin : center;color:white; text-decoration:none !important;} 
+
+.player_removed .name { text-decoration : line-through } 
+
+.player .position { color : white; font-size : 12pt; }
+
+.player .name  { width : 10px ; white-space: nowrap;}
+.player .position { width: 10px; white-space: nowrap; }

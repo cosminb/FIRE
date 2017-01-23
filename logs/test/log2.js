@@ -104,10 +104,10 @@ game["Level 2 - Map 0 - Round 0"]= {
 ,  [ "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "_", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W" ]
 ] 
 , "players" : {
-  "P1" : { "name" : "t1" , "startX": 0, "startY": 50}
-, "P2" : { "name" : "t2" , "startX": 51, "startY": 100}
-, "P3" : { "name" : "t3" , "startX": 100, "startY": 48}
-, "P4" : { "name" : "t4" , "startX": 47, "startY": 0}
+  "P1" : { "name" : "player A" , "startX": 0, "startY": 50}
+, "P2" : { "name" : "player B" , "startX": 51, "startY": 100}
+, "P3" : { "name" : "player C" , "startX": 100, "startY": 48}
+, "P4" : { "name" : "player D" , "startX": 47, "startY": 0}
 }
 , "steps": [ [{"type" : "sonar" , "player" : "P1" }, {"type" : "sonar" , "player" : "P2" }, {"type" : "sonar" , "player" : "P3" }, {"type" : "sonar" , "player" : "P4" }, {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P1" }, {"x" : "0" , "y" : "-1" , "type" : "move" , "player" : "P2" }, {"x" : "-1" , "y" : "0" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }], [
 {"x" : "1" , "y" : "0" , "type" : "move" , "player" : "P1" }, {"x" : "1" , "y" : "-1" , "type" : "move" , "player" : "P2" }, {"x" : "-1" , "y" : "1" , "type" : "move" , "player" : "P3" }, {"x" : "0" , "y" : "1" , "type" : "move" , "player" : "P4" }], [

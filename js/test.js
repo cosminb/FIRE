@@ -72,7 +72,7 @@ app.test = {
     
     animateCamera : function ( ) {
 		
-		var b = 0;
+		var b = 90;
             
             var that = this;
 		
@@ -85,11 +85,18 @@ app.test = {
 
 		
 		
-		this.x = window.setTimeout( function ( ) {
+		//this.x = window.setTimeout( function ( ) {
+		
+		this.shouldRotate = true;
+		this.x = window.setInterval( function ( ) {
+		
+			if ( !that.shouldRotate ) return;
 			
-		//this.x = window.setInterval( function ( ) {
+			app.test.center = Math.floor( napp.game.boardSize / 2  );
+			app.test.dist = Math.floor( napp.game.boardSize / 2 + 10 ) * 150;
 			
-			b += 0.1;
+			
+			b -= 0.1;
 			x+= 10;
 			
 			that.dist = 9000;

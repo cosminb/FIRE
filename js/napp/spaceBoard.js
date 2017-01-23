@@ -12,8 +12,8 @@ napp.spaceScene = {
 		
 		this.box = {
 			
-			left : 10, 
-			top  : 10, 
+			left : app.units.board3d.left, 
+			top  : app.units.board3d.top, 
 			width  : app.units.board3d.width,
 			height : app.units.board3d.height,
 			
@@ -32,7 +32,7 @@ napp.spaceScene = {
 		this.renderer = renderer;
 		
 		
-		this.camera = new THREE.PerspectiveCamera(90, 1, 100, 100000 );
+		this.camera = new THREE.PerspectiveCamera(90, this.box.width / this.box.height, 100, 100000 );
 		
 
 	},
@@ -107,7 +107,7 @@ napp.arena3d.players = {
 		var obj = new THREE.Mesh(this.mesh.clone(), material);
 		
 		
-		obj.scale.set( 4,4, 4 ); 
+		obj.scale.set( 3,3,3); 
 		return obj;
 		
 	},
@@ -177,16 +177,6 @@ napp.arena3d.players = {
 			},
 			
 			h : 50
-		},
-		
-		base : {
-			type : "circle",
-			
-			r : 60, 
-			
-			position : {
-				y : 0
-			}
 		},
 		
 	},
@@ -295,7 +285,10 @@ napp.arena3d.traps = {
 	
 	
 	remove : function ( trapId ) {
+		
 		if ( !this.traps[ trapId ] ) return;
+		
+		
 		
 		napp.spaceScene.scene.remove( this.traps[ trapId ] );
 		
@@ -329,10 +322,22 @@ napp.arena3d.traps = {
 	},
 	
 	
+	disolve : function ( id, percent  ) {
+		if ( !this.traps[id] ) return;
+		
+		this.traps[ id ] .scale.set(percent * 50 , percent * 50 , percent * 50 );
+		
+		this.traps[id].material.opacity = 1-percent;
+	},
+	
 	render : function () {
 		
 		
-		var sphere = new THREE.Mesh( new THREE.SphereGeometry( 80, 30, 20 ), new THREE.MeshNormalMaterial() );
+		var sphere = new THREE.Mesh( new THREE.SphereGeometry( 80, 30, 20 ), 
+									 new THREE.MeshNormalMaterial({
+										side: THREE.DoubleSide,	
+									   transparent : true,
+									}) );
 		
 		return sphere;
 		
@@ -484,9 +489,8 @@ napp.arena3d.idol = {
 		xobj.attributes = x.attributes;
 		
 		
-		var pos = pos3d( 0,0 );
+		var pos = { x :  0, y : 2000, z : 0 };
 		
-		pos.y = 2000;
 		xobj.position.copy(   pos );
 		
 		this.obj = xobj;
@@ -496,8 +500,7 @@ napp.arena3d.idol = {
 		
 		window.setInterval( function ( ) {
 			
-			var delta = app.scene.clock.getDelta();
-			x.uniforms.time.value += delta;
+			x.uniforms.time.value += app.units.clock.getDelta();
 			x.uniforms.hue.value += 0.1;
 			if ( x.uniforms.hue.value > 565 ) x.uniforms.hue.value = 0;
 		}, 1 );
@@ -692,11 +695,9 @@ napp.arena3d.idol = {
 	},
 	
 	update : function ( boardSize ) {
-		var xz = app.units.getX(  Math.floor( app.game.boardSize / 2 ) );
+		var xz = app.units.getX(  Math.floor( napp.game.boardSize / 2 ) );
 		
 		this.obj.position.x = xz;
 		this.obj.position.z = xz;
-		
-		app.dummy.line.move( pos3d( app.units.idol.x, app.units.idol.z ) );
 	}
 }

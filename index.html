@@ -73,6 +73,7 @@ body { background : #222; }
 </style>
 
 
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 <canvas id="canvas" style='width:100%; height:100%;position:absolute; left : 0; z-index:100;'></canvas>
 
@@ -104,52 +105,20 @@ app.dummy = {}
 
 </script>
 
-<script src='js/dummy.line.js' ></script>
-<script src='js/dummy.glow.js' ></script>
 
 
 <script src='js/units.js' > </script> 
 
-<script src='js/api.js'> </script>
-
-<script src='js/scene.js' ></script>
              
 <script src='js/textures.js'></script>
-                          
-<script src='js/player.js'> </script>
-             
-<script src='js/floor.js'> </script>
-             
-<script src='js/trap.js'></script>
              
 <script src='js/materials.js'></script>
 
-<script src='js/objects.js'></script>
-
-<script src='js/timeline.js'></script>
-
 <script src='js/test.js'></script>
-
-<script src='js/camera.js'></script>
-
-<script src='js/game.js'></script>
-
-<script src='js/stats.js'></script>
-
-<script src='js/events.js'></script>
-
-<script src='js/ui/scene.js'></script>
-<!-- <script src='js/ui/radar.js'></script> -->
-<script src='js/ui/logs.js'></script>
-<script src='js/ui/info.js'></script>
-
-<script src='js/producer.js'></script>
-
-<script src='js/persistent.js'></script>
 
 <script src='js/gameManager.js'></script>
 
-
+<script src='js/ui/scene.js'></script>
 
 <script src='js/napp/game.js'></script>
 <script src='js/napp/timeline.js'></script>
@@ -159,6 +128,9 @@ app.dummy = {}
 <script src='js/napp/radar.js'></script>
 <script src='js/napp/spaceBoard.js'></script>
 
+<script src='js/napp/status.js'></script>
+
+<script src='js/camera.js'></script>
 <script>
 
 var game = {};
@@ -167,7 +139,7 @@ var game = {};
 </script>
 
 
-<script src='logs/test/log2.js'></script>
+<script src='logs/test/log2.js'></script> 
 <script src='logs/test/Level 2 - Map 1 - Round 0.log'></script>
 
 <script>
@@ -175,53 +147,10 @@ var game = {};
 
 
 
-/*
-
-window.clearInterval( app.test.x )
-
-
-app.camera.positionAtAngle( 50, 50, 15000, 0, 0 )
-app.camera.positionAtAngle( 50, 50, 15000, 70, 40 )
-
-*/
-
-
-
-
-app.scene.clock = new THREE.Clock();
-
-
 app.units.init();
 
-
-napp.spaceScene.init();
-
-app.scene.init();
-app.scene.addCamera();
-app.scene.addRender( app.scene.camera2 );
-
-
-
 app.ui.scene.init();
-app.ui.scene.update();
-
-app.stats.init();
-
-// app.ui.radar.render();
-
-app.ui.logs.render();
-
-app.ui.info.render();
-
-
-app.persistent.init();
-
-
-
-
-app.floor.add(  );
-app.dummy.line.add( );
-//app.dummy.glow.add( );
+napp.spaceScene.init();
 
 
 
@@ -230,14 +159,6 @@ app.dummy.line.add( );
 app.test.init();
 app.test.auto();
 app.test.animateCamera();
-
-//app.camera.positionBySquare( 50, 50, 50, 0, 90 )
-
-init();
-
-//draw( true );
-
-
 
 
 requestAnimationFrame = function ( callback ) {
@@ -249,6 +170,7 @@ requestAnimationFrame = function ( callback ) {
 
 
 lastTime = Date.now();
+
 function animate(time) {
 
 	
@@ -256,19 +178,17 @@ function animate(time) {
 	
     //if ( app.timeline.paused ) return;
     
-    app.scene.renderFrame(time);
-    //draw();
-    
-	app.ui.scene.update();
-		
 		
 	napp.spaceScene.render();
 
+	app.ui.scene.update();
 	
 	requestAnimationFrame( animate );
     return;
  
 }
+
+animate();
 
 
 /*
@@ -285,4 +205,6 @@ for (var i=0 ; i<5 ; i++){
 app.gameManager.parseGames();
 app.gameManager.runNextGame()
 
+
+napp.timeline.play();
 </script>

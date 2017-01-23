@@ -29,6 +29,11 @@ napp.timeline = {
 		
 		if ( !this.auto || this.currentFrame >= this.frames.length )  {
 			//this.smoothTransition  = false;
+			
+			var that = this;
+			this.timer = window.setTimeout( function ( ) {
+				that.cleanup();
+			}, this.frameDuration);
 			return;
 		}
 			
@@ -42,9 +47,16 @@ napp.timeline = {
 		
 	},
 	
+	cleanup : function ( ) {
+		
+		this.smoothTransition = false;
+		for ( var i in this.deltaTraps ) 
+			napp.arena3d.traps.remove( this.deltaTraps[i].id );
+		
+	},
+	
 	
 	nextFrame : function ( ) {
-			
 		this.transitionTo( this.currentFrame );
 		this.currentFrame++;
 		
@@ -80,6 +92,11 @@ napp.timeline = {
 			napp.arena3d.players.movePlayer( i, x, y, z );
 		}
 		
+		
+		for ( var i in this.deltaTraps ) {
+			
+			napp.arena3d.traps.disolve( this.deltaTraps[ i ].id, percent );
+		}
 	},
 	
 	transitionTo : function ( id ) {
@@ -108,6 +125,8 @@ napp.timeline = {
 		}
 		
 		
+		
+		
 		var prevFrame = this.frames[ id - 1 ];
 		
 		this.delta = [];
@@ -128,11 +147,23 @@ napp.timeline = {
 			
 			this.delta[ i ] = dp;
 		}
+
 		
+		
+		for ( var i in this.deltaTraps ) 
+			napp.arena3d.traps.remove( this.deltaTraps[i].id );
+		
+		this.deltaTraps = [];
+		
+		for ( var i in frame.removedTraps ) {
+			
+			this.deltaTraps.push( { id : i } );
+		}
 	},
 	
 	
 	goto : function ( id ) {
+		
 		
 		var frame = this.frames[ id ];
 		if ( !frame ) return;
@@ -161,7 +192,7 @@ napp.timeline = {
 	
 	removeTrap : function ( trap ) {
 		napp.radar.removeTrap( trap.id );
-		napp.arena3d.traps.remove( trap.id );
+		//napp.arena3d.traps.remove( trap.id );
 		
 	},
 	
@@ -172,10 +203,11 @@ napp.timeline = {
 		}
 		
 		napp.radar.movePlayer( player.id, player.x, player.y );
-		
+		napp.status.updatePlayer( player );
 	},
 	
 	removePlayer : function ( player ) {
-		
+		napp.status.updatePlayer( player );		
+		napp.radar.removePlayer( player.id );
 	},
 }

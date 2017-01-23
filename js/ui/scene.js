@@ -12,7 +12,6 @@ app.ui.scene = {
 		
 		this.scene = scene;
 		
-		this.box = app.scene.box;
 	},
 	
 	
@@ -22,7 +21,7 @@ app.ui.scene = {
 	
 	
 	add : function ( obj , index ) {
-		this.scene.addChildAt( obj, index || 0 );
+		this.scene.addChildAt( obj, this.scene.children.length );
 		//this.scene.setChildIndex( obj, index || 0 );
 	},
 	

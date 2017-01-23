@@ -67,6 +67,8 @@ napp.frameBuilder = {
 		}
 		
 		player.sy = 2540;
+		
+		player.removed = true;
 	},
 	
 	addBomb   : function ( frame, input ) {

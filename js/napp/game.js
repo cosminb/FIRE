@@ -9,6 +9,7 @@ napp.game = {
 
 		
 		this.score = game.results;
+		this.boardSize = game.info.size;
 		
 		
 		var frames = napp.frameBuilder.build( game.players, game.steps );
@@ -23,13 +24,17 @@ napp.game = {
 	init : function ( players ) {
 		this.isInitialize = true;
 		
-		napp.players.init( players );
-		
 		napp.radar.render();
 		
 		napp.arena3d.grid.add();
 		
 		napp.arena3d.idol.add();
+		
+		
+		napp.players.init( players );
+		
+		
+		napp.status.render();
 	},
 	
 	
@@ -71,7 +76,11 @@ napp.players = {
 	
 	
 	initColors : function ( ) {
+		var step = 360 /  (this.count + 1 );
 		
+		for ( var i = 0; i < this.count; i++ ) {
+			this.items[i].color.base = "hsl(" + i*step + ",100%,50%)" ;
+		}
 	},
 	
 	createPlayer : function ( i, input ) {

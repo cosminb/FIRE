@@ -17,10 +17,6 @@ app.camera = {
 			y :        far * Math.cos( a )
 		}
 		
-		app.scene.camera2.position.copy( p2 );
-		app.scene.camera2.lookAt( p1 );
-		
-		
 		napp.spaceScene.camera.position.copy( p2 );
 		napp.spaceScene.camera.lookAt( p1 );
 	},
@@ -40,25 +36,12 @@ app.camera = {
 			y :        far * Math.cos( a )
 		}
 		
-		app.scene.camera2.position.copy( p2 );
-		app.scene.camera2.lookAt( p1 );
-		
 		
 		napp.spaceScene.camera.position.copy( p2 );
 		napp.spaceScene.camera.lookAt( p1 );
 	},
 	
 	
-    reposition : function ( frame ) {
-        
-           var cameraMovement = app.timeline.cameraShots[ frame ];
-           if ( !cameraMovement ) return;
-           
-                      console.log( frame, cameraMovement );
-
-           this.positionBySquare.apply( this, cameraMovement.shot.params );
-           
-    },
 	
 
 }

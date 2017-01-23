@@ -34,9 +34,7 @@ app.gameManager = {
         
       var ngame = this.games.shift( );  
       
-      
-      app.game.runGame( ngame );
-	  
+      console.log ( ngame );
 	  napp.game.runGame( ngame );
     },
     

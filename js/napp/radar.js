@@ -14,21 +14,21 @@ napp.radar = {
 		this.board  = new createjs.Shape();
 		this.board.setTransform( app.units.radar.left+10, 10 );
 		
-		this.offsetX = app.units.radar.left+20;
-		this.offsetY = 300;
+		this.offsetX = app.units.radar.left+10;
+		this.offsetY = 10;
 		
-		this.board.cache(0, 0, 300, 300 );
+		this.board.cache(0, 0, app.units.radar.width, app.units.radar.height);
 		
 		
 		
-		app.ui.scene.add( this.board );
+		app.ui.scene.add( this.board);
 		
 	},
 	updateBoard : function ( map, size ) {
 		
 		if ( !this.board ) this.renderBoard();
 		
-		var blockSize = 300 / size;
+		var blockSize = app.units.radar.width / size;
 		
 		
 		
@@ -119,11 +119,8 @@ napp.radar = {
 		
 		var shape = new createjs.Shape();
 
-		shape.alpha = 0.8;
+		shape.alpha = 0.9;
 		shape.cache(0, 0, 20, 20 );
-		
-		//shape.setTransform( app.units.radar.left+20, 300 );
-		
 		
 		
 		var ctx = shape.graphics;
@@ -150,8 +147,17 @@ napp.radar = {
 		
 		player.x = this.offsetX + (x + 0.5) * this.blockSize -8 , 
 		player.y = this.offsetY +(y + 0.5)* this.blockSize - 8;
-				
+		
+		player.visible = true;
 		//player.updateCache( );
+	},
+	
+	removePlayer : function ( id ) {
+		
+		var player = this.players[ id ];
+		
+		
+		player.visible = false;
 	},
 	
 	update : function ( ) {
