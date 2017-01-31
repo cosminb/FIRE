@@ -34,9 +34,13 @@ app.gameManager = {
         
       var ngame = this.games.shift( );  
       
-      console.log ( ngame );
 	  app.game.runGame( ngame );
     },
+	
+	parseAndRun : function ( obj ) {
+		var game = {};
+		app.game.runGame( obj );
+	},
     
     
 }

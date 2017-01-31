@@ -1,0 +1,28 @@
+<script src='libs/jquery.js'></script>
+<script src='js/controls/controls.js' ></script>
+
+
+<style>
+#logFile { width : 100%; }
+</style>
+
+<input type='file' id='logFile' />
+
+
+
+<br /><br />
+<br /><br />
+
+
+<input type='button' id='goto' value='goto' />
+
+<input type="number" min="0" max="5" id='frameCount'>
+
+
+<br />
+
+<script>
+$(function ( ) { 
+	controls.main.init();
+});
+</script>
