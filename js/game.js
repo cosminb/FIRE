@@ -1,130 +1,118 @@
 app.game = {
-    
-    runGame : function ( game, id ) {
-       
+	
+	isInitialize : false, 
+	
+	
+	runGame : function ( game ) {		
+		if ( !this.isInitialize ) 
+			this.init(game.players);
 
-    this.currentGame = game;
-       
-     app.timeline.pause();
-     
-        app.ui.info.NewMatch();
-        
-      this.gameId = id;
-      
-      app.stats.clear();
-
-      app.persistent.matchPlayers( game );
-        
-        
-      app.timeline.reset( );
-
-        //app.ui.radar.reset();
-
-      
-	   app.events.newGame();
-
-	   app.api.addFrame();
-
-       this.matchId = game.info.matchId;
-       this.boardSize = game.info.size;
-  
-  
-  
-        app.test.center = Math.floor( this.boardSize / 2  );
-        app.test.dist = Math.floor( this.boardSize / 2 + 10 ) * 150;
-        
-        app.api.resetAll( game );
 		
-		app.ui.logs.clear();
-        
-		app.producer.newGame( game );
+		this.score = game.results;
+		this.boardSize = game.info.size;
 		
-        for ( var i in game.steps ) {
-            this.runStep( game.steps[ i ] );
-        }
-        
-        
-        app.timeline.resume ( );
-    },
-    
-    runStep : function( steps ) {
-        app.api.addFrame();
-        
-        for ( var i=0; i<steps.length; i++ ) {
-            
-            this.executeStep( steps[ i ] );
-        }
-        
-        app.producer.afterAddingStep ( );
-    },
-    
-    executeStep : function ( step ) {
-        
-        
-        
-        var playerId = app.persistent.getPlayer( step.player );
-        
-
-        switch ( step.type ) {
-            
-            
-            case "move" : 
-                    var player = app.objects.getPlayer( playerId );
-
-                    player.xx -= -step.x;
-                    player.xz -= -step.y;
-
-                    app.api.movePlayer( playerId, player.xx, player.xz, "walk", step );
-                    break;
-            case "kill":
-            
-                    var player = app.objects.getPlayer( playerId );
-
-                   app.api.killPlayer(playerId, player.xx, player.xz);
-                  break;         
-            case "bomb" :
-                app.api.addBomb( playerId, step.x, step.y );
-                
-    //                app.api.addBomb();
-                    break;
-            case "explodeBomb":
-      //              app.api.explodeBomb();
-                    break;
-           
-            case "sonar":
-                    app.api.useSonar(playerId);
-                    break;
-            case "win":
-          //          app.api.playerWin();
-                    break;
-        }
-    }
+		
+		var frames = app.frameBuilder.build( game.players, game.steps );
+		
+		app.timeline.setFrames( frames );
+		
+		this.removeTraps ( );
+		this.setupBoards ( game.board , game.info.size );
+	},
+	
+	
+	init : function ( players ) {
+		this.isInitialize = true;
+		
+		app.radar.render();
+		
+		app.arena3d.grid.add();
+		
+		app.arena3d.idol.add();
+		
+		
+		app.players.init( players );
+		
+		
+		app.status.render();
+	},
+	
+	
+	setupBoards : function ( board , boardSize ) {
+		app.radar.updateBoard( board, boardSize );
+		app.arena3d.grid.update( board, boardSize );
+		app.arena3d.idol.update( boardSize );
+	},
+	
+	resetPlayers : function ( players ) {
+	},
+	
+	removeTraps : function ( ) {
+		app.radar.removeAllTraps( );
+	},
+	parse : function ( ) {
+		
+	},
 }
 
-/*
-
-function runGame ( game ) {
-
-    app.api.startGame ( game );
-
-    app.api.setupBoard( game.board );
-    
-    var steps = game.steps;
-    
-    for ( var i in steps ) {
-        
-        var currentStep = steps[ i ];
-        
-        for ( j in currentStep ) {
-            
-        }
-
-    }
+app.players = {
+	items : {},
+	names : {},
+	ids   : {},
+	count : 0,
+	
+	init : function ( inputs ) {
+		this.count = 0;
+		
+		for ( var i in inputs ) {
+			this.createPlayer( i, inputs[ i ] );
+		}
+		
+		this.initColors( );
+		
+		for ( var i in this.items ) 
+			this.addToUI( this.items[ i ] );
+	},
+	
+	
+	initColors : function ( ) {
+		var step = 360 /  (this.count + 1 );
+		
+		for ( var i = 0; i < this.count; i++ ) {
+			this.items[i].color.base = "hsl(" + i*step + ",100%,50%)" ;
+		}
+	},
+	
+	createPlayer : function ( i, input ) {
+		var id = this.count;
+		this.count++;
+		
+		var player = { 
+			name : input.name, 
+			id   : id,
+			color: { base : "#007abc", accent : "" }
+		}
+		
+		this.names [player.name] = id;
+		this.ids[i]  = id;
+		
+		this.items[ id ] = player;
+	},
+	
+	
+	get  : function ( index ) {
+		var id = this.ids[ index ];
+		
+		return this.items [ id ];
+	},
+	
+	getId : function ( index ) {
+		return this.ids[ index ];
+	},
+	
+	addToUI : function ( player ) {
+		app.radar.addPlayer( player );
+		
+		app.arena3d.players.addPlayer( player );
+	},
 }
-
-for ( var i in game ) {
-
-    runGame( game[ i ] );
-        
-}
-*/

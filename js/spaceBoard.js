@@ -1,4 +1,4 @@
-napp.spaceScene = {
+app.spaceScene = {
 	
 	init : function ( ) {
 		
@@ -53,12 +53,12 @@ napp.spaceScene = {
 
 
 
-napp.arena3d = {
+app.arena3d = {
 	
 }
 
 
-napp.arena3d.players = {
+app.arena3d.players = {
 	
 	
 	players : {},
@@ -79,7 +79,7 @@ napp.arena3d.players = {
 		this.movePlayer( id , 0,0,0 );
 		
 		
-		napp.spaceScene.scene.add( obj );
+		app.spaceScene.scene.add( obj );
 		
 	},
 	
@@ -101,7 +101,7 @@ napp.arena3d.players = {
 		var material =  app.materials.playerMaterial( {}, color);
 		
 		if ( !this.mesh ) 
-			this.mesh = napp.component3d.render( this.items  );
+			this.mesh = app.component3d.render( this.items  );
 		
 		
 		var obj = new THREE.Mesh(this.mesh.clone(), material);
@@ -183,7 +183,7 @@ napp.arena3d.players = {
 }
 
 
-napp.component3d = {
+app.component3d = {
 
 	
 	setPlace : function (obj, opt ) {
@@ -264,7 +264,7 @@ napp.component3d = {
 	
 }
 
-napp.arena3d.traps = {
+app.arena3d.traps = {
 	
 	
 	traps : {},
@@ -276,7 +276,7 @@ napp.arena3d.traps = {
 		var obj = this.render( );
 		this.move( obj, trap.sx,80, trap.sz );
 		
-		napp.spaceScene.scene.add( obj );
+		app.spaceScene.scene.add( obj );
 		
 		
 		this.traps[ trap.id ] = obj;
@@ -290,7 +290,7 @@ napp.arena3d.traps = {
 		
 		
 		
-		napp.spaceScene.scene.remove( this.traps[ trapId ] );
+		app.spaceScene.scene.remove( this.traps[ trapId ] );
 		
 		
 		delete this.traps[ trapId ];
@@ -299,7 +299,7 @@ napp.arena3d.traps = {
 	
 	removeAll : function ( ) {
 		for ( var i in this.traps ) {
-			napp.spaceScene.scene.removeChild( this.traps[i] );
+			app.spaceScene.scene.removeChild( this.traps[i] );
 			delete this.traps[ i ];
 		}
 	},
@@ -354,18 +354,18 @@ napp.arena3d.traps = {
 }
 
 
-napp.arena3d.grid = {
+app.arena3d.grid = {
 	
 	add : function (  ) {
 		
 		this.render();
 		
-		napp.spaceScene.scene.add( this.obj );
+		app.spaceScene.scene.add( this.obj );
 	},
 	
 	
 	remove : function ( ) {
-		napp.spaceScene.scene.remove( this.obj );
+		app.spaceScene.scene.remove( this.obj );
 	},
 	
 	
@@ -466,12 +466,12 @@ napp.arena3d.grid = {
 
 
 
-napp.arena3d.idol = {
+app.arena3d.idol = {
 	
 	add : function ( ) {
 		this.render();
 		
-		napp.spaceScene.scene.add( this.obj );
+		app.spaceScene.scene.add( this.obj );
 	},
 	
 	move : function ( pos ) {
@@ -695,7 +695,7 @@ napp.arena3d.idol = {
 	},
 	
 	update : function ( boardSize ) {
-		var xz = app.units.getX(  Math.floor( napp.game.boardSize / 2 ) );
+		var xz = app.units.getX(  Math.floor( app.game.boardSize / 2 ) );
 		
 		this.obj.position.x = xz;
 		this.obj.position.z = xz;

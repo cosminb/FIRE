@@ -17,8 +17,8 @@ app.camera = {
 			y :        far * Math.cos( a )
 		}
 		
-		napp.spaceScene.camera.position.copy( p2 );
-		napp.spaceScene.camera.lookAt( p1 );
+		app.spaceScene.camera.position.copy( p2 );
+		app.spaceScene.camera.lookAt( p1 );
 	},
 	positionBySquare : function ( x, z, l, a,b ) {
 		
@@ -37,8 +37,8 @@ app.camera = {
 		}
 		
 		
-		napp.spaceScene.camera.position.copy( p2 );
-		napp.spaceScene.camera.lookAt( p1 );
+		app.spaceScene.camera.position.copy( p2 );
+		app.spaceScene.camera.lookAt( p1 );
 	},
 	
 	

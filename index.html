@@ -94,7 +94,7 @@ var api = {}
 var the = {}
 var ub  = {}
 
-var napp = {}
+var app = {}
 
 app.ui = {};
 
@@ -118,17 +118,17 @@ app.dummy = {}
 
 <script src='js/gameManager.js'></script>
 
-<script src='js/ui/scene.js'></script>
+<script src='js/scene.js'></script>
 
-<script src='js/napp/game.js'></script>
-<script src='js/napp/timeline.js'></script>
-<script src='js/napp/frameBuilder.js'></script>
+<script src='js/game.js'></script>
+<script src='js/timeline.js'></script>
+<script src='js/frameBuilder.js'></script>
 
 
-<script src='js/napp/radar.js'></script>
-<script src='js/napp/spaceBoard.js'></script>
+<script src='js/radar.js'></script>
+<script src='js/spaceBoard.js'></script>
 
-<script src='js/napp/status.js'></script>
+<script src='js/status.js'></script>
 
 <script src='js/camera.js'></script>
 <script>
@@ -150,7 +150,7 @@ var game = {};
 app.units.init();
 
 app.ui.scene.init();
-napp.spaceScene.init();
+app.spaceScene.init();
 
 
 
@@ -174,12 +174,9 @@ lastTime = Date.now();
 function animate(time) {
 
 	
-	napp.timeline.updateTransition();
-	
-    //if ( app.timeline.paused ) return;
-    
+	app.timeline.updateTransition();	
 		
-	napp.spaceScene.render();
+	app.spaceScene.render();
 
 	app.ui.scene.update();
 	
@@ -191,20 +188,9 @@ function animate(time) {
 animate();
 
 
-/*
-for (var i=0 ; i<5 ; i++){
-	app.api.addPlayer();
-}
-
-*/
-
-//app.game.runGame( game["Level 2 - Map 1 - Round 0"], "Level 2 - Map 1 - Round 0" );
-//debugger;
-//animate();
-
 app.gameManager.parseGames();
 app.gameManager.runNextGame()
 
 
-napp.timeline.play();
+app.timeline.play();
 </script>

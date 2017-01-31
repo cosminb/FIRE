@@ -1,4 +1,4 @@
-napp.radar = {
+app.radar = {
 	
 	players : {},
 	traps   : {},

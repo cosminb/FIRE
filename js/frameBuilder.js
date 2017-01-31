@@ -1,4 +1,4 @@
-napp.frameBuilder = {
+app.frameBuilder = {
 	
 	
 	build : function ( players, input ) {
@@ -73,7 +73,7 @@ napp.frameBuilder = {
 	
 	addBomb   : function ( frame, input ) {
 		var playerId = this.ids[ input.player ];
-		var trap = new napp.Trap ( playerId, input.x, input.y );
+		var trap = new app.Trap ( playerId, input.x, input.y );
 		frame.addTrap( trap );
 	},
 	
@@ -87,7 +87,7 @@ napp.frameBuilder = {
 		
 		this.ids = {};
 		
-		var frame = new napp.FrameState( {} );
+		var frame = new app.FrameState( {} );
 		
 		var nr = 0;
 		
@@ -96,7 +96,7 @@ napp.frameBuilder = {
 			this.ids[ i ] = nr;
 			
 			
-			var player = new napp.PlayerState( nr , players[i].startX, players[i].startY , false);
+			var player = new app.PlayerState( nr , players[i].startX, players[i].startY , false);
 			frame.players[ nr ] = player;
 			nr++;
 			
@@ -106,15 +106,15 @@ napp.frameBuilder = {
 	}
 }
 
-napp.FrameState = function (  traps ) {
-	this.players = new Array( napp.players.count )
+app.FrameState = function (  traps ) {
+	this.players = new Array( app.players.count )
 	this.traps   = Object.create( traps );
 	this.addedTraps = {};
 	this.removedTraps = {};
 }
 
-napp.FrameState.prototype.clone = function ( ) {
-	var frame = new napp.FrameState( this.traps);
+app.FrameState.prototype.clone = function ( ) {
+	var frame = new app.FrameState( this.traps);
 	
 	for ( var i in this.players ) {
 		frame.players[ i ] = this.players[ i ].clone();
@@ -123,17 +123,17 @@ napp.FrameState.prototype.clone = function ( ) {
 	return frame;
 }
 
-napp.FrameState.prototype.addTrap = function ( trap ) {
+app.FrameState.prototype.addTrap = function ( trap ) {
 	this.traps[ trap.id ] = trap;
 	this.addedTraps[ trap.id ] = trap;
 }
-napp.FrameState.prototype.removeTrap = function ( trapId ) {
+app.FrameState.prototype.removeTrap = function ( trapId ) {
 	this.removedTraps[ trapId ] = this.traps[ trapId ];
 	this.traps[ trapId ] = null;
 }
 
 
-napp.PlayerState= function ( id, x, y, removed, direction, sy ) {
+app.PlayerState= function ( id, x, y, removed, direction, sy ) {
 	this.id = id;
 	this.x = x;
 	this.y = y;
@@ -150,20 +150,20 @@ napp.PlayerState= function ( id, x, y, removed, direction, sy ) {
 	this.update3d();
 }
 
-napp.PlayerState.prototype.update3d = function ( ) {
+app.PlayerState.prototype.update3d = function ( ) {
 	this.sx = app.units.getX( this.x );
 	//this.sy = this.y;
 	this.sz = app.units.getZ(this.y);
 	
 }
 
-napp.PlayerState.prototype.setPos = function ( x, y ) {
+app.PlayerState.prototype.setPos = function ( x, y ) {
 	this.x = x;
 	this.y = y;
 	this.update3d();
 }
 
-napp.PlayerState.prototype.moveBy = function ( dx, dy ) {
+app.PlayerState.prototype.moveBy = function ( dx, dy ) {
 	this.x += dx;
 	this.y += dy;
 	
@@ -172,12 +172,12 @@ napp.PlayerState.prototype.moveBy = function ( dx, dy ) {
 	this.update3d();
 }
 
-napp.PlayerState.prototype.setAction = function ( action  ){ 
+app.PlayerState.prototype.setAction = function ( action  ){ 
 	this.action = action;
 }
 
-napp.PlayerState.prototype.clone = function ( ) {
-	var player =  new napp.PlayerState( this.id, this.x, this.y, this.removed , this.direction, this.sy);
+app.PlayerState.prototype.clone = function ( ) {
+	var player =  new app.PlayerState( this.id, this.x, this.y, this.removed , this.direction, this.sy);
 	
 	
 	return player;
@@ -187,7 +187,7 @@ napp.PlayerState.prototype.clone = function ( ) {
 
 
 
-napp.Trap= function ( playerId, x, y) {
+app.Trap= function ( playerId, x, y) {
 	this.id = x + "__" + y;
 	
 	this.x = x;
@@ -204,7 +204,7 @@ napp.Trap= function ( playerId, x, y) {
 	this.update3d();
 }
 
-napp.Trap.prototype.update3d = function ( ) {
+app.Trap.prototype.update3d = function ( ) {
 	this.sx = app.units.getX( this.x );
 	//this.sy = this.y;
 	this.sz = app.units.getZ(this.y);

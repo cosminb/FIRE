@@ -1,9 +1,9 @@
-napp.status = {
+app.status = {
 	
 	render : function ( ) {
 		
 		
-		var players = napp.players.items;
+		var players = app.players.items;
 		
 		var playersContent = "";
 		for ( var i in players ) {

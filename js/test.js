@@ -92,8 +92,8 @@ app.test = {
 		
 			if ( !that.shouldRotate ) return;
 			
-			app.test.center = Math.floor( napp.game.boardSize / 2  );
-			app.test.dist = Math.floor( napp.game.boardSize / 2 + 10 ) * 150;
+			app.test.center = Math.floor( app.game.boardSize / 2  );
+			app.test.dist = Math.floor( app.game.boardSize / 2 + 10 ) * 150;
 			
 			
 			b -= 0.03;
