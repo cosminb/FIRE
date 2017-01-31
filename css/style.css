@@ -11,3 +11,11 @@
 
 .player .name  { width : 10px ; white-space: nowrap;}
 .player .position { width: 10px; white-space: nowrap; }
+
+
+
+body,window { padding : 0; margin : 0; overflow : hidden; }
+
+
+body { background : #222; }
+

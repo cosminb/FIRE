@@ -1,5 +1,7 @@
+
 app.frameBuilder = {
-	
+    //utility object to interpret the logs into frame objects 
+    
 	
 	build : function ( players, input ) {
 		var steps = Array( input.length + 1 );

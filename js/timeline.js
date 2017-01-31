@@ -1,8 +1,7 @@
 app.timeline = {
-	
-	values : {
-
-	},
+    //animates and change objects between steps
+    
+	values : {},
 	
 	frameDuration : 700, 
 	auto : true, 

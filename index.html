@@ -11,68 +11,6 @@
 <body>
 
 
-<style>
-
-body,window { padding : 0; margin : 0; overflow : hidden; }
-
-
-body { background : #222; }
-
-
-.logs_container { 
-
-}
-
-.logs { 
-	font-variant : small-caps;
-	font-size 	 : 20px;
-	color : #ddd;
-    z-index : 20000;
-    
-}
-
-.logs_container:hover {
-    overflow : auto !important;
-}
-
-.logs .digit {
-	font-size : 16px;
-}
-
-.log_step { 
-	margin-top : 20px;
-	font-weight : bolder;
-	border-bottom : 1px solid #777;
-	animation : none !important;
-}
-
-
-.info { 
-    z-index : 10000;
-    background : rgba( 40, 40, 40, 0.97 );
-}
-
-.info #title {
-	font-size : 90px;
-	color     : #444;
-}
-
-.logs > div {
-	
-	animation : reveal 2s;
-}
-
-.log_player {
-	font-weight : bolder;
-}
-
-@keyframes reveal {
-  0%   { color : #222; }
-  100% { color: #ddd; }
-}
-</style>
-
-
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <canvas id="canvas" style='width:100%; height:100%;position:absolute; left : 0; z-index:100;'></canvas>
@@ -121,6 +59,8 @@ app.dummy = {}
 <script src='js/scene.js'></script>
 
 <script src='js/game.js'></script>
+<script src='js/players.js'></script>
+
 <script src='js/timeline.js'></script>
 <script src='js/frameBuilder.js'></script>
 
@@ -156,8 +96,6 @@ app.spaceScene.init();
 
 
 //tests for simulation. this should be removed 
-app.test.init();
-app.test.auto();
 app.test.animateCamera();
 
 

@@ -1,5 +1,5 @@
 app.status = {
-	
+	//shows the status of the players - bottom-right text
 	render : function ( ) {
 		
 		

@@ -1,5 +1,6 @@
 app.radar = {
-	
+	//top-right 2d graphics to show the position of the players
+    
 	players : {},
 	traps   : {},
 	

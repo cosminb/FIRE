@@ -1,5 +1,5 @@
 app.ui.scene = {
-	
+	//utility to handle 2d graphics
 	
 	init : function ( ) {
 		
